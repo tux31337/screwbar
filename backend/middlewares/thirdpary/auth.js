@@ -1,0 +1,28 @@
+const jwt = require('jsonwebtoken');
+const authRepository = require('../auth/authRepository');
+const config = require('../../config/config.js');
+const AUTH_ERROR = { message: '사용자 인증에 실패했습니다'};
+
+const isAuth = async (req, res, next) => {
+    const authHeader = req.get("Authorization");
+    if (!(authHeader && authHeader.startsWith("Bearer "))) {
+      return res.status(401).json(AUTH_ERROR);
+    }
+    const token = authHeader.split(" ")[1];
+    jwt.verify(token, config.jwt.secretKey, async (err, decoded) => {
+      if (err) {
+        return res.status(401).json(AUTH_ERROR);
+      }
+      console.log(decoded);
+      const user = await authRepository.findById(decoded.id);
+      if (!user) {
+        return res.status(401).json(AUTH_ERROR);
+      }
+      console.log(user);
+      req.userId = user.userId;
+      req.token = token;
+      next();
+    });
+  };
+
+module.exports = isAuth;
