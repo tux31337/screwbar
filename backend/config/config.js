@@ -12,7 +12,6 @@ function required(key, defaultValue = undefined) {
 const config = {
   //jwt
   jwt: {
-<<<<<<< HEAD
     secretKey: required('JWT_SECRET'),
     expiresInSec: required('JWT_EXPIRES_SEC', 86400),
   },
@@ -25,20 +24,7 @@ const config = {
   },
   host: {
     port: required('HOST_PORT', 8090),
-=======
-    secretKey: required("JWT_SECRET"),
-    expiresInSec: required("JWT_EXPIRES_SEC", 86400),
-  },
-  //db
-  db: {
-    host: required("DB_HOST"),
-    user: required("DB_USER"),
-    database: required("DB_DATABASE"),
-    password: required("DB_PASSWORD"),
-  },
-  host: {
-    port: required("HOST_PORT", 8080),
->>>>>>> 4e5abc219e926cbad0a048140dc5c496166d4504
+
   },
   //암호화
   bcrypt: {
@@ -46,22 +32,10 @@ const config = {
   },
   // 문자 메시지 인증관리
   sens: {
-<<<<<<< HEAD
     accessKey: required('SENS_ACCESS'),
     secretKey: required('SENS_SECRET'),
     serviceId: required('SENS_ID'),
     callNumber: required('SENS_NUMBER'),
   },
 };
-
 module.exports = config;
-=======
-    accessKey: required("SENS_ACCESS"),
-    secretKey: required("SENS_SECRET"),
-    serviceId: required("SENS_ID"),
-    callNumber: required("SENS_NUMBER"),
-  },
-};
-
-module.exports = config;
->>>>>>> 4e5abc219e926cbad0a048140dc5c496166d4504
