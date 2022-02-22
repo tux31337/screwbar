@@ -56,52 +56,61 @@ function Signup() {
             phoneNumber: phonenumber,
             birthday: birthday,
         };
-        axios.post("http://127.0.0.1:8080/auth/signup", data)
+        axios.post("/auth/signup", data)
         .then((result) => {
-            console.log(result);
             alert("회원가입에 성공하셨습니다. 로그인을 진행해주세요");
             navigate('/login');
         }).catch((error) => {
             alert(error.response.data.message);
         })
-
-
     }
-
-
-
-
     return(
-        <>
-    <section className="signup">
-        <div>
-            <img src="img/screwbar.png"></img>
-        </div>
-        <label className="signup__label">이메일</label>
-        <input
-          type="text"
-          className="signup__phone"
-          onChange={onEmailChange}
-        />
-        <label className="signup__label">이름</label>
-        <input
-          type="text"
-          className="signup__username"
-          onChange={onUsernameChange}
-        />
-        <label className="signup__label">비밀번호</label>
-        <input type="password" id="signup__password" className="signup__password" onChange={onPasswordChanged}/>
-        <label className="signup__label" >비밀번호 확인</label>
-        <input type="password" id="signup__password2" className="signup__password2" onChange={onPasswordChanged2}/>
-        <label className="signup__label">주소</label>
-        <input type="text" className="signup__address" onChange={onAddressChanged}/>
-        <label className="signup__label">전화번호</label>
-        <input type="text" className="signup__phone" onChange={onPhoneNumberChanged}/>
-        <label className="signup__label">생년월일</label>
-        <input type="text" className="signup__birthday" onChange={onBirthdayChange}/>
-      <button className="signup__signupBtn" onClick={signup}>회원가입</button>
-    </section>
-        </>
+    <>
+        <section className="signup">
+            <div>
+                <img src="img/screwbar.png"></img>
+            </div>
+            <div>
+                <label className="signup__label">이메일</label>
+                <input
+                type="text"
+                className="signup__email"
+                maxLength={25}
+                onChange={onEmailChange}
+                />
+            </div>
+            <div>
+                <label className="signup__label">이름</label>
+                <input
+                type="text"
+                className="signup__username"
+                maxLength={15}
+                onChange={onUsernameChange}
+                />
+            </div>
+            <div>
+                <label className="signup__label">비밀번호</label>
+                <input type="password" id="signup__password" className="signup__password" onChange={onPasswordChanged} maxLength={25} />
+            </div>
+            <div>
+                <label className="signup__label">비밀번호 확인</label>
+                <input type="password" id="signup__password2" className="signup__password2" onChange={onPasswordChanged2} maxLength={25}/>
+            </div>
+            <div>
+                <label className="signup__label">주소</label>
+                <input type="text" className="signup__address" onChange={onAddressChanged} maxLength={25}/>
+            </div>
+            <div>
+                <label className="signup__label">전화번호</label>
+                <input type="text" className="signup__phone" onChange={onPhoneNumberChanged} maxLength={25}/>
+            </div>
+            <div>
+                <label className="signup__label">생년월일</label>
+                <input type="text" className="signup__birthday" onChange={onBirthdayChange} maxLength={25}/>
+            </div>
+        <button className="signup__signupBtn" onClick={signup}>회원가입</button>
+        </section>
+    </>
     )
 }
 

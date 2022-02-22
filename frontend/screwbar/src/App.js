@@ -1,31 +1,32 @@
 import './App.css';
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Login from './component/user/Login';
-import token from './action/token';
 import Signup from './component/user/Signup';
+import AuthHoc from './hoc/auth'
+
 
 
 const App = () => {
+
   return(
     <BrowserRouter>
       <Routes>
         <Route 
           path='/login'
-          element={
+          element={AuthHoc(
             <>
               <Login />
-            </>
-          }>
-
-        </Route>  
+            </>,
+            false
+          )}
+          />
         <Route 
           path='/signup'
-          element={
+          element={AuthHoc(
             <>
               <Signup />
-            </>
-          }>
-
+            </>, true
+          )}>
         </Route>  
       </Routes>
     </BrowserRouter>

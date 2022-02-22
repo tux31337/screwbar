@@ -7,6 +7,7 @@ const isAuth = async (req, res, next) => {
 
   let token;
   const authHeader = req.get("Authorization");
+  console.log(authHeader)
   if (authHeader && authHeader.startsWith("Bearer ")) {
     token = authHeader.split(" ")[1];
   }
@@ -14,20 +15,23 @@ const isAuth = async (req, res, next) => {
   if(!token) {
     token = req.cookies['token'];
   }
+  console.log(token);
 
   if(!token) {
     return res.status(401).json(AUTH_ERROR);
   }
   jwt.verify(token, config.jwt.secretKey, async (err, decoded) => {
     if (err) {
+      console.log(err);
       return res.status(401).json(AUTH_ERROR);
     }
-    console.log(decoded);
-    const user = await authRepository.findById(decoded.id);
+    const user = await authRepository.findById(decoded.userId);
+    console.log("---------------------user=========================")
+    console.log(user);
     if (!user) {
       return res.status(401).json(AUTH_ERROR);
     }
-    req.userId = user.userId;
+    req.userId = user.user_id;
     req.token = token;
     next();
   });

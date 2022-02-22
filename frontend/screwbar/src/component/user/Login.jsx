@@ -2,11 +2,14 @@ import "../../css/user/login.css"
 import {loginAction} from '../../action/auth.js'
 import { useState } from "react"
 import { Link, useNavigate } from 'react-router-dom';
-import token from "../../action/token";
+import {useDispatch} from 'react-redux';
+import { loginUser } from "../../action/auth.js";
 
 
 
 function Login() {
+    const dispatch = useDispatch();
+
     const navigate = useNavigate();
     const [phoneNumber, setPhoneNumber] = useState("");
     const [password, setPassword] = useState("");
@@ -20,11 +23,23 @@ function Login() {
         setPassword(event.target.value);
     }
 
-    const login = () => {
-        console.log(phoneNumber);
-        console.log(password);
-        loginAction({phoneNumber: phoneNumber, password: password})
-        navigate('/');
+    const userLogin = () => {
+        let data = {
+            phoneNumber: phoneNumber, 
+            password: password
+        }
+        dispatch(loginUser(data))
+        .then(response => {
+            if(response.payload.token) {
+                alert("hi");
+            } else {
+                alert(response.payload.response.data.message);
+            }
+        })
+    }
+
+    const userLogout = () => {
+        
     }
 
 
@@ -47,7 +62,8 @@ function Login() {
         <label className="login__label">비밀번호</label>
         <input type="password" id="login__password" className="login__password" onChange={onPasswordChanged} />
         
-      <button className="login__loginBtn" onClick={login}>로그인</button>
+      <button className="login__loginBtn" onClick={userLogin}>로그인</button>
+      <button className="login__loginBtn" onClick={userLogout}>로그아웃</button>
       <button className="login__signupBtn" onClick={() => navigate('/signup')}>회원가입</button>
       <ul className="login__finddiv">
         <li className="login__finddiv__list"><a>아이디 찾기</a></li>|
