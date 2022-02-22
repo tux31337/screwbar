@@ -5,19 +5,22 @@ const config = require('../../config/config.js');
 const {v4} = require('uuid');
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
+const cookie = require('cookie-parser');
+const { options } = require('../../router/auth.js');
 
 
 async function signup(req, res) {
+  console.log(req);
   const { email, username, password, address, phoneNumber, birthday } =
     req.body;
-  const userId = v4();
+  const userID = v4();
   const findByNumbmer = await userRepository.findByNumbmer(phoneNumber);
   if(findByNumbmer) {
     return res.status(409).json({message: "이미 가입한 휴대폰 번호입니다."});
   }
   const hashed = await bcrypt.hash(password, config.bcrypt.saltRounds);
   const result = await userRepository.createUser({
-    userId,
+    userID,
     email,
     username,
     password : hashed,
@@ -42,11 +45,22 @@ async function signIn(req, res) {
     return res.status(401).json({message: "아이디 또는 비밀번호를 확인하세요"});
   }
   const token = createJwtToken(findByNumbmer.userId);
+  setToken(res, token);
   res.status(200).json({token});
+
+}
+
+function setToken(res, token) {
+  const options = {
+    maxAge: config.jwt.expiresInSec * 1000,
+    httpOnly: true,
+    sameSite: 'none',
+  };
+  res.cookie('token', token, options) // http only cookie
+
 }
 
 async function me(req, res) {
-  console.log(req.userId);
   const user = await userRepository.findById(req.userId);
   if (!user) {
     return res.status(404).json({message: '사용자를 찾을 수 없습니다'});
