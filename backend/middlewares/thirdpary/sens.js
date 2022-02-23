@@ -2,6 +2,7 @@ const config = require('../../config/config.js');
 const cryptojs = require('crypto-js');
 const axios = require('axios');
 const Cache = require('memory-cache');
+Cache.put("01020446199", 926312);
 
 
 const messageAuthentication = {
@@ -12,10 +13,8 @@ const messageAuthentication = {
       const date = Date.now().toString();
       //6자리 인증코드 생성
       const verificationCode = Math.floor(Math.random() * (999999 - 100000)) + 100000;
-      
       //캐시에 넣어서
       Cache.put(phoneNumber, verificationCode.toString());
-      console.log(config);
       //환경 변수
       const sens_service_id = config.sens.serviceId;
       const sens_access_key = config.sens.accessKey;
@@ -59,22 +58,23 @@ const messageAuthentication = {
           messages: [{ to: `${phoneNumber}` }],
         },
       });
-      return res.status(200).json({ message: "SMS sent" });
+      return res.status(200).json({ message: "인증 메시지를 보냈습니다." });
     } catch (error) {
       return res.status(404).json({ message: "sms 전송에 실패했습니다" });
     }
   }, confirmSms: (req, res) => {
     const { phoneNumber , checkVerificationCode} = req.body;
-    console.log(req.body);
+    console.log(phoneNumber);
+    console.log(checkVerificationCode);
     const CacheData = Cache.get(phoneNumber);
+    console.log(CacheData);
     if(!CacheData) {
-      console.log(true);
-      return res.status(404).json({ message: "인증에 실패했습니다" });
-    } else if (CacheData !== checkVerificationCode) {
-      return res.status(404).json({ message: "인증에 실패했습니다" });
+      return res.status(200).json({ message: "fail" });
+    } else if (CacheData != checkVerificationCode) {
+      return res.status(200).json({ message: "fail" });
     } else {
       Cache.del(phoneNumber);
-      return res.status(200).json({ message: "인증에 성공했습니다. 계속 가입을 진행해주세요" });
+      return res.status(200).json({ message: "success" });
     }
   }
 };

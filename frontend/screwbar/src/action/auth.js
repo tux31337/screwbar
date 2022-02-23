@@ -22,8 +22,9 @@ export  async function signupAction(data) {
     return {
         payload: result,
     };
-
 }
+
+
 
 export function loginUser(data) {
     const request = axios.post('/auth/signin', data).then((response) => 
@@ -35,7 +36,6 @@ export function loginUser(data) {
         type: LOGIN_USER,
         payload: request
     }
-
 }
 
 export function auth() {
@@ -48,6 +48,5 @@ export function auth() {
         type: AUTH_USER,
         payload: request
     }
-
 }
 

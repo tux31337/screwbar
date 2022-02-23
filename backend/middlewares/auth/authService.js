@@ -6,6 +6,8 @@ const {v4} = require('uuid');
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 const cookie = require('cookie-parser');
+const clearCookie = require('cookie-parser');
+
 const { options } = require('../../router/auth.js');
 
 
@@ -46,7 +48,10 @@ async function signIn(req, res) {
   const token = createJwtToken(findByNumbmer.user_id);
   setToken(res, token);
   res.status(200).json({token});
+}
 
+async function logout(req, res) {
+  res.clearCookie('token').json({message: "logout success"});
 }
 
 function setToken(res, token) {
@@ -74,4 +79,5 @@ function createJwtToken(userId) {
 module.exports.signup = signup;
 module.exports.signIn = signIn;
 module.exports.me = me;
+module.exports.logout = logout;
 

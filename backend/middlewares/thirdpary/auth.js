@@ -4,10 +4,9 @@ const config = require('../../config/config.js');
 const AUTH_ERROR = { message: '사용자 인증에 실패했습니다'};
 
 const isAuth = async (req, res, next) => {
-
+  console.log('hi');
   let token;
   const authHeader = req.get("Authorization");
-  console.log(authHeader)
   if (authHeader && authHeader.startsWith("Bearer ")) {
     token = authHeader.split(" ")[1];
   }
@@ -15,7 +14,6 @@ const isAuth = async (req, res, next) => {
   if(!token) {
     token = req.cookies['token'];
   }
-  console.log(token);
 
   if(!token) {
     return res.status(401).json(AUTH_ERROR);
@@ -26,8 +24,6 @@ const isAuth = async (req, res, next) => {
       return res.status(401).json(AUTH_ERROR);
     }
     const user = await authRepository.findById(decoded.userId);
-    console.log("---------------------user=========================")
-    console.log(user);
     if (!user) {
       return res.status(401).json(AUTH_ERROR);
     }

@@ -31,7 +31,7 @@ function Login() {
         dispatch(loginUser(data))
         .then(response => {
             if(response.payload.token) {
-                alert("hi");
+                navigate('/home');
             } else {
                 alert(response.payload.response.data.message);
             }

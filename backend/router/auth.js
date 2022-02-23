@@ -36,8 +36,11 @@ const validateSignUp = [
 //회원가입
 router.post("/signup", validateSignUp, authService.signup);
 
-// //로그인
+//로그인
 router.post("/signin", validateSignIn, authService.signIn);
+
+//로그아웃
+router.get('/logout', isAuth, authService.logout);
 
 //
 router.get('/me', isAuth, authService.me);

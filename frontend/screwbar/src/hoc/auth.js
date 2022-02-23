@@ -20,7 +20,7 @@ export default function (WrappedComponent, option, adminRoute = null) {
                     }
                 } else {
                     if(option === false) {
-                        navigate('/');
+                        navigate('/home');
                     }
                     //로그인 한 상태
                 }
