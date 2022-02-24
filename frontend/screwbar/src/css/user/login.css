@@ -1,0 +1,56 @@
+.login input {
+    height: 38px;
+    border: 0px;
+    border-bottom: 1px solid #d3d3d3;
+    width: 380px;
+    font-size: 1.2rem;
+
+}
+
+.login input:focus {
+    outline: none;
+    border-bottom: 3px solid;
+    border-color: #000000;
+}
+
+.login {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    flex-direction: column;
+    flex-wrap: wrap;
+  }
+
+  .login > * {
+      margin-top: 1.1%;
+  }
+
+  .login__loginBtn, .login__signupBtn {
+    width: 380px;
+    border-radius: 10px;
+    height: 38px;
+    color: white;
+    background-color: #000000;
+    cursor: pointer;
+  }
+
+  .login__label {
+      text-align: left;
+      justify-content: end;
+  }
+
+  .login__finddiv {
+      width: 380px;
+      display: flex;
+  }
+
+  .login__finddiv__list {
+      list-style: none;
+      margin: auto;
+  }
+
+
+  
+
+
