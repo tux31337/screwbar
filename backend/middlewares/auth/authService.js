@@ -6,11 +6,12 @@ const {v4} = require('uuid');
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 const cookie = require('cookie-parser');
+const clearCookie = require('cookie-parser');
+
 const { options } = require('../../router/auth.js');
 
 
 async function signup(req, res) {
-  console.log(req);
   const { email, username, password, address, phoneNumber, birthday } =
     req.body;
   const userID = v4();
@@ -44,17 +45,19 @@ async function signIn(req, res) {
   if(!result) {
     return res.status(401).json({message: "아이디 또는 비밀번호를 확인하세요"});
   }
-  const token = createJwtToken(findByNumbmer.userId);
+  const token = createJwtToken(findByNumbmer.user_id);
   setToken(res, token);
   res.status(200).json({token});
+}
 
+async function logout(req, res) {
+  res.clearCookie('token').json({message: "logout success"});
 }
 
 function setToken(res, token) {
   const options = {
     maxAge: config.jwt.expiresInSec * 1000,
     httpOnly: true,
-    sameSite: 'none',
   };
   res.cookie('token', token, options) // http only cookie
 
@@ -63,9 +66,9 @@ function setToken(res, token) {
 async function me(req, res) {
   const user = await userRepository.findById(req.userId);
   if (!user) {
-    return res.status(404).json({message: '사용자를 찾을 수 없습니다'});
+    return res.status(401).json({message: '사용자를 찾을 수 없습니다'});
   }
-  res.status(200).json({token:req.token, userId: user.userId});
+  res.status(200).json({token:req.token, userId: user.user_id, isAuth: true});
 }
 
 
@@ -76,4 +79,5 @@ function createJwtToken(userId) {
 module.exports.signup = signup;
 module.exports.signIn = signIn;
 module.exports.me = me;
+module.exports.logout = logout;
 

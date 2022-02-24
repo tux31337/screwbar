@@ -1,8 +1,8 @@
 .signup input {
     height: 30px;
     border: 0px;
-    border-bottom: 1px solid #d3d3d3;
-    width: 550px;
+    border-bottom: 3px solid #d3d3d3;
+    width: 450px;
     text-align: center;
     font-size: 1.2rem;
 }
@@ -23,11 +23,11 @@
   }
 
   .signup > * {
-      margin-top: 0.8%;
+      margin-top: 2%;
   }
 
 .signup__signupBtn {
-    width: 550px;
+    width: 450px;
     border-radius: 20px;
     height: 50px;
     color: white;
@@ -35,10 +35,24 @@
     cursor: pointer;
   }
 
-  .login__label {
-      text-align: left;
-      justify-content: end;
+  .signup__label {
+      position: absolute;
+      font-size: 1.0rem;
+      color: #000000;
+      font-weight: 900;
   }
+
+  .signup__small {
+      margin: 0;
+      padding: 0;
+      width: 450px;
+      color: red;
+  }
+
+  .signup__certificationBtn {
+      position: absolute;
+  }
+
 
   
 

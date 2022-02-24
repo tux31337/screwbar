@@ -23,7 +23,7 @@ const config = {
     password: required('DB_PASSWORD'),
   },
   host: {
-    port: required('HOST_PORT', 8090),
+    port: required('HOST_PORT', 8080),
 
   },
   //암호화

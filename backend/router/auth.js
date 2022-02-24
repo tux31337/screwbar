@@ -26,8 +26,8 @@ const validateSignUp = [
     .withMessage("password should be at least 5 characters"),
   body("address")
     .trim()
-    .isLength({ min: 5 })
-    .withMessage("password should be at least 5 characters"),
+    .isLength({ min: 2 })
+    .withMessage("구 이름을 입력해주세요"),
   body("phoneNumber").trim().isLength(11).withMessage("휴대폰 번호는 11자만 가능합니다"),
   body("birthday").trim().isLength(8).withMessage("생년월일을 입력하세요 Ex)19940204"),
   validate,
@@ -36,8 +36,11 @@ const validateSignUp = [
 //회원가입
 router.post("/signup", validateSignUp, authService.signup);
 
-// //로그인
+//로그인
 router.post("/signin", validateSignIn, authService.signIn);
+
+//로그아웃
+router.get('/logout', isAuth, authService.logout);
 
 //
 router.get('/me', isAuth, authService.me);
