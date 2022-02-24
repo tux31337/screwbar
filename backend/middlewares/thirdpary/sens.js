@@ -2,8 +2,6 @@ const config = require('../../config/config.js');
 const cryptojs = require('crypto-js');
 const axios = require('axios');
 const Cache = require('memory-cache');
-Cache.put("01020446199", 926312);
-
 
 const messageAuthentication = {
   sendVerificationSMS: async (req, res) => {

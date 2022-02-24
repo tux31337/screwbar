@@ -40,7 +40,6 @@ function Signup() {
     useEffect(() => {
         if(password !== password2) {
             setPasswordCheck(false);
-            console.log("비밀번호가 맞지않습니다")
         } else {
             setPasswordCheck(true);
         }
@@ -52,14 +51,15 @@ function Signup() {
     
     const onEmailChange = (event) => {
         setEmail(event.target.value);
-
+    }
+    useEffect(() => {
         let userEmailExp = /^[A-Za-z0-9_\.\-]+@[A-Za-z0-9\-]+\.[A-Za-z0-9\-]+/;
-        if(userEmailExp.test(event.target.value) === false) {
+        if(email && userEmailExp.test(email) === false) {
             setEmailCheck(false);
         } else {
             setEmailCheck(true);
         }
-    }
+    }, [email])
 
     const onUsernameChange = (event) => {
         setUserName(event.target.value);

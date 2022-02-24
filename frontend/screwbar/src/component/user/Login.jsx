@@ -63,7 +63,6 @@ function Login() {
         <input type="password" id="login__password" className="login__password" onChange={onPasswordChanged} />
         
       <button className="login__loginBtn" onClick={userLogin}>로그인</button>
-      <button className="login__loginBtn" onClick={userLogout}>로그아웃</button>
       <button className="login__signupBtn" onClick={() => navigate('/signup')}>회원가입</button>
       <ul className="login__finddiv">
         <li className="login__finddiv__list"><a>아이디 찾기</a></li>|
