@@ -4,7 +4,7 @@ import { LOGIN_USER, AUTH_USER } from "./types";
 
 
 export function login(data) {
-    axios.post("http://127.0.0.1:8080/auth/signin", data, {withCredentials: true})
+    axios.post("/auth/signin", data, {withCredentials: true})
     .then((result) => {
         if(result.status === 200) {
             token.saveToken(result.data);
@@ -17,7 +17,7 @@ export function login(data) {
 
 export  async function signupAction(data) {
     const result = axios.
-    post("http://127.0.0.1:8080/auth/signup", data)
+    post("/auth/signup", data)
     .then((response) => response.date);
     return {
         payload: result,

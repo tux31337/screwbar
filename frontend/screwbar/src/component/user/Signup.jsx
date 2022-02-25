@@ -108,7 +108,6 @@ function Signup() {
         })
     }
 
-
     const [isPopupOpen, setIsPopupOpen] = useState(false)
  
 	// 팝업창 열기
@@ -121,8 +120,6 @@ function Signup() {
         setIsPopupOpen(false)
     }
  
-
-
     //회원가입 클릭시
     const  signup = () => {
         if(!email || !emailCheck) {
@@ -215,5 +212,4 @@ function Signup() {
     </>
     )
 }
-
 export default Signup;
