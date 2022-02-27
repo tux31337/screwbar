@@ -1,0 +1,34 @@
+* {
+  box-sizing: border-box;
+  margin: 0;
+}
+
+li {
+  list-style: none;
+}
+
+.participations {
+  padding: 30px;
+}
+
+.participations > li {
+  margin-bottom: 10px;
+}
+
+.participation_name {
+  margin-right: 20px;
+}
+
+.evaluation_btn {
+  padding: 3px 5px;
+  border: solid 0.5px #cfcfcf;
+  border-radius: 3px;
+  background-color: white;
+  cursor: pointer;
+  transition: all 0.3s ease-in-out;
+}
+
+.evaluation_btn:hover {
+  color: red;
+  border: solid 0.5px red;
+}
