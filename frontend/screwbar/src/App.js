@@ -6,6 +6,8 @@ import Signup from './component/user/Signup';
 import AuthHoc from './hoc/auth'
 import Home from './component/home';
 import CreateTeam from './component/team/CreateTeam';
+import Chat from './component/chat/chat';
+import QuillEditor from './component/team/QuillEditor';
 
 
 
@@ -45,7 +47,16 @@ const App = () => {
           element={AuthHoc(
             <>
               <Navbar />
-              <CreateTeam />
+              <QuillEditor />
+            </>, true
+          )}>
+        </Route> 
+        <Route 
+          path='/chat'
+          element={AuthHoc(
+            <>
+              <Navbar />
+              <Chat />
             </>, true
           )}>
         </Route> 

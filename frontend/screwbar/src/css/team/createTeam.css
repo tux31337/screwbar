@@ -1,0 +1,54 @@
+.createTeam {
+    flex-direction: row;
+    max-width: 1100px;
+    margin: auto;
+    margin-bottom: 90px;
+    display: flex;
+}
+
+
+.createTeam__form__imgBox {
+    border: 1px solid black;
+    width: 500px;
+    height: 300px;
+}
+
+
+
+.createTeam__information__text {
+    font-size: 1.0rem;
+}   
+
+.createTeam__information {
+    position: sticky;
+    top: 10px;
+    margin-top: 1%;
+    width: 550px;
+    margin-left: 30%;
+    display: flex;
+    flex-direction: column;
+    height: 250px;
+}
+
+.createTeam__information > * {
+    padding-top: 6px;
+}
+
+.createTeam__information__input {
+    height: 28px;
+    width: 140px;
+    border: 0.5px solid;
+
+}
+
+.createTeam__information > span > select {
+    margin-left: 10px;
+    height: 28px;
+    width: 100px;
+}
+
+.postBtn {
+    margin-top: 5%;
+    width: 290px;
+}
+

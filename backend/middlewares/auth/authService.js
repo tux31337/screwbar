@@ -60,7 +60,6 @@ function setToken(res, token) {
     httpOnly: true,
   };
   res.cookie('token', token, options) 
-
 }
 
 async function me(req, res) {
@@ -76,8 +75,25 @@ function createJwtToken(userId) {
   return jwt.sign({userId}, config.jwt.secretKey, { expiresIn: config.jwt.expiresInSec});
 }
 
+async function myInfo(req, res) {
+  const user = await userRepository.findById(req.userId);
+  if (!user) {
+    return res.status(401).json({message: '사용자를 찾을 수 없습니다'});
+  }
+
+  /* user 나이 계산 */ 
+  const birthday = user.birthday;
+  const today = new Date();
+  const year = today.getFullYear();
+  const age =  year -birthday.substr(0, 4);
+
+  res.status(200).json({userId: user.user_id, userName: user.username, age: age})
+}
+
 module.exports.signup = signup;
 module.exports.signIn = signIn;
 module.exports.me = me;
 module.exports.logout = logout;
+module.exports.myInfo = myInfo;
+
 

@@ -1,11 +1,14 @@
 const multer = require('multer');
 const path = require('path');
+const fs = require('fs');
 
 const postsUpload = multer({
     storage: multer.diskStorage({
       destination(req, file, cb) {
-        console.log(req);
-        cb(null, 'public/uploads/posts');
+        if(!fs.existsSync(`public/uploads/posts/${req.userId}`)) {
+          fs.mkdirSync(`public/uploads/posts/${req.userId}`);
+        }
+        cb(null, `public/uploads/posts/${req.userId}`);
       },
       filename(req, file, cb) {
         const ext = path.extname(file.originalname); 
@@ -19,9 +22,10 @@ const postsUpload = multer({
   const presentUpload = multer({
     storage: multer.diskStorage({
       destination(req, file, cb) {
-        // makeDir(`${req.userId}`);
-        // ${req.userId}
-        cb(null, `public/uploads/present`);
+        if(!fs.existsSync(`public/uploads/present/${req.userId}`)) {
+          fs.mkdirSync(`public/uploads/present/${req.userId}`);
+        }
+        cb(null, `public/uploads/present/${req.userId}`);
       },
       filename(req, file, cb) {
         const ext = path.extname(file.originalname); 

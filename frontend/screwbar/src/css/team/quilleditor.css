@@ -1,0 +1,16 @@
+.quill__textbox {
+    max-width: 1100px;
+    height: 320px;
+    margin: 0 auto 20px auto;
+}
+
+.quill__textbox__span {
+    font-size: 1rem;
+    font-weight: 900;
+}
+
+.quill__textbox__input {
+    margin: 1% 0 1% 0;
+    width: 99%;
+    height: 25px;
+}

@@ -4,6 +4,9 @@ import { useQuill } from 'react-quilljs';
 import 'quill/dist/quill.snow.css'; 
 import fetch from 'isomorphic-unfetch';
 import { useRef } from 'react';
+import "../../css/team/quilleditor.css"
+import CreateTeam from './CreateTeam';
+
 
 export default (props) => {
     const { quill, quillRef } = useQuill();
@@ -11,37 +14,10 @@ export default (props) => {
     const [useUrl, setUseUrl] = useState([]);
     const [deleteUrl, setDeleteUrl] = useState([]);
     const allUrl = useRef([]);
-    const onTitle = (event) => {
-        setTitle(event.target.value);
-    }
 
     //multipart
     const config = {
 	    header: {'content-type': 'multipart/form-data'}
-    }
-
-    //팀작성 시 실행
-    const postTeamPosting = () => {
-        const formData = new FormData();
-        formData.append('title', title);
-        formData.append('content', quill.root.innerHTML);
-        if(props.imgFile) {
-            formData.append('imgFile', props.imgFile[0]);
-        }
-        quill.getContents().ops.map(result => {
-           if(result.insert.image) {
-               const copyArray = useUrl;
-               copyArray.push(result.insert.image);
-               setUseUrl(copyArray);
-           }
-        });
-        const deleteUrl = allUrl.current.filter(x => ! useUrl.includes(x))
-        formData.append('deleteUrl', deleteUrl);
-        axios.post("/team/createTeam", formData, config).then((result) => {
-            alert(result.data.message);
-        }).catch((error) => {
-            console.log(error);
-        })
     }
 
     const insertToEditor = (url) => {
@@ -60,6 +36,10 @@ export default (props) => {
         });
     };
 
+    const titleChange = (event) => {
+        setTitle(event.target.value);
+    }
+
 
     //텍스트 에디터에 이미지 올릴 시 실행
     const selectLocalImage = () => {
@@ -76,7 +56,6 @@ export default (props) => {
 
     React.useEffect(() => {
     if (quill) {
-        //텍스트 에디터에 이미지 올릴 시 실행
 
         quill.getModule('toolbar').addHandler('image', selectLocalImage);
     }
@@ -86,19 +65,20 @@ export default (props) => {
     React.useEffect(() => {
     if (quill) {
       quill.on('text-change', (delta, oldDelta, source) => {
-        // console.log(quill.getContents());
-        //  console.log(quill.getContents().ops[0]);
+
         });
         }
     }, [quill]);
 
   return (
     <>
-        <input type="text" onChange={onTitle}></input>
-        <div style={{ width: 2000, height: 300 }}>
-        <div ref={quillRef} />
-        <button onClick={postTeamPosting}>글작성</button>
-        </div>
+        <article className='quill'>
+            <CreateTeam quill={quill} title={title} allUrl={allUrl}  />
+            <section className='quill__textbox'>
+                <input type="text" onChange={titleChange} className="quill__textbox__input" placeholder='제목을 입력하세요' />
+                <div ref={quillRef} />
+            </section>
+        </article>
     </>
         );
     };
