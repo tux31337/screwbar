@@ -45,6 +45,8 @@ router.get('/logout', isAuth, authService.logout);
 // me 구현
 router.get('/me', isAuth, authService.me);
 
+router.get('/myInfo', isAuth, authService.myInfo);
+
 //문자 인증 받기
 router.post("/getVerificationCode", sens.sendVerificationSMS);
 
