@@ -1,12 +1,13 @@
+import "../css/home.css"
 
 function Home() {
 
     return(
-        <>
-            <section>
-                <h1>메인페이지</h1>
-            </section>
-        </>
+        
+           <div className="main">
+            <a><img src="img/main.jpg" /></a>
+            </div>
+        
     )
 }
 

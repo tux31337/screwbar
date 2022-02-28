@@ -37,7 +37,7 @@ const App = () => {
             <>
               <Navbar />
               <Home />
-            </>, true
+            </>, false
           )}>
         </Route> 
         <Route 
