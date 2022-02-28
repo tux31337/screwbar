@@ -5,6 +5,7 @@ import Navbar from './component/Navbar';
 import Signup from './component/user/Signup';
 import AuthHoc from './hoc/auth'
 import Home from './component/home';
+import CreateTeam from './component/team/CreateTeam';
 
 
 
@@ -36,6 +37,15 @@ const App = () => {
             <>
               <Navbar />
               <Home />
+            </>, true
+          )}>
+        </Route> 
+        <Route 
+          path='/post'
+          element={AuthHoc(
+            <>
+              <Navbar />
+              <CreateTeam />
             </>, true
           )}>
         </Route> 

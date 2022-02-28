@@ -42,10 +42,10 @@ router.post("/signin", validateSignIn, authService.signIn);
 //로그아웃
 router.get('/logout', isAuth, authService.logout);
 
-//
+// me 구현
 router.get('/me', isAuth, authService.me);
 
-// //문자 인증 받기
+//문자 인증 받기
 router.post("/getVerificationCode", sens.sendVerificationSMS);
 
 //문자 인증번호 확인

@@ -1,10 +1,12 @@
-import { useState } from "react";
-import { signupAction } from "../../action/auth";
-import { Link, useNavigate } from 'react-router-dom';
-
-import "../../css/user/signup.css"
 import axios from "axios";
 import { useEffect } from "react";
+import { Link, useNavigate } from 'react-router-dom';
+import { useState } from "react";
+
+import { signupAction } from "../../action/auth";
+import "../../css/user/signup.css"
+import DaumPost from "./Daumpost";
+
 
 function Signup() {
     const [email, setEmail] = useState("");
@@ -12,11 +14,15 @@ function Signup() {
     const [password, setPassword] = useState("");
     const [password2, setPassword2] = useState("");
     const [address, setAddress] = useState("");
+    const [addressDetail, setAddressDetail] = useState("");
     const [phonenumber, setPhoneNumber] = useState("");
     const [birthday, setBirthday] = useState("");
+
     const [certificationBtn, setCertificationBtn] = useState(false);
     const [labelCheck, setLabelCheck] = useState(false);
     const [disabledCheck, setDisabledCheck] = useState(false);
+    const [isOpenPost, setIsOpenPost] = useState(false);
+
     const [emailCheck, setEmailCheck] = useState(true);
     const [passwordCheck, setPasswordCheck] = useState(true);
     const navigate = useNavigate();
@@ -24,19 +30,24 @@ function Signup() {
 
     const onAddressChanged = (event) => {
         setAddress(event.target.value);
-    }
+    };
 
     const onPhoneNumberChanged = (event) => {
         setPhoneNumber(event.target.value);
-    }
+    };
 
     const onPasswordChanged = (event) => {
         setPassword(event.target.value);
-    }
+    };
 
     const onPasswordChanged2 = (event) => {
         setPassword2(event.target.value);
+    };
+
+    const onAddressDetail = (event) => {
+        setAddressDetail(event.target.value);
     }
+
     useEffect(() => {
         if(password !== password2) {
             setPasswordCheck(false);
@@ -47,11 +58,12 @@ function Signup() {
 
     const onBirthdayChange = (event) => {
         setBirthday(event.target.value);
-    }
+    };
     
     const onEmailChange = (event) => {
         setEmail(event.target.value);
-    }
+    };
+
     useEffect(() => {
         let userEmailExp = /^[A-Za-z0-9_\.\-]+@[A-Za-z0-9\-]+\.[A-Za-z0-9\-]+/;
         if(email && userEmailExp.test(email) === false) {
@@ -59,11 +71,12 @@ function Signup() {
         } else {
             setEmailCheck(true);
         }
-    }, [email])
+    }, [email]);
+
 
     const onUsernameChange = (event) => {
         setUserName(event.target.value);
-    }
+    };
 
     const getCertification = () => {
         const data = {
@@ -75,7 +88,7 @@ function Signup() {
         }).catch((error) => {
             console.log(error);
         })
-    }
+    };
 
     const onCertificationNumberChanged = (event) => {
         const  data = {
@@ -95,7 +108,18 @@ function Signup() {
         })
     }
 
-
+    const [isPopupOpen, setIsPopupOpen] = useState(false)
+ 
+	// 팝업창 열기
+    const openPostCode = () => {
+        setIsPopupOpen(true)
+    }
+ 
+	// 팝업창 닫기
+    const closePostCode = () => {
+        setIsPopupOpen(false)
+    }
+ 
     //회원가입 클릭시
     const  signup = () => {
         if(!email || !emailCheck) {
@@ -106,7 +130,8 @@ function Signup() {
             alert("이름을 입력해주세요");
             return;
         }
-        
+        let finishAddress = address + addressDetail;
+        setAddress(finishAddress);
         const data = {
             email: email,
             username: username,
@@ -159,7 +184,14 @@ function Signup() {
             {passwordCheck === false ? <small className="signup__small">비밀번호가 일치하지 않습니다.</small> : null}
             <div>
                 <label className="signup__label">주소</label>
-                <input type="text" className="signup__address" onChange={onAddressChanged} maxLength={25}/>
+                <input type="text" className="signup__address" onClick={openPostCode} maxLength={25} defaultValue={address}/>
+            </div>
+            {
+                isPopupOpen && <DaumPost address={address} setAddress={setAddress} isPopupOpen={isPopupOpen} setIsPopupOpen={setIsPopupOpen}></DaumPost>
+            }
+            <div>
+                <label className="signup__label">상세 주소</label>
+                <input type="text" className="signup__address" maxLength={25} onChange={onAddressDetail}/>
             </div>
             <div>
                 <label className="signup__label">전화번호</label>
@@ -180,5 +212,4 @@ function Signup() {
     </>
     )
 }
-
 export default Signup;

@@ -59,7 +59,7 @@ function setToken(res, token) {
     maxAge: config.jwt.expiresInSec * 1000,
     httpOnly: true,
   };
-  res.cookie('token', token, options) // http only cookie
+  res.cookie('token', token, options) 
 
 }
 

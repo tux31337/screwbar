@@ -2,7 +2,7 @@ const { createProxyMiddleware } = require('http-proxy-middleware');
 
 module.exports = function(app) {
   app.use(
-    '/auth/',
+    ['/auth/', '/team/'],
     createProxyMiddleware({
       target: 'http://localhost:8080',
       changeOrigin: true,
