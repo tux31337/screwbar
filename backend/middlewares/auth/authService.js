@@ -12,9 +12,11 @@ const { options } = require('../../router/auth.js');
 
 
 async function signup(req, res) {
-  const { email, username, password, address, phoneNumber, birthday } =
+  const { email, username, password, address, phoneNumber, birthday, gender } =
     req.body;
   const userID = v4();
+  console.log(gender);
+  console.log("birthday" + birthday);
   const findByNumbmer = await userRepository.findByNumbmer(phoneNumber);
   if(findByNumbmer) {
     return res.status(409).json({message: "이미 가입한 휴대폰 번호입니다."});
@@ -27,25 +29,27 @@ async function signup(req, res) {
     password : hashed,
     address,
     phoneNumber,
-    birthday
+    birthday,
+    gender
   });
   if(!result) {
-    return res.status(401).json({message: "아이디 또는 비밀번호를 확인하세요"});
+    return res.status(401).json({message: "회원 가입에 실패했습니다"});
   }
   res.status(200).json({message: "회원 가입에 성공했습니다"});
 }
 
 async function signIn(req, res) {
-  const {phoneNumber, password} = req.body;
-  const findByNumbmer = await userRepository.findByNumbmer(phoneNumber);
-  if(!findByNumbmer) {
+  const {email, password} = req.body;
+  const findByEmail = await userRepository.findByEmail(email);
+  console.log(findByEmail);
+  if(!findByEmail) {
     return res.status(401).json({message: "아이디 또는 비밀번호를 확인하세요"});
   }
-  const result = await bcrypt.compare(password,  findByNumbmer.password);
+  const result = await bcrypt.compare(password,  findByEmail.password);
   if(!result) {
     return res.status(401).json({message: "아이디 또는 비밀번호를 확인하세요"});
   }
-  const token = createJwtToken(findByNumbmer.user_id);
+  const token = createJwtToken(findByEmail.user_id);
   setToken(res, token);
   res.status(200).json({token});
 }
@@ -90,10 +94,22 @@ async function myInfo(req, res) {
   res.status(200).json({userId: user.user_id, userName: user.username, age: age})
 }
 
+
+async function emailDuplicateCheck(req, res) {
+  console.log(req.query);
+  const user = await userRepository.findByEmail(req.query.email);
+  if (!user) {
+    return res.status(200).json({message: '회원가입을 진행해주세요', status: true});
+  } else {
+    return res.status(200).json({message: '중복회원 입니다.', status: false});
+  }
+}
+
 module.exports.signup = signup;
 module.exports.signIn = signIn;
 module.exports.me = me;
 module.exports.logout = logout;
 module.exports.myInfo = myInfo;
+module.exports.emailDuplicateCheck = emailDuplicateCheck;
 
 

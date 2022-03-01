@@ -29,9 +29,9 @@
   .login__loginBtn, .login__signupBtn {
     width: 380px;
     border-radius: 10px;
-    height: 38px;
+    height: 45px;
     color: white;
-    background-color: #000000;
+    background-color: #5f0080;
     cursor: pointer;
   }
 

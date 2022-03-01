@@ -21,8 +21,6 @@ async function createTeam(req, res) {
 }
 
 function postImg(req, res) {
-        console.log(req.file);
-        // ${req.userId}
         const IMG_URL = `http://localhost:8080/uploads/posts/${req.userId}/${req.file.filename}`;
         console.log(IMG_URL);
         res.json({ url: IMG_URL });
