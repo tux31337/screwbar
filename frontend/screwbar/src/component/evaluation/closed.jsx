@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import Modal from './modal.jsx';
-import '../../css/evaluation/participants_list.css';
+import '../../css/evaluation/closed.css';
+import '../../css/font.css';
 
 //마감된 글 페이지
 function Closed() {
@@ -11,12 +12,27 @@ function Closed() {
   ];
 
   const [modalVisibleId, setModalVisibleId] = useState(false);
+  const [finalData, setfinalData] = useState([]);
 
   const onModalHandler = (id) => {
     setModalVisibleId(id);
   };
+
+  // 서버로 보내기
+  const finalSumbit = () => {
+    console.log('서버로 보내자');
+    console.log(finalData);
+  };
+
+  const onAdd = (finalPersonalData) => {
+    console.log(finalPersonalData);
+    const copyArray = [...finalData];
+    copyArray.push(finalPersonalData.current);
+    setfinalData(copyArray);
+    console.log(finalData);
+  };
   return (
-    <React.Fragment>
+    <div className="contents">
       <h4>참여자</h4>
       <ul className="participations">
         {participants.map((participant) => (
@@ -32,11 +48,16 @@ function Closed() {
               participant={participant}
               modalVisibleId={modalVisibleId}
               setModalVisibleId={setModalVisibleId}
+              setfinalData={setfinalData}
+              onAdd={onAdd}
             />
           </li>
         ))}
       </ul>
-    </React.Fragment>
+      <button className="finalSubmit-btn" onClick={() => finalSumbit()}>
+        제출하기
+      </button>
+    </div>
   );
 }
 
