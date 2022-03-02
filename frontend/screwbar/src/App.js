@@ -6,14 +6,9 @@ import Signup from './component/user/Signup';
 import AuthHoc from './hoc/auth';
 import Home from './component/home';
 import CreateTeam from './component/team/CreateTeam';
-<<<<<<< HEAD
 import Closed from './component/evaluation/closed';
-=======
 import Chat from './component/chat/chat';
 import QuillEditor from './component/team/QuillEditor';
-
-
->>>>>>> 96a5265d83c85496f7a382e6ebe4d43d252bb912
 
 const App = () => {
   return (
@@ -43,7 +38,6 @@ const App = () => {
             <>
               <Navbar />
               <Home />
-<<<<<<< HEAD
             </>,
             true
           )}
@@ -68,29 +62,26 @@ const App = () => {
             true
           )}
         ></Route>
-=======
-            </>, false
-          )}>
-        </Route> 
-        <Route 
-          path='/post'
+        <Route
+          path="/post"
           element={AuthHoc(
             <>
               <Navbar />
               <QuillEditor />
-            </>, true
-          )}>
-        </Route> 
-        <Route 
-          path='/chat'
+            </>,
+            true
+          )}
+        ></Route>
+        <Route
+          path="/chat"
           element={AuthHoc(
             <>
               <Navbar />
               <Chat />
-            </>, true
-          )}>
-        </Route> 
->>>>>>> 96a5265d83c85496f7a382e6ebe4d43d252bb912
+            </>,
+            true
+          )}
+        ></Route>
       </Routes>
     </BrowserRouter>
   );
