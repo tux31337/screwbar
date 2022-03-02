@@ -14,6 +14,8 @@ function CreateTeam(props) {
     const [excercise, setExcercise] = useState("");
     const [temperature, setTemperature] = useState("");
     const [useUrl, setUseUrl] = useState([]);
+    const [title, setTitle] = useState([]);
+    const [check, setCheck] = useState(false);
     const [deleteUrl, setDeleteUrl] = useState([]);
 
     useEffect(() => {
@@ -21,6 +23,10 @@ function CreateTeam(props) {
             setMyInfo(result.data);
         })
     }, []);
+
+    const changeCheckValue = () => {
+        setCheck(!check);
+    }
 
     const priceFormatChange = (str) => {
         const comma = (str) => {
@@ -65,6 +71,10 @@ function CreateTeam(props) {
         setExcercise(event.target.value);
     }
 
+    const onTitle = (event) => {
+        setTitle(event.target.value);
+    }
+
     const temperatureChange = (event) => {
         setTemperature(event.target.value);
     }
@@ -79,13 +89,15 @@ function CreateTeam(props) {
         if(imgFile) {
             formData.append('imgFile', imgFile[0]);
         }
+        let discloseInfo = check === true ? 1 : 0;
         formData.append('personnel', personnel);
         formData.append('price', price);
         formData.append('excercise', excercise);
         formData.append('date', date);
         formData.append('temperature', temperature);
         formData.append('content', props.quill.root.innerHTML);
-        formData.append('title', props.title);
+        formData.append('title', title);
+        formData.append('discloseInfo', discloseInfo);
         props.quill.getContents().ops.map((result) => {
             if(result.insert.image) {
                 const copyArray = useUrl;
@@ -119,7 +131,7 @@ function CreateTeam(props) {
                             className="d-block w-100"
                             src={item}
                             alt="First slide"
-                            style={{width:"500px",height:"350px"}}
+                            style={{width:"250px",height:"250px"}}
                             />
                         )
                         }) }
@@ -128,28 +140,38 @@ function CreateTeam(props) {
                     <input type="file" className="createTeam__upload" onChange={handleChangeFile} multiple="multiple" />
                 </section>
                 <section className="createTeam__information">
-                    <span className="createTeam__information__text">인원 : <input type="text" className="createTeam__information__input" onChange={personnelChange}></input> 명</span>
-                    <span className="createTeam__information__text">리더 : {myInfo.userName}님, 남, {myInfo.age}</span>
-                    <span className="createTeam__information__text">비용 : <input type="text" className="createTeam__information__input" value={price} onChange={(event) => setPrice(priceFormatChange(event.target.value))}></input></span>
-                    <span className="createTeam__information__text">날짜 : <input type="text" className="createTeam__information__input" onChange={dateChange} /></span>
-                    <span className="createTeam__information__text">운동종류 :
-                    <select onChange={excerciseTypeChange}>
-                        <option value="">운동 종류</option>
-                        <option value="축구">축구</option>
-                        <option value="농구">농구</option>
-                        <option value="야구">야구</option>
-                    </select>
+                    <span className="createTeam__information__title">카테고리/모임명</span>
+                    <span className="createTeam__information__excercise">
+                        <select onChange={excerciseTypeChange} className="createTeam__information__excercise__selectbox">
+                            <option value="">운동 종류</option>
+                            <option value="축구">축구</option>
+                            <option value="농구">농구</option>
+                            <option value="야구">야구</option>
+                        </select>
                     </span>
-                    <span className="createTeam__information__text">열정온도 조건 :
-                    <select onChange={temperatureChange}>
+                    <input type="text" placeholder='제목을 입력하세요' className="createTeam__information__subjectTitle" onChange={onTitle} />
+                    <span className="createTeam__information__information">정보</span>
+                    <span className="createTeam__information__name">이름 : {myInfo.userName}</span>
+                    <span className="createTeam__information__telephone">연락처 : {myInfo.phonenumber}</span>
+                    <span className="createTeam__information__subInformation">부가 정보</span>
+                    <span className="createTeam__information__open">공개 여부 : <input type="checkbox" checked={check} onClick={changeCheckValue}/></span>
+                    <span className="createTeam__information__gender">성별 : {myInfo.gender}</span>
+                    <span className="createTeam__information__email">이메일 : {myInfo.email}</span>  
+                    <span className="createTeam__information__age">나이 : {myInfo.age}</span> 
+                    <span className="createTeam__information__detail">팀 세부 조건</span>
+                    <div className="createTeam__information__count">인원 : <input type="text" className="createTeam__information__count__input" onChange={personnelChange}></input></div>
+                    <span className="createTeam__information__pay">비용 : <input type="text" className="createTeam__information__pay__input" value={price} onChange={(event) => setPrice(priceFormatChange(event.target.value))}></input></span>
+                    <span className="createTeam__information__date">날짜 : <input type="text" className="createTeam__information__date__input" onChange={dateChange} /></span>
+
+                    <span className="createTeam__information__temperature">열정온도 조건</span>
+                    <select onChange={temperatureChange} className="createTeam__information__temperatureChange">
                         <option value="">열정온도</option>
                         <option value="35">35</option>
                         <option value="30">30</option>
                         <option value="25">25</option>
                         <option value="상관 없음">상관 없음</option>
                     </select>
-                    </span>
-                    <button onClick={postTeamPosting} className="postBtn">글작성</button>
+                    <button onClick={postTeamPosting} className="createTeam__postBtn">글작성</button>
                 </section>
             </article>
         </>

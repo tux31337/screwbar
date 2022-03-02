@@ -73,10 +73,11 @@ export default (props) => {
   return (
     <>
         <article className='quill'>
-            <CreateTeam quill={quill} title={title} allUrl={allUrl}  />
-            <section className='quill__textbox'>
-                <input type="text" onChange={titleChange} className="quill__textbox__input" placeholder='제목을 입력하세요' />
-                <div ref={quillRef} />
+          <section className='quill__box'>
+              <CreateTeam quill={quill} title={title} allUrl={allUrl}  />
+              <section className='quill__textbox'>
+                  <div ref={quillRef} />
+              </section>
             </section>
         </article>
     </>
