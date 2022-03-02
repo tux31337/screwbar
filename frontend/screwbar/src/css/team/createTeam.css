@@ -9,46 +9,158 @@
 
 .createTeam__form__imgBox {
     border: 1px solid black;
-    width: 500px;
-    height: 300px;
-}
-
-
-
-.createTeam__information__text {
-    font-size: 1.0rem;
-}   
-
-.createTeam__information {
-    position: sticky;
-    top: 10px;
-    margin-top: 1%;
-    width: 550px;
-    margin-left: 30%;
-    display: flex;
-    flex-direction: column;
+    width: 250px;
     height: 250px;
 }
 
-.createTeam__information > * {
-    padding-top: 6px;
+.createTeam__information {
+    font-size: 0.9rem;
 }
 
-.createTeam__information__input {
-    height: 28px;
-    width: 140px;
-    border: 0.5px solid;
 
+
+.createTeam__information {
+    display: grid;
+    grid-gap: 12px;
+    grid-template-columns: 110px 180px 1.4fr 1fr;
+    grid-auto-rows: minmax(30px, auto);
+    grid-template-areas: 
+                          'createTeam__information__title createTeam__information__excercise createTeam__information__subjectTitle createTeam__information__subjectTitle'
+                          'createTeam__information__information createTeam__information__name createTeam__information__gender  createTeam__information__age'
+                          'createTeam__information__subInformation createTeam__information__open createTeam__information__email createTeam__information__telephone'
+                          'createTeam__information__detail createTeam__information__count createTeam__information__pay createTeam__information__date'
+                          'createTeam__information__temperature createTeam__information__temperatureChange createTeam__information__temperatureChange createTeam__information__temperatureChange'
+                          'createTeam__postBtn createTeam__postBtn createTeam__postBtn createTeam__postBtn';
+    margin-left: 7%;
 }
 
-.createTeam__information > span > select {
-    margin-left: 10px;
-    height: 28px;
+.createTeam__postBtn {
+    border: 1px solid #5f0080;
+    background-color: #fff;
+    color: #5f0080;
+    font-weight: 600;
+    width: 300px;
+    margin: auto;
+    height: 35px;
+    border-radius: 5px;
+}
+
+.createTeam__postBtn:hover {
+    border: 1px solid #5f0080;
+    background-color: #eedff3;
+    color: #5f0080;
+    cursor: pointer;
+}
+
+
+
+.createTeam__information__excercise__selectbox {
+    height: 30px;
     width: 100px;
 }
 
-.postBtn {
-    margin-top: 5%;
-    width: 290px;
+.createTeam__information__temperature, .createTeam__information__temperatureChange, .createTeam__information__title, .createTeam__information__excercise, .createTeam__information__subjectTitle,  .createTeam__information__date, .createTeam__information__date__input ,.createTeam__information__pay__input, .createTeam__information__count__input, .createTeam__information__detail, .createTeam__information__count, .createTeam__information__pay, .createTeam__information__date {
+    align-self: center;
 }
+
+.createTeam__information__temperatureChange {
+    height: 30px;
+    width: 150px;
+}
+
+.createTeam__information__count__input {
+    width: 50px;
+    height: 28px;
+}
+
+.createTeam__information__subjectTitle {
+    height: 28px;
+}
+
+.createTeam__information__pay__input {
+    width: 120px;
+    height: 28px;
+}
+
+.createTeam__information__date__input {
+    height: 28px;
+    width: 120px;
+}
+
+.createTeam__information__title {
+    grid-area: createTeam__information__title;
+}
+
+.createTeam__information__excercise {
+    grid-area: createTeam__information__excercise;
+}
+
+.createTeam__information__subjectTitle {
+    grid-area: createTeam__information__subjectTitle;
+}
+
+.createTeam__information__open {
+    grid-area: createTeam__information__open;
+}
+
+
+.createTeam__information__count {
+    grid-area: createTeam__information__count;
+}
+
+.createTeam__information__information {
+    grid-area: createTeam__information__information;
+}
+
+.createTeam__information__telephone {
+    grid-area: createTeam__information__telephone;
+}
+
+.createTeam__information__name {
+    grid-area: createTeam__information__name;
+}
+
+.createTeam__information__subInformation {
+    grid-area: createTeam__information__subInformation;
+}
+.createTeam__information__gender {
+    grid-area: createTeam__information__gender;
+}
+
+.createTeam__information__age {
+    grid-area: createTeam__information__age;
+}
+
+.createTeam__information__email {
+    grid-area: createTeam__information__email;
+}
+
+.createTeam__information__detail {
+    grid-area: createTeam__information__detail;
+}
+
+.createTeam__information__count {
+    grid-area: createTeam__information__count;
+}
+
+.createTeam__information__pay {
+    grid-area: createTeam__information__pay;
+}
+
+.createTeam__information__date {
+    grid-area: createTeam__information__date;
+}
+
+.createTeam__information__temperature {
+    grid-area: createTeam__information__temperature;
+}
+
+.createTeam__information__temperatureChange {
+    grid-area: createTeam__information__temperatureChange;
+}
+
+.createTeam__postBtn {
+    grid-area: createTeam__postBtn;
+}
+
 

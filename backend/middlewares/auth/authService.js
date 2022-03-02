@@ -91,7 +91,7 @@ async function myInfo(req, res) {
   const year = today.getFullYear();
   const age =  year -birthday.substr(0, 4);
 
-  res.status(200).json({userId: user.user_id, userName: user.username, age: age})
+  res.status(200).json({userId: user.user_id, userName: user.username, age: age, phonenumber: user.phonenumber, gender: user.gender, email: user.email})
 }
 
 
