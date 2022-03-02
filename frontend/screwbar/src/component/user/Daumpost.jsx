@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import DaumPostcode from "react-daum-postcode";
 
 const DaumPost = (props) => {
@@ -7,10 +7,7 @@ const DaumPost = (props) => {
   const isPopupOpen = props.isPopupOpen;
   const setIsPopupOpen = props.setIsPopupOpen;
 
-
-
   const onCompletePost = (data) => {
-    console.log(data.address);
     setAddress(data.address);
     setIsPopupOpen(false);
   };
@@ -24,27 +21,25 @@ const DaumPost = (props) => {
     position: "absolute",
     width: "700px",
     height: "400px",
-    right: "-350px",
-    bottom: "-50px",
+    right: "-50px",
+    bottom: "-250px",
     padding: "7px",
     zIndex: 100, 
   };
 
   const daumPostBtnStyle = {
+    border:"0px",
     position:"absolute",
     display: "block",
-    color: "black",
-    zIndex: 101,
-    width: "710px",
-    right: "-345px",
-    bottom: "360px",
+    zIndex: 100,
+    width: "700px",
+    right: "-45px",
+    bottom: "158px",
     backgroundColor:"#888",
     padding:"5px",
     color:"white",
     textAlign:"right"
   }
-
-
 
   return (
     <>
@@ -59,7 +54,6 @@ const DaumPost = (props) => {
         />
         </div>
     </div>
-     
     </>
   );
 };

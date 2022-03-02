@@ -2,11 +2,16 @@ const config = require('../../config/config.js');
 const cryptojs = require('crypto-js');
 const axios = require('axios');
 const Cache = require('memory-cache');
+const userRepository = require('../auth/authRepository.js');
 
 const messageAuthentication = {
   sendVerificationSMS: async (req, res) => {
     try {
       const phoneNumber = req.body.phoneNumber;
+      const user = await userRepository.findByNumbmer(phoneNumber);
+      if(user) {
+        return res.status(200).json({message: "이미 가입한 휴대폰 번호입니다."});
+      }
       Cache.del(phoneNumber);
       const date = Date.now().toString();
       //6자리 인증코드 생성

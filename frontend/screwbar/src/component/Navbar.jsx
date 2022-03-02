@@ -18,19 +18,11 @@ function Navbar() {
                 <div className="navbar__logo">
                     <img src="img/screwbar2.png" className="navbar__logo__img"></img>
                 </div>
-                <ul className="navbar__menu">
-                    <li><a href="">test</a></li>
-                    <li><a href="">test</a></li>
-                    <li><a href="">test</a></li>
-                    <li><a href="">test</a></li>
-                    <li><a href="">test</a></li>
-                </ul>
                 <ul className="navbar__links">
+                    <li><a href="">홈</a></li>
+                    <li><a href="">운동</a></li>
                     <li><img className="logoutBtn" src="img/logout.svg" onClick={logout}/></li>
-                    <li><a href="">2</a></li>
-                    <li><a href="">3</a></li>
                 </ul>
-            
             </nav>
         </>
     )

@@ -1,12 +1,15 @@
+import "../css/home.css"
 
 function Home() {
 
     return(
-        <>
-            <section>
-                <h1>메인페이지</h1>
-            </section>
-        </>
+        
+           <div className="main">
+               <div className="Title">
+                    <p>운동,함께해요</p>
+               </div>
+            </div>
+        
     )
 }
 
