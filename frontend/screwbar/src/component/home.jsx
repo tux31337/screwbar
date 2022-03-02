@@ -5,7 +5,9 @@ function Home() {
     return(
         
            <div className="main">
-            <a><img src="img/main.jpg" /></a>
+               <div className="Title">
+                    <p>운동,함께해요</p>
+               </div>
             </div>
         
     )

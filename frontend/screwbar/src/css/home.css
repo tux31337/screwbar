@@ -1,4 +1,17 @@
 .main{
-    background-size: 100%;    
+    background-image: url('img/Main.jpg');
+    background-size: 100%;   
+    width: 1920px;
+    height: 876px;
+    background-size: cover;
+    background-repeat: no-repeat;
+    
+}
 
+.Title{
+    font-size: 40px;
+    margin-left: 1200px;
+    margin-top: 50px;
+    position: absolute;
+    font-family: "tway_sky";
 }
