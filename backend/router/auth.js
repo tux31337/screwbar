@@ -45,8 +45,11 @@ router.get('/logout', isAuth, authService.logout);
 // me 구현
 router.get('/me', isAuth, authService.me);
 
+// 내정보 가져오기
 router.get('/myInfo', isAuth, authService.myInfo);
 
+//이메일 중복 체크
+router.get('/emailDuplicateCheck', authService.emailDuplicateCheck)
 //문자 인증 받기
 router.post("/getVerificationCode", sens.sendVerificationSMS);
 

@@ -25,7 +25,7 @@ function Login() {
 
     const userLogin = () => {
         let data = {
-            phoneNumber: phoneNumber, 
+            email: phoneNumber, 
             password: password
         }
         dispatch(loginUser(data))
@@ -43,17 +43,13 @@ function Login() {
     }
 
 
-
-
-
-
     return(
         <>
     <section className="login">
         <div>
             <img src="img/screwbar.png"></img>
         </div>
-        <label className="login__label">휴대폰 번호</label>
+        <label className="login__label">이메일</label>
         <input
           type="text"
           className="login__phone"
