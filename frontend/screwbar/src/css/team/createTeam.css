@@ -35,10 +35,24 @@
 }
 
 .createTeam__postBtn {
-    width: 200px;
+    border: 1px solid #5f0080;
+    background-color: #fff;
+    color: #5f0080;
+    font-weight: 600;
+    width: 300px;
     margin: auto;
-    height: 30px;
+    height: 35px;
+    border-radius: 5px;
 }
+
+.createTeam__postBtn:hover {
+    border: 1px solid #5f0080;
+    background-color: #eedff3;
+    color: #5f0080;
+    cursor: pointer;
+}
+
+
 
 .createTeam__information__excercise__selectbox {
     height: 30px;
