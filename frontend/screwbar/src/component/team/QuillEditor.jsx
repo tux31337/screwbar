@@ -74,7 +74,7 @@ export default (props) => {
     <>
         <article className='quill'>
           <section className='quill__box'>
-              <CreateTeam quill={quill} title={title} allUrl={allUrl}  />
+              <CreateTeam quill={quill} allUrl={allUrl}  />
               <section className='quill__textbox'>
                   <div ref={quillRef} />
               </section>
