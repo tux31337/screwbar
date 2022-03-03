@@ -4,7 +4,7 @@ import axios from "axios";
 import "../css/navbar.css"
 import { useNavigate } from 'react-router-dom';
 import { useEffect, useState } from "react";
-
+import '../css/font.css';
 
 function Navbar() {
     const navigate = useNavigate();
@@ -43,11 +43,6 @@ function Navbar() {
                                 <ul><li><a href="/signup">회원가입</a></li><li><a href="/login">로그인</a></li></ul>: 
                                 <ul><li><img className="logoutBtn" src="img/user.svg" onClick={logout}/></li><li><img className="logoutBtn" src="img/logout.svg" onClick={logout}/></li></ul>}                       
                 </div>
-                <ul className="navbar__links">
-                    <li><a href="">홈</a></li>
-                    <li><a href="">운동</a></li>
-                    <li><img className="logoutBtn" src="img/logout.svg" onClick={logout}/></li>
-                </ul>
                 <div className="navbar__logo">
                     <img src="img/screwbar2.png" className="navbar__logo__img" onClick={goHome}></img>
                 </div>

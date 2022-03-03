@@ -32,11 +32,6 @@ function Home() {
     return(
         
         <>
-        <div className="main">
-               <div className="Title">
-                    <p>운동,함께해요</p>
-               </div>
-            </div>
         
             <article className="home">
                 <section className="home__cards">
