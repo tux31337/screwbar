@@ -5,9 +5,9 @@ import Navbar from './component/Navbar';
 import Signup from './component/user/Signup';
 import AuthHoc from './hoc/auth'
 import Home from './component/home';
-import CreateTeam from './component/team/CreateTeam';
 import Chat from './component/chat/chat';
 import QuillEditor from './component/team/QuillEditor';
+import Closed from './component/evaluation/closed';
 
 
 
@@ -58,6 +58,15 @@ const App = () => {
             <>
               <Navbar />
               <Chat />
+            </>, true
+          )}>
+        </Route> 
+        <Route 
+          path='/closeD'
+          element={AuthHoc(
+            <>
+              <Navbar />
+              <Closed />
             </>, true
           )}>
         </Route> 

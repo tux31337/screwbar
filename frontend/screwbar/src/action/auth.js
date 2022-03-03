@@ -1,5 +1,4 @@
 import axios from "axios";
-import token from "./token";
 import { LOGIN_USER, AUTH_USER } from "./types";
 
 
@@ -7,7 +6,6 @@ export function login(data) {
     axios.post("/auth/signin", data, {withCredentials: true})
     .then((result) => {
         if(result.status === 200) {
-            token.saveToken(result.data);
             return result;
         }
     }).catch((error) => {
