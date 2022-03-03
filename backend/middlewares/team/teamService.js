@@ -20,9 +20,16 @@ async function createTeam(req, res) {
     })
 }
 
-function postImg(req, res) {
+async function getTeam(req, res) {
+    return db.execute(
+        "SELECT * FROM posting"
+    ).then((result) => {
+        return res.status(200).json({message: result[0]});
+    })
+}
+
+function postImg(req, res) { 
         const IMG_URL = `http://localhost:8080/uploads/posts/${req.userId}/${req.file.filename}`;
-        console.log(IMG_URL);
         res.json({ url: IMG_URL });
 }
 
@@ -42,3 +49,4 @@ function deleteImg(req, res) {
 
 module.exports.createTeam = createTeam;
 module.exports.postImg = postImg;
+module.exports.getTeam = getTeam;

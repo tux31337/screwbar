@@ -3,6 +3,8 @@ import QuillEditor from "./QuillEditor";
 import "../../css/team/createTeam.css"
 import { useEffect } from "react";
 import axios from "axios";
+import { useNavigate } from 'react-router-dom';
+
 
 function CreateTeam(props) {
     const [imgBase64, setImgBase64] = useState([]); // 파일 base64
@@ -16,8 +18,9 @@ function CreateTeam(props) {
     const [useUrl, setUseUrl] = useState([]);
     const [title, setTitle] = useState([]);
     const [check, setCheck] = useState(false);
-    const [deleteUrl, setDeleteUrl] = useState([]);
 
+
+    const navigate = useNavigate();
     useEffect(() => {
         axios.get("/auth/myInfo").then((result) => {
             setMyInfo(result.data);
@@ -109,6 +112,7 @@ function CreateTeam(props) {
         formData.append('deleteUrl', deleteUrl);
         axios.post("/team/createTeam", formData, config).then((result) => {
             alert(result.data.message);
+            navigate('/home');
         }).catch((error) => {
             console.log(error);
         })
@@ -154,14 +158,14 @@ function CreateTeam(props) {
                     <span className="createTeam__information__name">이름 : {myInfo.userName}</span>
                     <span className="createTeam__information__telephone">연락처 : {myInfo.phonenumber}</span>
                     <span className="createTeam__information__subInformation">부가 정보</span>
-                    <span className="createTeam__information__open">공개 여부 : <input type="checkbox" checked={check} onClick={changeCheckValue}/></span>
+                    <span className="createTeam__information__open">공개 여부 : <input type="checkbox" defaultChecked={check} onClick={changeCheckValue}/></span>
                     <span className="createTeam__information__gender">성별 : {myInfo.gender}</span>
                     <span className="createTeam__information__email">이메일 : {myInfo.email}</span>  
                     <span className="createTeam__information__age">나이 : {myInfo.age}</span> 
                     <span className="createTeam__information__detail">팀 세부 조건</span>
                     <div className="createTeam__information__count">인원 : <input type="text" className="createTeam__information__count__input" onChange={personnelChange}></input></div>
                     <span className="createTeam__information__pay">비용 : <input type="text" className="createTeam__information__pay__input" value={price} onChange={(event) => setPrice(priceFormatChange(event.target.value))}></input></span>
-                    <span className="createTeam__information__date">날짜 : <input type="text" className="createTeam__information__date__input" onChange={dateChange} /></span>
+                    <span className="createTeam__information__date">날짜 : <input type="date" className="createTeam__information__date__input" onChange={dateChange} /></span>
 
                     <span className="createTeam__information__temperature">열정온도 조건</span>
                     <select onChange={temperatureChange} className="createTeam__information__temperatureChange">

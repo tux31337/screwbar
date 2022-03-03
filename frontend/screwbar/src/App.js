@@ -29,6 +29,7 @@ const App = () => {
           path='/signup'
           element={AuthHoc(
             <>
+              <Navbar />
               <Signup />
             </>, false
           )}>
