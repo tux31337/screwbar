@@ -1,0 +1,60 @@
+* {
+  box-sizing: border-box;
+  margin: 0;
+}
+
+li {
+  list-style: none;
+}
+
+h4 {
+  font-size: 38px;
+  margin-bottom: 10px;
+  font-weight: 500;
+}
+
+.contents {
+  padding: 30px;
+  width: 400px;
+  text-align: center;
+  margin: auto;
+}
+
+.participations {
+  text-align: center;
+  padding: 30px;
+}
+
+.participations > li {
+  margin-bottom: 10px;
+}
+
+.participation_name {
+  margin-right: 20px;
+}
+
+.evaluation_btn {
+  padding: 3px 5px;
+  border: solid 0.5px #cfcfcf;
+  border-radius: 3px;
+  background-color: white;
+  cursor: pointer;
+  transition: all 0.3s ease-in-out;
+}
+
+.evaluation_btn:hover {
+  color: #8750ac;
+  border: solid 0.5px #8750ac;
+}
+
+.finalSubmit-btn {
+  width: 100%;
+  padding: 10px 0px;
+  color: #f0f0f0;
+  background-color: #351f44;
+  border-radius: 5px;
+  font-size: 15px;
+  font-weight: 500;
+  border: none;
+  cursor: pointer;
+}
