@@ -4,7 +4,6 @@ import axios from "axios";
 import "../css/navbar.css"
 import { useNavigate } from 'react-router-dom';
 import { useEffect, useState } from "react";
-import { useRef } from "react";
 
 
 function Navbar() {
@@ -14,7 +13,6 @@ function Navbar() {
     useEffect(() => {
         axios.get("/auth/myInfo").then((result) => {
             setMyInfo(result.data);
-            console.log(myInfo.userId);
         }).catch((error) => {
             throw error
         })
@@ -48,7 +46,7 @@ function Navbar() {
         <>
             <nav className="navbar">
                 <div className="navbar__header">
-                        {myInfo.userId === undefined ? 
+                        {myInfo && myInfo.userId == undefined ? 
                                 <ul><li><a href="/signup">회원가입</a></li><li><a href="/login">로그인</a></li></ul>: 
                                 <ul><li><img className="logoutBtn" src="img/user.svg"/></li><li><img className="logoutBtn" src="img/logout.svg" onClick={logout}/></li></ul>}                       
                 </div>
