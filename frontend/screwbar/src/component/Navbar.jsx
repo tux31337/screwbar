@@ -32,6 +32,14 @@ function Navbar() {
         navigate('/home');
     }
 
+    const postBtn = () => {
+        navigate('/post');
+    }
+
+    const chatBtn = () => {
+        navigate('/chat');
+    }
+
     
 
     return(
@@ -41,7 +49,7 @@ function Navbar() {
                 <div className="navbar__header">
                         {myInfo.userId == undefined ? 
                                 <ul><li><a href="/signup">회원가입</a></li><li><a href="/login">로그인</a></li></ul>: 
-                                <ul><li><img className="logoutBtn" src="img/user.svg" onClick={logout}/></li><li><img className="logoutBtn" src="img/logout.svg" onClick={logout}/></li></ul>}                       
+                                <ul><li><img className="logoutBtn" src="img/user.svg"/></li><li><img className="logoutBtn" src="img/logout.svg" onClick={logout}/></li></ul>}                       
                 </div>
                 <div className="navbar__logo">
                     <img src="img/screwbar2.png" className="navbar__logo__img" onClick={goHome}></img>
@@ -58,19 +66,29 @@ function Navbar() {
                         <h4 onClick={openCategory}>&nbsp;&nbsp;카테고리</h4>
                         <div className="sidebar">
                             <div>축구</div>
-                            <div>농구</div>
                             <div>야구</div>
-                            <div>필라테스</div>
+                            <div>농구</div>
+                            <div>탁구</div>
+                            <div>배구</div>
+                            <div>배드민턴</div>
                             <div>테니스</div>
-                            <div>헬스</div>
-                            <div>헬스</div>
-                            <div>헬스</div>
-                            <div>헬스</div>
+                            <div>골프</div>
+                            <div>볼링</div>
+                            <div>러닝</div>
+                            <div>클라이밍</div>
+                            <div>사이클</div>
+                            <div>PT</div>
+                            <div>필라테스</div>
+                            <div>요가</div>
+                            <div>등산</div>
+                            <div>기타</div>
                         </div>           
                     </div>
                     <ul className="navbar__bottom__menu1">
                     </ul>
                     <div className="navbar__bottom__menu2">
+                        <img src="img/board.svg" className="navbar__bottom__menu2__board" onClick={postBtn} />
+                        <img src="img/chat.svg" className="navbar__bottom__menu2__chat" onClick={chatBtn} />
                     </div>
                     <div>
                         
