@@ -22,10 +22,14 @@ async function createTeam(req, res) {
 
 async function getTeam(req, res) {
     return db.execute(
-        "SELECT * FROM posting"
+        "SELECT * FROM posting ORDER BY regDate desc"
     ).then((result) => {
         return res.status(200).json({message: result[0]});
     })
+}
+
+async function getDetailTeam(req, res) {
+    return res.status(200);
 }
 
 function postImg(req, res) { 
@@ -50,3 +54,4 @@ function deleteImg(req, res) {
 module.exports.createTeam = createTeam;
 module.exports.postImg = postImg;
 module.exports.getTeam = getTeam;
+module.exports.getDetailTeam = getDetailTeam;

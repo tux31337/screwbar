@@ -149,8 +149,22 @@ function CreateTeam(props) {
                         <select onChange={excerciseTypeChange} className="createTeam__information__excercise__selectbox">
                             <option value="">운동 종류</option>
                             <option value="축구">축구</option>
-                            <option value="농구">농구</option>
                             <option value="야구">야구</option>
+                            <option value="농구">농구</option>
+                            <option value="탁구">탁구</option>
+                            <option value="배구">배구</option>
+                            <option value="배드민턴">배드민턴</option>
+                            <option value="테니스">테니스</option>
+                            <option value="골프">골프</option>
+                            <option value="볼링">볼링</option>
+                            <option value="러닝">러닝</option>
+                            <option value="클라이밍">클라이밍</option>
+                            <option value="사이클">사이클</option>
+                            <option value="PT">PT</option>
+                            <option value="필라테스">필라테스</option>
+                            <option value="요가">요가</option>
+                            <option value="등산">등산</option>
+                            <option value="등산">기타</option>
                         </select>
                     </span>
                     <input type="text" placeholder='제목을 입력하세요' className="createTeam__information__subjectTitle" onChange={onTitle} />

@@ -166,8 +166,8 @@ input[id="menuicon"]:checked + label span:nth-child(3) {
 }
 
 div[class="sidebar"] {
-    width: 100px;
-    height: 500px;
+    width: 150px;
+    height: 520px;
     background: white;
     position: absolute;
     top: 180px;
@@ -193,8 +193,24 @@ input[id="menuicon"] + label + h4 + div {
 }
 
 .sidebar > div {
-    height: 50px;
+    height: 30px;
     width: 300px;
     text-align: center;
     align-self: center;
+}
+
+
+
+.navbar__bottom__menu2__board {
+    width: 33px;
+    height: 33px;
+    padding-left: 350%;
+    cursor: pointer;
+}
+
+.navbar__bottom__menu2__chat {
+    width: 33px;
+    height: 33px;
+    padding-left: 15px;
+    cursor: pointer;
 }
