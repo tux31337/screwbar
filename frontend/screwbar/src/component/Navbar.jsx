@@ -43,11 +43,10 @@ function Navbar() {
     
 
     return(
-        myInfo &&
         <>
             <nav className="navbar">
                 <div className="navbar__header">
-                        {myInfo.userId == undefined ? 
+                        {myInfo && myInfo.userId == undefined ? 
                                 <ul><li><a href="/signup">회원가입</a></li><li><a href="/login">로그인</a></li></ul>: 
                                 <ul><li><img className="logoutBtn" src="img/user.svg"/></li><li><img className="logoutBtn" src="img/logout.svg" onClick={logout}/></li></ul>}                       
                 </div>

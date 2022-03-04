@@ -5,10 +5,14 @@ import Navbar from './component/Navbar';
 import Signup from './component/user/Signup';
 import AuthHoc from './hoc/auth';
 import Home from './component/home';
+<<<<<<< HEAD
 import CreateTeam from './component/team/CreateTeam';
 import Closed from './component/evaluation/closed';
+=======
+>>>>>>> d13bcabc1dd12628f767d0fbcf2c37852af6c368
 import Chat from './component/chat/chat';
 import QuillEditor from './component/team/QuillEditor';
+import Closed from './component/evaluation/closed';
 
 const App = () => {
   return (
@@ -79,10 +83,25 @@ const App = () => {
             <>
               <Navbar />
               <Chat />
+<<<<<<< HEAD
             </>,
             true
           )}
         ></Route>
+=======
+            </>, true
+          )}>
+        </Route> 
+        <Route 
+          path='/closeD'
+          element={AuthHoc(
+            <>
+              <Navbar />
+              <Closed />
+            </>, true
+          )}>
+        </Route> 
+>>>>>>> d13bcabc1dd12628f767d0fbcf2c37852af6c368
       </Routes>
     </BrowserRouter>
   );

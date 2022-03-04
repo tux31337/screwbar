@@ -1,13 +1,20 @@
+<<<<<<< HEAD
 * {
   box-sizing: border-box;
   margin: 0;
 }
+=======
+>>>>>>> d13bcabc1dd12628f767d0fbcf2c37852af6c368
 
 li {
   list-style: none;
 }
 
+<<<<<<< HEAD
 h4 {
+=======
+.contents__h4 {
+>>>>>>> d13bcabc1dd12628f767d0fbcf2c37852af6c368
   font-size: 38px;
   margin-bottom: 10px;
   font-weight: 500;
