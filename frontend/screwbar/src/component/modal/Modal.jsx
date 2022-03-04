@@ -9,7 +9,7 @@ const Modal = (props) => {
   // console.log(detailContents);
   return (
     // 모달이 열릴때 openModal 클래스가 생성된다.
-    <div className={open ? 'openModal modal' : 'modal'}>
+    <div className={open ? 'openModal teamModal' : 'teamModal'}>
       {open ? (
         <section>
           <header>
@@ -18,7 +18,13 @@ const Modal = (props) => {
               &times;
             </button>
           </header>
-          <main>
+          <main className='teamModal__main'>
+            <div className='teamModal__left'>
+
+            </div>
+            <div className='teamModal__right'>
+
+            </div>
               <span><img src={detail.postImg} alt=""/></span>
               <span>{detail.title}</span>
               {Parser(detail.contents)}
