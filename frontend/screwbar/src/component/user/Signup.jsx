@@ -166,7 +166,6 @@ function Signup() {
 
     //회원가입 클릭시
     const  signup = () => {
-        let finishAddress = address + addressDetail;
         setBirthday(birthdayYear+birthdayMonth+birthdayDate);
         if(!email || !emailCheck) {
             alert("이메일을 입력해주세요");
@@ -203,7 +202,7 @@ function Signup() {
             password: password,
             address: address,
             phoneNumber: phonenumber,
-            birthday: birthday,
+            birthday: birthdayYear+birthdayMonth+birthdayDate,
             gender: radioValue,
         };
         axios.post("/auth/signup", data)

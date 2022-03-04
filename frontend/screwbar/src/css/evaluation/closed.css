@@ -1,13 +1,8 @@
-* {
-  box-sizing: border-box;
-  margin: 0;
-}
-
 li {
   list-style: none;
 }
 
-h4 {
+.contents__h4 {
   font-size: 38px;
   margin-bottom: 10px;
   font-weight: 500;

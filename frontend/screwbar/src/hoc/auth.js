@@ -12,7 +12,6 @@ export default function (WrappedComponent, option, adminRoute = null) {
         useEffect(() => {
             dispatch(auth()).then(response => {
                 console.log(response);
-
                 //로그인안한상태
                 if(!response.payload.isAuth) {
                     if(option) {

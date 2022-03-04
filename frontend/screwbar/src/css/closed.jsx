@@ -33,7 +33,7 @@ function Closed() {
   };
   return (
     <div className="contents">
-      <h4 className="contents__h4">참여자</h4>
+      <h4>참여자</h4>
       <ul className="participations">
         {participants.map((participant) => (
           <li key={participant.id}>

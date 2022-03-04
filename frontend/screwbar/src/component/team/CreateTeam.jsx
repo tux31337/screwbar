@@ -3,6 +3,8 @@ import QuillEditor from "./QuillEditor";
 import "../../css/team/createTeam.css"
 import { useEffect } from "react";
 import axios from "axios";
+import { useNavigate } from 'react-router-dom';
+
 
 function CreateTeam(props) {
     const [imgBase64, setImgBase64] = useState([]); // 파일 base64
@@ -16,8 +18,9 @@ function CreateTeam(props) {
     const [useUrl, setUseUrl] = useState([]);
     const [title, setTitle] = useState([]);
     const [check, setCheck] = useState(false);
-    const [deleteUrl, setDeleteUrl] = useState([]);
 
+
+    const navigate = useNavigate();
     useEffect(() => {
         axios.get("/auth/myInfo").then((result) => {
             setMyInfo(result.data);
@@ -109,6 +112,7 @@ function CreateTeam(props) {
         formData.append('deleteUrl', deleteUrl);
         axios.post("/team/createTeam", formData, config).then((result) => {
             alert(result.data.message);
+            navigate('/home');
         }).catch((error) => {
             console.log(error);
         })
@@ -145,8 +149,22 @@ function CreateTeam(props) {
                         <select onChange={excerciseTypeChange} className="createTeam__information__excercise__selectbox">
                             <option value="">운동 종류</option>
                             <option value="축구">축구</option>
-                            <option value="농구">농구</option>
                             <option value="야구">야구</option>
+                            <option value="농구">농구</option>
+                            <option value="탁구">탁구</option>
+                            <option value="배구">배구</option>
+                            <option value="배드민턴">배드민턴</option>
+                            <option value="테니스">테니스</option>
+                            <option value="골프">골프</option>
+                            <option value="볼링">볼링</option>
+                            <option value="러닝">러닝</option>
+                            <option value="클라이밍">클라이밍</option>
+                            <option value="사이클">사이클</option>
+                            <option value="PT">PT</option>
+                            <option value="필라테스">필라테스</option>
+                            <option value="요가">요가</option>
+                            <option value="등산">등산</option>
+                            <option value="등산">기타</option>
                         </select>
                     </span>
                     <input type="text" placeholder='제목을 입력하세요' className="createTeam__information__subjectTitle" onChange={onTitle} />
@@ -154,14 +172,14 @@ function CreateTeam(props) {
                     <span className="createTeam__information__name">이름 : {myInfo.userName}</span>
                     <span className="createTeam__information__telephone">연락처 : {myInfo.phonenumber}</span>
                     <span className="createTeam__information__subInformation">부가 정보</span>
-                    <span className="createTeam__information__open">공개 여부 : <input type="checkbox" checked={check} onClick={changeCheckValue}/></span>
+                    <span className="createTeam__information__open">공개 여부 : <input type="checkbox" defaultChecked={check} onClick={changeCheckValue}/></span>
                     <span className="createTeam__information__gender">성별 : {myInfo.gender}</span>
                     <span className="createTeam__information__email">이메일 : {myInfo.email}</span>  
                     <span className="createTeam__information__age">나이 : {myInfo.age}</span> 
                     <span className="createTeam__information__detail">팀 세부 조건</span>
                     <div className="createTeam__information__count">인원 : <input type="text" className="createTeam__information__count__input" onChange={personnelChange}></input></div>
                     <span className="createTeam__information__pay">비용 : <input type="text" className="createTeam__information__pay__input" value={price} onChange={(event) => setPrice(priceFormatChange(event.target.value))}></input></span>
-                    <span className="createTeam__information__date">날짜 : <input type="text" className="createTeam__information__date__input" onChange={dateChange} /></span>
+                    <span className="createTeam__information__date">날짜 : <input type="date" className="createTeam__information__date__input" onChange={dateChange} /></span>
 
                     <span className="createTeam__information__temperature">열정온도 조건</span>
                     <select onChange={temperatureChange} className="createTeam__information__temperatureChange">
