@@ -8,6 +8,7 @@ import Home from './component/home';
 import Chat from './component/chat/chat';
 import QuillEditor from './component/team/QuillEditor';
 import Closed from './component/evaluation/closed';
+import CreateTeam from './component/team/CreateTeam';
 
 const App = () => {
   return (
