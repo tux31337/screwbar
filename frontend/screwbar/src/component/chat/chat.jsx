@@ -32,6 +32,7 @@ function Chat() {
   if(location.state) {
     
   }
+
   
   useEffect(() => {
     axios.get("/auth/myInfo").then((result) => {
