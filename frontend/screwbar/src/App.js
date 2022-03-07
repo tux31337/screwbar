@@ -44,16 +44,6 @@ const App = () => {
           )}
         ></Route>
         <Route
-          path="/post"
-          element={AuthHoc(
-            <>
-              <Navbar />
-              <CreateTeam />
-            </>,
-            true
-          )}
-        ></Route>
-        <Route
           path="/closed"
           element={AuthHoc(
             <>
