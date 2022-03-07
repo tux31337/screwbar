@@ -11,6 +11,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "@types/mongodb": "^4.0.7",
     "axios": "^0.26.0",
     "bcrypt": "^5.0.1",
     "cookie-parser": "^1.4.6",

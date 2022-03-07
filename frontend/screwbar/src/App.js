@@ -63,6 +63,7 @@ const App = () => {
             true
           )}
         ></Route>
+
         <Route
           path="/chat"
           element={AuthHoc(
@@ -70,11 +71,13 @@ const App = () => {
               <Navbar />
               <Chat />
             </>,
+
             true
           )}
         ></Route>
+
         <Route
-          path="/closed"
+          path="/closeD"
           element={AuthHoc(
             <>
               <Navbar />

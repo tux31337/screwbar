@@ -6,10 +6,15 @@ const path = require('path');
 
 
 
-const config = require('./config/config.js');
 const authRouter = require('./router/auth.js');
 const teamRouter = require('./router/team.js');
+const chatRouter = require('./router/chat.js');
+
+
 const db = require('./config/db/database.js');
+const { connect } = require('http2');
+const { connectDB } = require('./config/db/mongodb.js');
+const { initSocket } = require('./socket/socket.js');
 
 
 const app = express();
@@ -34,9 +39,13 @@ app.use(cors(corsOption));
 app.use("/auth", authRouter);
 app.use('/api', teamRouter)
 app.use("/team", teamRouter);
+app.use("/chat", chatRouter);
 
 
 
+connectDB().then((data) => {
+  console.log(data);
+})
 
 db.getConnection().then((connection) => {});
 app.use((req, res, next) => {
@@ -46,9 +55,7 @@ app.use((req, res, next) => {
   app.use((error, req, res, next) => {
     console.log(error);
     res.sendStatus(500);
-  });
-
-
+});
 
 
 module.exports = app;
