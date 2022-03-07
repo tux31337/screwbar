@@ -9,6 +9,10 @@
   grid-gap: 20px;
 }
 
+.home__cards > div {
+  cursor: pointer;
+}
+
 .home__cards__img {
   width: 255px;
   height: 200px;

@@ -1,17 +1,16 @@
 import axios from 'axios';
-import { useRef } from 'react';
 import { useEffect, useState } from 'react';
 import '../css/home.css';
-import Modal from './modal/Modal';
+import TeamModal from './team/TeamModal';
 
 let detailTeam;
 function Home() {
   const [myInfo, setMyInfo] = useState({}); //내 정보
   const [teams, setTeams] = useState();
   const [modalOpen, setModalOpen] = useState(false);
-  let detail = useRef();
 
   const openModal = (postNumId) => {
+    console.log('open modal' + postNumId);
     detailTeam = teams.filter((team) => team.postNum === postNumId);
     detailTeam = detailTeam[0];
     setModalOpen(true);
@@ -39,6 +38,9 @@ function Home() {
         <section className="home__cards">
           {teams &&
             teams.map((team) => {
+              {
+                console.log(team.postNum);
+              }
               return (
                 <div
                   key={team.postNum}
@@ -58,14 +60,14 @@ function Home() {
         </section>
       </article>
 
-      <Modal
+      <TeamModal
         open={modalOpen}
         close={closeModal}
         header="Modal heading"
         detail={detailTeam}
       >
         <div>{console.log(detailTeam)}</div>
-      </Modal>
+      </TeamModal>
     </>
   );
 }

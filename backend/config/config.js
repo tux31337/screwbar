@@ -13,7 +13,7 @@ const config = {
   //jwt
   jwt: {
     secretKey: required('JWT_SECRET'),
-    expiresInSec: required('JWT_EXPIRES_SEC', 864000),
+    expiresInSec: required('JWT_EXPIRES_SEC', 10000000),
   },
   //db
   db: {
