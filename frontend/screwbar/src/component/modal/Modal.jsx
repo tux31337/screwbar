@@ -19,14 +19,14 @@ const Modal = (props) => {
             </button>
           </header>
           <main className='teamModal__main'>
-            <div className='teamModal__left'>
-
-            </div>
-            <div className='teamModal__right'>
-
-            </div>
+            <section className='teamModal__main__top'>
+              <div className='teamModal__main__top__left'>
               <span><img src={detail.postImg} alt=""/></span>
-              <span>{detail.title}</span>
+              </div>
+              <div className='teamModal__main__top__right'>
+                <span>{detail.title}</span>
+              </div>
+            </section>
               {Parser(detail.contents)}
             </main>
           <footer>

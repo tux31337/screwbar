@@ -8,7 +8,10 @@
  const debug = require('debug')('helloworldapp:server');
  const config = require('../config/config.js');
  const http = require('http');
-const { Server } = require('socket.io');
+ const { initSocket } = require('../socket/socket.js');
+ const { Server } = require('socket.io');
+ const createChat = require('../middlewares/chat/chatService.js')
+
  
  /**
   * Get port from environment and store in Express.
@@ -22,80 +25,63 @@ const { Server } = require('socket.io');
   */
  
  const server = http.createServer(app);
-
+ console.log(initSocket())
+ initSocket(server);
  //socket서버에 서버를 담음.
- const sockets = new Server(server, {
-   cors: {
-    origin: '*',
-   },
- });
-//  socket.on('connection', (socket) => {
-//    console.log(socket.request._query.userId);
-
-//    let privateRoom = socket.request._query.userId;
-//    //console.log(socket.id);
-
-//    socket.on("join", (roomName) => {
-//      console.log("roomName" + roomName);
-//      socket.join(roomName);
-//      socket.to(roomName).emit("welcome");
-//    });
+//  const sockets = new Server(server, {
+//    cors: {
+//     origin: '*',
+//    },
 //  });
-
-/**
- * 소켓테스트
- */
-
-
-let login_ids = {};
-
-sockets.on('connection', (socket) => {
-  // console.log("connection info =>" + JSON.stringify(socket.request.connection._peername));
-  socket.remoteAddress = socket.request.connection._peername.address;
-  socket.remotePort = socket.request.connection._peername.port;
+// /**
+//  * 소켓테스트
+//  */
 
 
-  socket.on('login', (input) => {
-    console.log('login 받음 =>' + JSON.stringify(input));
-    console.log(input);
-    login_ids[input] = socket.id;
-    socket.login_id = input.id;
+// let login_ids = {};
 
-    sendResponse(socket, 'login', 200, 'OK');
-  })
+// sockets.on('connection', (socket) => {
+//   // console.log("connection info =>" + JSON.stringify(socket.request.connection._peername));
+//   socket.remoteAddress = socket.request.connection._peername.address;
+//   socket.remotePort = socket.request.connection._peername.port;
 
 
-  socket.on('message', (message) => {
-    console.log('message 받음 ->' + JSON.stringify(message));
+//   socket.on('login', (input) => {
+//     console.log('login 받음 =>' + JSON.stringify(input));
+//     console.log(input);
+//     login_ids[input] = socket.id;
+//     socket.login_id = input.id;
 
-    if(message.recepient == 'all') {
-      console.log('모든 클라이언트에게 메시지 전송');
-      sockets.emit('message', message);
-    } else {
-      console.log("==============")
-      console.log(login_ids[message.recepient]);
-      console.log(sockets.connected);
-      console.log("==============")
+//     sendResponse(socket, 'login', 200, 'OK');
+//   })
 
-      if (login_ids[message.recepient]) {
-        sockets.to(login_ids[message.recepient]).emit('message', message);
+//   socket.on('message', (message) => {
 
-        sendResponse(socket, 'message', 200, 'OK');
-      } else {
-        sendResponse(socket, 'message', 400, '상대방 ID를 찾을 수 없습니다');
-      }
-    }
-  });
-});
+//     if(message.recepient == 'all') {
+//       console.log('모든 클라이언트에게 메시지 전송');
+//       sockets.emit('message', message);
+//     } else {
+//       console.log(login_ids[message.recepient]);
+//       console.log(sockets.connected);
+//       if (login_ids[message.recepient]) {
+//         sockets.to(login_ids[message.recepient]).emit('message', message);
+//         sendResponse(socket, 'message', 200, 'OK');
+//       } else {
+//         createChat(11);
+//         sendResponse(socket, 'message', 400, '상대방 ID를 찾을 수 없습니다');
+//       }
+//     }
+//   });
+// });
 
-function sendResponse(socket, command, code, message) {
-  let output = {
-    command: command,
-    code: code,
-    message: message
-  };
-  socket.emit('response', output);
-}
+// function sendResponse(socket, command, code, message) {
+//   let output = {
+//     command: command,
+//     code: code,
+//     message: message
+//   };
+//   socket.emit('response', output);
+// }
 
  
  /**

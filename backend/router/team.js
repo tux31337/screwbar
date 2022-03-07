@@ -11,4 +11,5 @@ router.get("/getTeam", isAuth, teamService.getTeam);
 router.get("/getDetailTeam", isAuth, teamService.getDetailTeam);
 
 
+
 module.exports = router;

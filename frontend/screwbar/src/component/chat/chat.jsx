@@ -29,10 +29,13 @@ function Chat() {
   const [chat, setChat] = useState("");
   const [myInfo, setMyInfo] = useState("");
 
+  if(location.state) {
+    
+  }
+  
   useEffect(() => {
     axios.get("/auth/myInfo").then((result) => {
         setMyInfo(result.data);
-        console.log(result.data)
         socket.emit('login', result.data.userId);
     })
 }, []);
@@ -43,8 +46,8 @@ function Chat() {
   }
 
   const sendMessage = () => {
-    let sender = "이종민";
-    let recepient = "4f8460c4-846e-4377-a80d-9d4456699bdc";
+    let sender = myInfo.userName;
+    let recepient = userId;
     let data = chat;
     let message = {
       sender: sender,
@@ -64,12 +67,21 @@ function Chat() {
 
 
   return (
-    <div className='card'>
-      <h3>채팅 클라이언트</h3>
-      <input type="text" name="" id="" onChange={onMessage} />
-      <button onClick={sendMessage}>전송
-      </button>
-    </div>
+
+    <section className='chat'>
+      <div className='chat__user'>
+          <div className='chat__user__userName'>
+            {myInfo.userName && myInfo.userName}
+          </div>
+      </div>
+      <div className='chat__message'>
+          <div className='chat__user__peerName'>
+            {username}
+          </div>
+          <input type="text" name="" id="" onChange={onMessage} />
+          <button onClick={sendMessage}>전송</button>
+      </div>
+    </section>
   );
 }
 
