@@ -27,6 +27,7 @@ const Modal = (props) => {
                 <span>{detail.title}</span>
               </div>
             </section>
+
               {Parser(detail.contents)}
             </main>
           <footer>
