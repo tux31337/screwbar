@@ -39,6 +39,7 @@ router.get('/getDetailTeam', isAuth, teamService.getDetailTeam);
 //참가하기
 router.post('/joinTeam', isAuth, participantsService.joinTeam);
 
+//마이페이지 내 팀 현황
 router.get('/getMyTeam', isAuth, myTeamService.getMyTeam);
 router.get('/getDetailMyTeam', isAuth, myTeamService.getDetailMyTeam);
 
