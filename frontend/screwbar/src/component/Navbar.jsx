@@ -42,6 +42,10 @@ function Navbar() {
     navigate('/chat');
   };
 
+  const goMypage = () => {
+    navigate('/myTeam');
+  };
+
   return (
     <>
       <nav className="navbar">
@@ -58,7 +62,11 @@ function Navbar() {
           ) : (
             <ul>
               <li>
-                <img className="logoutBtn" src="img/user.svg" />
+                <img
+                  className="logoutBtn"
+                  src="img/user.svg"
+                  onClick={goMypage}
+                />
               </li>
               <li>
                 <img

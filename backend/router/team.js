@@ -1,6 +1,8 @@
 const express = require('express');
 const router = express.Router();
 const teamService = require('../middlewares/team/teamService.js');
+const participantsService = require('../middlewares/team/participantsService.js');
+const myTeamService = require('../middlewares/mypage/myTeamService.js');
 const isAuth = require('../middlewares/thirdpary/auth.js');
 const upload = require('../middlewares/thirdpary/multer.js');
 
@@ -33,5 +35,11 @@ router.post(
 );
 router.get('/getTeam', isAuth, teamService.getTeam);
 router.get('/getDetailTeam', isAuth, teamService.getDetailTeam);
+
+//참가하기
+router.post('/joinTeam', isAuth, participantsService.joinTeam);
+
+router.get('/getMyTeam', isAuth, myTeamService.getMyTeam);
+router.get('/getDetailMyTeam', isAuth, myTeamService.getDetailMyTeam);
 
 module.exports = router;

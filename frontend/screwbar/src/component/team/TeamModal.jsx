@@ -2,6 +2,7 @@ import React, { useCallback, useEffect } from 'react';
 import '../../css/modal/teamModal.css';
 import Parser from 'html-react-parser';
 import moment from 'moment';
+import axios from 'axios';
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
@@ -28,6 +29,24 @@ const Modal = (props) => {
         username: detail.username,
       },
     });
+  };
+
+  // 팀 참여
+  const joinTeam = (postNum, user_id) => {
+    console.log('버튼클릭');
+    const data = {
+      postNum: postNum,
+      user_id: user_id,
+    };
+    axios
+      .post('/team/joinTeam', data)
+      .then((result) => {
+        alert(result.data.message);
+        navigate('/home');
+      })
+      .catch((error) => {
+        alert(error.response.data.message);
+      });
   };
 
   console.log(detail);
@@ -87,7 +106,10 @@ const Modal = (props) => {
                   열정온도 : {detail.temperature}
                 </span>
                 <span className="teamModal__main__top__right__btn">
-                  <button className="teamModal__main__top__right__btn__join">
+                  <button
+                    className="teamModal__main__top__right__btn__join"
+                    onClick={() => joinTeam(detail.postNum, detail.user_id)}
+                  >
                     참가하기
                   </button>
                   <button

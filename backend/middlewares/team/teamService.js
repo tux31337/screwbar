@@ -25,7 +25,7 @@ async function createTeam(req, res) {
   }
   return db
     .execute(
-      'INSERT INTO posting (postNum, user_id, meetingDate, cost, title, contents, postImg, participants, sportName, areaName, discloseInfo) VALUES (?,?,?,?,?,?,?,?,?,?, ?)',
+      'INSERT INTO posting (postNum, user_id, meetingDate, cost, title, contents, postImg, participants, sportName, areaName, discloseInfo, temperature) VALUES (?,?,?,?,?,?,?,?,?,?,?,?)',
       [
         teamId,
         userId,
@@ -38,6 +38,7 @@ async function createTeam(req, res) {
         excercise,
         '성북구',
         discloseInfo,
+        temperature,
       ]
     )
     .then((result) => {
