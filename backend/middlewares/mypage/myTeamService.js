@@ -2,8 +2,6 @@ const db = require('../../config/db/database.js');
 const fs = require('fs');
 
 async function getMyTeam(req, res) {
-  console.log('!!!!!!!!!!!!!!!getMyTeam!!');
-  console.log(req.userId);
   const user_id = req.userId;
   return db
     .execute(
