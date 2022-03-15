@@ -7,7 +7,19 @@ async function joinTeam(req, res) {
   const findJoin = await participantsRepository.findJoin(postNum, user_id);
   const headCount = await participantsRepository.getHeadCount(postNum);
   if (findJoin) {
-    return res.status(409).json({ message: '이미 신청하셨습니다.' });
+    await participantsRepository.updateHeadCount(postNum, headCount - 1);
+    return db
+      .execute('DELETE FROM participants WHERE postNum = ? and user_id = ?', [
+        postNum,
+        user_id,
+      ])
+      .then((result) => {
+        console.log(result);
+        return res.status(200).json({ message: '취소완료' });
+      })
+      .error((error) => {
+        console.log(error);
+      });
   } else {
     await participantsRepository.updateHeadCount(postNum, headCount + 1);
     return db
