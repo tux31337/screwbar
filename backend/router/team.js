@@ -36,6 +36,9 @@ router.post(
 router.get('/getTeam', isAuth, teamService.getTeam);
 router.get('/getDetailTeam', isAuth, teamService.getDetailTeam);
 
+// 참가자인지 확인하기
+router.post('/isParticipant', isAuth, participantsService.isParticipant);
+
 //참가하기
 router.post('/joinTeam', isAuth, participantsService.joinTeam);
 

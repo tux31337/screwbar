@@ -1,6 +1,20 @@
 const db = require('../../config/db/database.js');
 const fs = require('fs');
 const participantsRepository = require('./participantsRepository.js');
+
+async function isParticipant(req, res) {
+  const findJoin = await participantsRepository.findJoin(
+    req.body.postNumId,
+    req.userId
+  );
+  console.log(findJoin);
+  if (findJoin) {
+    res.status(200).json({ message: true });
+  } else {
+    res.status(200).json({ message: false });
+  }
+}
+
 async function joinTeam(req, res) {
   console.log(req.body);
   const { postNum, user_id } = req.body;
@@ -38,3 +52,4 @@ async function joinTeam(req, res) {
 }
 
 module.exports.joinTeam = joinTeam;
+module.exports.isParticipant = isParticipant;

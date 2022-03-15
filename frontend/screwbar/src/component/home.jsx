@@ -4,6 +4,7 @@ import '../css/home.css';
 import TeamModal from './team/TeamModal';
 
 let detailTeam;
+let isParticipant;
 function Home() {
   const [myInfo, setMyInfo] = useState({}); //내 정보
   const [teams, setTeams] = useState();
@@ -11,9 +12,15 @@ function Home() {
 
   const openModal = (postNumId) => {
     console.log('open modal' + postNumId);
-    detailTeam = teams.filter((team) => team.postNum === postNumId);
-    detailTeam = detailTeam[0];
-    setModalOpen(true);
+
+    axios
+      .post('/team/isParticipant', { postNumId: postNumId })
+      .then((result) => {
+        isParticipant = result.data;
+        detailTeam = teams.filter((team) => team.postNum === postNumId);
+        detailTeam = detailTeam[0];
+        setModalOpen(true);
+      });
   };
 
   const closeModal = () => {
@@ -65,6 +72,7 @@ function Home() {
         close={closeModal}
         header="Modal heading"
         detail={detailTeam}
+        isParticipant={isParticipant}
       >
         <div>{console.log(detailTeam)}</div>
       </TeamModal>

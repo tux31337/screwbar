@@ -8,7 +8,7 @@ import { useNavigate } from 'react-router-dom';
 
 const Modal = (props) => {
   // 열기, 닫기, 모달 헤더 텍스트를 부모로부터 받아옴
-  const { open, close, header, detail } = props;
+  const { open, close, header, detail, isParticipant } = props;
   const [detailUser, setDetailUser] = useState(false);
   const today = new Date();
   const year = today.getFullYear();
@@ -33,7 +33,12 @@ const Modal = (props) => {
 
   // 팀 참여
   const joinTeam = (postNum, user_id) => {
-    console.log('버튼클릭');
+    isParticipant.message = !isParticipant.message;
+    if (isParticipant.message) {
+      detail.headCount = detail.headCount + 1;
+    } else {
+      detail.headCount = detail.headCount - 1;
+    }
     const data = {
       postNum: postNum,
       user_id: user_id,
@@ -110,7 +115,7 @@ const Modal = (props) => {
                     className="teamModal__main__top__right__btn__join"
                     onClick={() => joinTeam(detail.postNum, detail.user_id)}
                   >
-                    참가하기
+                    {isParticipant.message === true ? '취소하기' : '참가하기'}
                   </button>
                   <button
                     className="teamModal__main__top__right__btn__chatting"
