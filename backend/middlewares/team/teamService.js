@@ -1,6 +1,7 @@
 const { v4 } = require('uuid');
 const db = require('../../config/db/database.js');
 const fs = require('fs');
+const participantsRepository = require('./participantsRepository.js');
 
 async function createTeam(req, res) {
   const teamId = v4();
@@ -43,14 +44,16 @@ async function createTeam(req, res) {
     )
     .then((result) => {
       console.log(result);
-      return res.status(200).json({ message: '생성성공' });
+      // 작성자 참여자에 넣어주기
+      participantsRepository.insertParticipant(teamId, userId);
+      return res.status(200).json({ message: '생산 성공' });
     });
 }
 
 async function getTeam(req, res) {
   return db
     .execute(
-      'SELECT posting.postNum, posting.user_id, posting.headCount, posting.meetingDate, posting.cost, posting.title, posting.contents, posting.postImg, posting.participants, posting.sportName, posting.areaName, posting.discloseInfo, posting.temperature, users.email, users.username, users.birthday, users.phoneNumber, users.gender from posting inner join users on posting.user_id = users.user_id ORDER BY posting.regDate desc'
+      'SELECT posting.postNum, posting.user_id, posting.headCount, posting.meetingDate, posting.cost, posting.title, posting.contents, posting.postImg, posting.participants, posting.sportName, posting.areaName, posting.discloseInfo, posting.temperature, posting.deadline, posting.closed, users.email, users.username, users.birthday, users.phoneNumber, users.gender from posting inner join users on posting.user_id = users.user_id ORDER BY posting.regDate desc'
     )
     .then((result) => {
       return res.status(200).json({ message: result[0] });

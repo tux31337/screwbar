@@ -59,6 +59,7 @@ function Home() {
                   <span>{team.title}</span>
                   <div className="home__cards__count">
                     {team.headCount} / {team.participants}
+                    {/* {console.log(team.headCount)} */}
                   </div>
                   <div className="home__cards__hr"></div>
                 </div>

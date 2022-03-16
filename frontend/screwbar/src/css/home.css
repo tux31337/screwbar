@@ -30,3 +30,12 @@
 .navbar__logo__img {
   cursor: pointer;
 }
+
+.closedTeam {
+  height: 100%;
+  width: 100%;
+  background-color: #6c757d;
+  position: absolute;
+  opacity: 0.7;
+  border-radius: 10px;
+}

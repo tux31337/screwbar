@@ -47,7 +47,8 @@ const Modal = (props) => {
       .post('/team/joinTeam', data)
       .then((result) => {
         alert(result.data.message);
-        navigate('/home');
+        close();
+        detail.closed = !detail.closed;
       })
       .catch((error) => {
         alert(error.response.data.message);
@@ -69,12 +70,16 @@ const Modal = (props) => {
           </header>
           <main className="teamModal__main">
             <section className="teamModal__main__top">
-              <div className="closed not_closed">
-                <button>평가하기</button>
-              </div>
-              {/* <div className="closed">
-                <button>평가하기</button>
-              </div> */}
+              {detail.closed === 0 ? (
+                <div className="closed not_closed">
+                  <button className="">평가하기</button>
+                </div>
+              ) : (
+                <div className="closed">
+                  <button>평가하기</button>
+                </div>
+              )}
+
               <div className="teamModal__main__top__left">
                 <img src={detail.postImg} alt="" />
               </div>
@@ -121,7 +126,11 @@ const Modal = (props) => {
                     className="teamModal__main__top__right__btn__join"
                     onClick={() => joinTeam(detail.postNum, detail.user_id)}
                   >
-                    {isParticipant.message === true ? '취소하기' : '참가하기'}
+                    {detail.closed === 0
+                      ? '마감하기'
+                      : isParticipant.message === true
+                      ? '취소하기'
+                      : '참가하기'}
                   </button>
                   <button
                     className="teamModal__main__top__right__btn__chatting"

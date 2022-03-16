@@ -29,6 +29,39 @@ async function updateHeadCount(postNum, headCount) {
     });
 }
 
+// 추가
+async function insertParticipant(postNum, user_id) {
+  return db
+    .execute(
+      'INSERT INTO participants(postNum, user_id, evaluation) VALUES(?,?,?)',
+      [postNum, user_id, '0']
+    )
+    .then((result) => {
+      console.log(result);
+    })
+    .error((error) => {
+      console.log(error);
+    });
+}
+
+// 유저와 작성자가 같은 사람인지 확인
+async function isWriter(postNum, user_id) {
+  return db.execute('SELECT * FROM posting WHERE postNum = ? and user_id = ?', [
+    postNum,
+    user_id,
+  ]);
+}
+
+// 마감처리하기
+async function closedTeam(postNum) {
+  return db.execute('UPDATE posting SET closed = 1 WHERE postNum = ?', [
+    postNum,
+  ]);
+}
+
 module.exports.findJoin = findJoin;
 module.exports.getHeadCount = getHeadCount;
 module.exports.updateHeadCount = updateHeadCount;
+module.exports.insertParticipant = insertParticipant;
+module.exports.isWriter = isWriter;
+module.exports.closedTeam = closedTeam;

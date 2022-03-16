@@ -20,6 +20,13 @@ async function joinTeam(req, res) {
   const { postNum, user_id } = req.body;
   const findJoin = await participantsRepository.findJoin(postNum, user_id);
   const headCount = await participantsRepository.getHeadCount(postNum);
+  const isWriter = await participantsRepository.isWriter(postNum, user_id);
+  if (isWriter) {
+    const isClosed = await participantsRepository.closedTeam(postNum);
+    if (isClosed) {
+      return res.status(200).json({ message: '마감완료' });
+    }
+  }
   if (findJoin) {
     await participantsRepository.updateHeadCount(postNum, headCount - 1);
     return db
