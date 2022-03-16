@@ -69,6 +69,12 @@ const Modal = (props) => {
           </header>
           <main className="teamModal__main">
             <section className="teamModal__main__top">
+              <div className="closed not_closed">
+                <button>평가하기</button>
+              </div>
+              {/* <div className="closed">
+                <button>평가하기</button>
+              </div> */}
               <div className="teamModal__main__top__left">
                 <img src={detail.postImg} alt="" />
               </div>
@@ -132,11 +138,15 @@ const Modal = (props) => {
               </div>
             </section>
           </main>
-          <footer>
+          {/* <footer>
+            <button className="not_closed" id="modalClose">
+              평가하기
+            </button>
+
             <button className="close" id="modalClose" onClick={close}>
               close
             </button>
-          </footer>
+          </footer> */}
         </section>
       ) : null}
     </div>
