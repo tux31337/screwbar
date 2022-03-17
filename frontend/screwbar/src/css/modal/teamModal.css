@@ -63,7 +63,7 @@
   width: 100%;
   background-color: #6c757d;
   position: absolute;
-  opacity: 0.7;
+  opacity: 0.9;
   border-radius: 10px;
 }
 
@@ -73,6 +73,17 @@
 
 .not_closed {
   display: none;
+}
+
+.evaluation_button {
+  font-size: 20px;
+  font-weight: 700;
+  border-radius: 5px;
+  padding: 10px 20px;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
 }
 
 .teamModal

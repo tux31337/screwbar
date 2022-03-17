@@ -11,6 +11,7 @@
 
 .home__cards > div {
   cursor: pointer;
+  position: relative;
 }
 
 .home__cards__img {
@@ -38,4 +39,11 @@
   position: absolute;
   opacity: 0.7;
   border-radius: 10px;
+}
+
+.closedText {
+  color: #f0f0f0;
+  font-size: 40px;
+  font-weight: 500;
+  margin-left: 10px;
 }

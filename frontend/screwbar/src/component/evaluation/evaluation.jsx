@@ -1,11 +1,29 @@
 import React, { useState } from 'react';
-import Modal from './modal.jsx';
-import '../../css/evaluation/closed.css';
+import Modal from './evaluationModal';
+import '../../css/evaluation/evaluation.css';
 import '../../css/font.css';
+import { useLocation } from 'react-router-dom';
+import axios from 'axios';
 
 //마감된 글 페이지
 function Closed() {
   // 서버에서 가져오기
+  const location = useLocation();
+
+  let user_id;
+  let postNum;
+
+  if (location.state) {
+    user_id = location.state.user_id;
+    postNum = location.state.postNum;
+  }
+  const data = {
+    postNum: postNum,
+    user_id: user_id,
+  };
+  axios.post('/team/participants', data).then((result) => {
+    console.log(result);
+  });
   const participants = [
     { name: '이철수', id: 'qwer' },
     { name: '김영희', id: 'asdf' },

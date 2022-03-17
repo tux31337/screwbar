@@ -6,6 +6,8 @@ import TeamModal from '../team/TeamModal';
 
 let detailTeam;
 let isParticipant;
+let myData;
+
 const MyTeam = (props) => {
   const [myInfo, setMyInfo] = useState({}); //내 정보
   const [teams, setTeams] = useState();
@@ -17,10 +19,13 @@ const MyTeam = (props) => {
     axios
       .post('/team/isParticipant', { postNumId: postNumId })
       .then((result) => {
-        isParticipant = result.data;
-        detailTeam = teams.filter((team) => team.postNum === postNumId);
-        detailTeam = detailTeam[0];
-        setModalOpen(true);
+        axios.get('/auth/myInfo').then((userInfo) => {
+          isParticipant = result.data;
+          detailTeam = teams.filter((team) => team.postNum === postNumId);
+          detailTeam = detailTeam[0];
+          myData = userInfo;
+          setModalOpen(true);
+        });
       });
   };
 
@@ -76,7 +81,9 @@ const MyTeam = (props) => {
                         openModal(team.postNum);
                       }}
                     >
-                      <div className="closedTeam"></div>
+                      <div className="closedTeam">
+                        <p className="closedText">마감</p>
+                      </div>
                       <img
                         src={team.postImg}
                         alt=""
@@ -101,9 +108,8 @@ const MyTeam = (props) => {
         header="Modal heading"
         detail={detailTeam}
         isParticipant={isParticipant}
-      >
-        <div>{console.log(detailTeam)}</div>
-      </TeamModal>
+        myData={myData}
+      ></TeamModal>
     </>
   );
 };

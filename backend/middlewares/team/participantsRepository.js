@@ -31,6 +31,8 @@ async function updateHeadCount(postNum, headCount) {
 
 // 추가
 async function insertParticipant(postNum, user_id) {
+  console.log(postNum);
+  console.log(user_id);
   return db
     .execute(
       'INSERT INTO participants(postNum, user_id, evaluation) VALUES(?,?,?)',
@@ -38,18 +40,19 @@ async function insertParticipant(postNum, user_id) {
     )
     .then((result) => {
       console.log(result);
-    })
-    .error((error) => {
-      console.log(error);
     });
 }
 
 // 유저와 작성자가 같은 사람인지 확인
 async function isWriter(postNum, user_id) {
-  return db.execute('SELECT * FROM posting WHERE postNum = ? and user_id = ?', [
-    postNum,
-    user_id,
-  ]);
+  return db
+    .execute('SELECT * FROM posting WHERE postNum = ? and user_id = ?', [
+      postNum,
+      user_id,
+    ])
+    .then((result) => {
+      return result[0][0];
+    });
 }
 
 // 마감처리하기

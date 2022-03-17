@@ -8,7 +8,7 @@ import Home from './component/home';
 import Chat from './component/chat/chat';
 import MypageNavbar from './component/mypage/mypageNavbar';
 import QuillEditor from './component/team/QuillEditor';
-import Closed from './component/evaluation/closed';
+import Evaluation from './component/evaluation/evaluation';
 import CreateTeam from './component/team/CreateTeam';
 import MyTeam from './component/mypage/myTeam';
 
@@ -41,16 +41,6 @@ const App = () => {
             <>
               <Navbar />
               <Home />
-            </>,
-            true
-          )}
-        ></Route>
-        <Route
-          path="/closed"
-          element={AuthHoc(
-            <>
-              <Navbar />
-              <Closed />
             </>,
             true
           )}
@@ -106,11 +96,11 @@ const App = () => {
         ></Route>
 
         <Route
-          path="/closed"
+          path="/evaluation"
           element={AuthHoc(
             <>
               <Navbar />
-              <Closed />
+              <Evaluation />
             </>,
             true
           )}

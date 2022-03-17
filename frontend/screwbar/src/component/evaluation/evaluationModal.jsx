@@ -1,5 +1,5 @@
 import React, { useRef, useState } from 'react';
-import '../../css/evaluation/modal.css';
+import '../../css/evaluation/evaluationModal.css';
 import '../../css/font.css';
 
 // 모달창
