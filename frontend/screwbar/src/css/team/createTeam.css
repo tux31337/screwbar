@@ -26,7 +26,8 @@
     'createTeam__information__information createTeam__information__name createTeam__information__gender  createTeam__information__age'
     'createTeam__information__subInformation createTeam__information__open createTeam__information__email createTeam__information__telephone'
     'createTeam__information__detail createTeam__information__count createTeam__information__pay createTeam__information__date'
-    'createTeam__information__temperature createTeam__information__temperatureChange createTeam__information__temperatureChange createTeam__information__temperatureChange'
+    'createTeam__information__deadline  createTeam__information__date__deadline1__input createTeam__information__date__deadline2__input createTeam__information__date__deadline2__input'
+    'createTeam__information__temperature createTeam__information__temperatureChange createTeam__information__area createTeam__information__area'
     'createTeam__postBtn createTeam__postBtn createTeam__postBtn createTeam__postBtn';
   margin-left: 7%;
 }
@@ -54,6 +55,10 @@
   width: 100px;
 }
 
+.createTeam__information__date__deadline2__input {
+  width: 40%;
+}
+
 .createTeam__information__temperature,
 .createTeam__information__temperatureChange,
 .createTeam__information__title,
@@ -66,7 +71,8 @@
 .createTeam__information__detail,
 .createTeam__information__count,
 .createTeam__information__pay,
-.createTeam__information__date {
+.createTeam__information__date,
+.createTeam__information__area {
   align-self: center;
 }
 
@@ -93,6 +99,13 @@
   height: 28px;
   width: 120px;
 }
+
+.createTeam__information__area__value {
+  height: 28px;
+  width: 100px;
+}
+
+
 
 .createTeam__information__title {
   grid-area: createTeam__information__title;
@@ -164,6 +177,27 @@
 .createTeam__information__temperatureChange {
   grid-area: createTeam__information__temperatureChange;
 }
+
+.createTeam__information__deadline {
+  grid-area: createTeam__information__deadline;
+}
+
+.createTeam__information__date__deadline1__input {
+  grid-area: createTeam__information__date__deadline1__input;
+}
+
+.createTeam__information__date__deadline2__input {
+  grid-area: createTeam__information__date__deadline2__input;
+}
+
+.createTeam__information__area {
+  grid-area: createTeam__information__area;
+}
+
+.createTeam__information__area__select {
+  grid-area: createTeam__information__area__select;
+}
+
 
 .createTeam__postBtn {
   grid-area: createTeam__postBtn;

@@ -6,44 +6,20 @@ const participantsRepository = require('./participantsRepository.js');
 async function createTeam(req, res) {
   const teamId = v4();
   console.log(req.body);
-  const {
-    personnel,
-    price,
-    excercise,
-    date,
-    temperature,
-    content,
-    title,
-    deleteUrl,
-    discloseInfo,
-  } = req.body;
-  const IMG_URL = req.file
-    ? `http://localhost:8080/uploads/present/${req.userId}/${req.file.filename}`
-    : null;
+  const {personnel,price,excercise,date,temperature,content,title,deleteUrl,discloseInfo, deadline, area} = req.body;
+  console.log(deadline);
+  console.log(area);
+  const IMG_URL = req.file? `http://localhost:8080/uploads/present/${req.userId}/${req.file.filename}`: null;
   const userId = req.userId;
+  console.log(userId);
   if (deleteUrl) {
     deleteImg(deleteUrl);
   }
   return db
     .execute(
-      'INSERT INTO posting (postNum, user_id, meetingDate, cost, title, contents, postImg, participants, sportName, areaName, discloseInfo, temperature) VALUES (?,?,?,?,?,?,?,?,?,?,?,?)',
-      [
-        teamId,
-        userId,
-        date,
-        price,
-        title,
-        content,
-        IMG_URL,
-        personnel,
-        excercise,
-        '성북구',
-        discloseInfo,
-        temperature,
-      ]
-    )
-    .then((result) => {
-      console.log(result);
+      'INSERT INTO posting (postNum, user_id, meetingDate, cost, title, contents, postImg, participants, sportName, areaName, discloseInfo, temperature, deadline) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?)',
+      [teamId,userId,date,price,title,content,IMG_URL,personnel,excercise,area,discloseInfo,temperature, new Date(deadline)])
+    .then((data) => {
       // 작성자 참여자에 넣어주기
       participantsRepository.insertParticipant(teamId, userId);
       return res.status(200).json({ message: '생산 성공' });

@@ -8,8 +8,9 @@ const messageAuthentication = {
   sendVerificationSMS: async (req, res) => {
     try {
       const phoneNumber = req.body.phoneNumber;
+      const passwordSearch = req.body.passwordSearch;
       const user = await userRepository.findByNumbmer(phoneNumber);
-      if(user) {
+      if(!passwordSearch && user) {
         return res.status(200).json({message: "이미 가입한 휴대폰 번호입니다."});
       }
       Cache.del(phoneNumber);

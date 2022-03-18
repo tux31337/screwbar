@@ -80,7 +80,7 @@ function Navbar() {
         </div>
         <div className="navbar__logo">
           <img
-            src="img/screwbar2.png"
+            src="img/logo.png"
             className="navbar__logo__img"
             onClick={goHome}
           ></img>
@@ -94,7 +94,7 @@ function Navbar() {
               <span></span>
               <span></span>
             </label>
-            <h4 onClick={openCategory}>&nbsp;&nbsp;카테고리</h4>
+            <h4 onClick={openCategory}>&nbsp;&nbsp;랭킹</h4>
             <div className="sidebar">
               <div>축구</div>
               <div>야구</div>

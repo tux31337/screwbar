@@ -1,0 +1,141 @@
+.chatting {
+    display: flex;
+    width: 1100px;
+    margin: auto;
+}
+
+.chatting__list {
+    background-color: #ffeb33;
+    width: 300px;
+}
+
+.chtting__list > ul {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.chatting__list > ul > li {
+    height: 50px;
+    text-align: center;
+}
+
+
+.wrapper {
+    height: 1000px;
+    width: 800px;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    margin: auto;
+  }
+
+  .user {
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+  }
+  
+  .user-container {
+    background: #a9bdce;
+    flex: 1;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    padding: 0.5rem;
+  }
+  
+  .user-container label {
+    font-size: 14px;
+    margin-right: 1rem;
+  }
+  
+  .user-container input {
+    border-radius: 3px;
+    border: none;
+    height: 100%;
+  }
+  
+  .display-container {
+    flex: 12;
+    background: #b2c7d9;
+    overflow-y: scroll;
+  }
+  .input-container {
+    flex: 1;
+    display: flex;
+    justify-content: stretch;
+    align-items: stretch;
+  }
+  .input-container span {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    padding: 0.3rem;
+    width: 100%;
+  }
+  .chatting-input {
+    font-size: 12px;
+    height: 100%;
+    flex: 8;
+  }
+  .send-button {
+    flex: 1;
+    background: #ffeb33;
+    border: none;
+    height: 100%;
+    border-radius: 3px;
+  }
+  
+  .chatting-list li {
+    width: 90%;
+    padding: 0.3rem;
+    display: flex;
+    justify-content: flex-start;
+    align-items: flex-end;
+    margin-top: 0.5rem;
+  }
+  
+  .profile {
+    display: flex;
+    align-items: flex-end;
+    justify-content: center;
+  }
+  
+  .profile .user {
+    font-size: 15px;
+    margin-bottom: 0.3rem;
+  }
+  .profile .image {
+    border-radius: 50%;
+    object-fit: cover;
+    width: 50px;
+    height: 50px;
+  }
+  
+  .message {
+    border-radius: 5px;
+    padding : 0.5rem;
+    font-size : 12px;
+    flex: 7;
+  }
+  
+  .time {
+    font-size : 10px;
+    margin: 0 5px;
+  }
+  
+  .sent {
+    flex-direction: row-reverse !important;
+    float: right;
+  }
+  
+  .sent .message {
+    background-color: #ffeb33;
+  }
+  
+  .received .message {
+    background: #ffeb33;
+  }
+  
+  

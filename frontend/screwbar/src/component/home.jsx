@@ -19,6 +19,7 @@ function Home() {
           isParticipant = result.data;
           detailTeam = teams.filter((team) => team.postNum === postNumId);
           detailTeam = detailTeam[0];
+
           myData = userInfo;
           setModalOpen(true);
         });
@@ -41,6 +42,8 @@ function Home() {
     });
   }, []);
 
+
+
   return (
     <>
       <article className="home">
@@ -55,11 +58,7 @@ function Home() {
                       openModal(team.postNum);
                     }}
                   >
-                    <img
-                      src={team.postImg}
-                      alt=""
-                      className="home__cards__img"
-                    />
+                    <img src={team.postImg} alt="" className="home__cards__img" />
                     <span>{team.title}</span>
                     <div className="home__cards__count">
                       {team.headCount} / {team.participants}
@@ -78,8 +77,9 @@ function Home() {
         header="Modal heading"
         detail={detailTeam}
         isParticipant={isParticipant}
-        myData={myData}
-      ></TeamModal>
+        myData = {myData}
+      >
+      </TeamModal>
     </>
   );
 }

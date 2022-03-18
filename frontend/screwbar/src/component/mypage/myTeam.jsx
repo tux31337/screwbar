@@ -1,7 +1,7 @@
 import React from 'react';
 import axios from 'axios';
 import { useEffect, useState } from 'react';
-import '../../css/home.css';
+import '../../css/team/myTeam.css';
 import TeamModal from '../team/TeamModal';
 
 let detailTeam;
@@ -63,6 +63,7 @@ const MyTeam = (props) => {
                         openModal(team.postNum);
                       }}
                     >
+                      <div>
                       <img
                         src={team.postImg}
                         alt=""
@@ -71,6 +72,7 @@ const MyTeam = (props) => {
                       <span>{team.title}</span>
                       <div className="home__cards__count">
                         {team.headCount} / {team.participants}
+                      </div>
                       </div>
                       <div className="home__cards__hr"></div>
                     </div>
@@ -101,7 +103,6 @@ const MyTeam = (props) => {
             })}
         </section>
       </article>
-
       <TeamModal
         open={modalOpen}
         close={closeModal}

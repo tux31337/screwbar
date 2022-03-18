@@ -29,6 +29,10 @@ const Modal = (props) => {
     });
   };
 
+  const goTest = () => {
+    navigate('/chatting');
+  };
+
   // 팀 참여
   const joinTeam = (postNum, user_id) => {
     if (
@@ -158,12 +162,14 @@ const Modal = (props) => {
                 <span className="teamModal__main__top__right__temparature">
                   열정온도 : {detail.temperature}
                 </span>
+                <span className="teamModal__main__top__right__finishTime">
+                  마감시간 :
+                </span>
                 <span className="teamModal__main__top__right__btn">
                   <button
                     className="teamModal__main__top__right__btn__join"
                     onClick={() => joinTeam(detail.postNum, detail.user_id)}
                   >
-                    {console.log(myData)}
                     {detail.closed === 0 &&
                     myData.data.userId === detail.user_id
                       ? '마감하기'

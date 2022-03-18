@@ -1,9 +1,11 @@
-import { useRef, useState } from "react";
+import { useCallback, useRef, useState } from "react";
 import QuillEditor from "./QuillEditor";
 import "../../css/team/createTeam.css"
 import { useEffect } from "react";
 import axios from "axios";
 import { useNavigate } from 'react-router-dom';
+import moment from 'moment';
+
 
 
 function CreateTeam(props) {
@@ -18,6 +20,10 @@ function CreateTeam(props) {
     const [useUrl, setUseUrl] = useState([]);
     const [title, setTitle] = useState([]);
     const [check, setCheck] = useState(false);
+    const [area, setArea] = useState();
+    const [deadlineDate, setDeadlineDate] = useState();
+    const [deadlineTime, setDeadlineTime] = useState();
+
 
 
     const navigate = useNavigate();
@@ -70,6 +76,8 @@ function CreateTeam(props) {
         }
     }
 
+
+
     const excerciseTypeChange = (event) => {
         setExcercise(event.target.value);
     }
@@ -82,12 +90,33 @@ function CreateTeam(props) {
         setTemperature(event.target.value);
     }
 
+    const deadline1 = (event) => {
+        console.log(event.target.value);
+        setDeadlineDate(event.target.value);
+    }
+
+    const deadline2 = (event) => {
+        console.log(event.target.value);
+        setDeadlineTime(event.target.value);
+    }
+
 
     const config = {
 	    header: {'content-type': 'multipart/form-data'}
     }
 
+    const areaValueChange = (event) => {
+        setArea(event.target.value);
+    }
+    const format1 = "YYYY-MM-DD HH:mm:ss"
+
+    const convertTime = useCallback((time) => {
+        return moment(time).format(format1);
+      }, []);
+
     const postTeamPosting = () => {
+        const date = convertTime(deadlineDate + " " + deadlineTime);
+        console.log(date);
         const formData = new FormData();
         if(imgFile) {
             formData.append('imgFile', imgFile[0]);
@@ -101,6 +130,8 @@ function CreateTeam(props) {
         formData.append('content', props.quill.root.innerHTML);
         formData.append('title', title);
         formData.append('discloseInfo', discloseInfo);
+        formData.append('deadline', date);
+        formData.append('area', area);
         props.quill.getContents().ops.map((result) => {
             if(result.insert.image) {
                 const copyArray = useUrl;
@@ -189,6 +220,36 @@ function CreateTeam(props) {
                         <option value="25">25</option>
                         <option value="상관 없음">상관 없음</option>
                     </select>
+                    <span className="createTeam__information__temperature">열정온도 조건</span>
+                    <span className="createTeam__information__deadline">마감 기간 :</span> <input type="date" className="createTeam__information__date__deadline1__input" onChange={deadline1} /><input type="time" className="createTeam__information__date__deadline2__input" onChange={deadline2} />
+                    <span className="createTeam__information__area">지역설정 :&nbsp;
+                    <select className="createTeam__information__area__value" onChange={areaValueChange}>
+                        <option key="성북구">성북구</option>
+                        <option key="은평구">은평구</option>
+                        <option key="서대문구">서대문구</option>
+                        <option key="노원구">노원구</option>
+                        <option key="강북구">강북구</option>
+                        <option key="도봉구">도봉구</option>
+                        <option key="동대문구">동대문구</option>
+                        <option key="중랑구">중랑구</option>
+                        <option key="성동구">성동구</option>
+                        <option key="광진구">광진구</option>
+                        <option key="종로구">종로구</option>
+                        <option key="중구">중구</option>
+                        <option key="용산구 ">용산구 </option>
+                        <option key="양천구">양천구</option>
+                        <option key="강서구">강서구</option>
+                        <option key="영등포구">영등포구</option>
+                        <option key="구로구">구로구</option>
+                        <option key="금천구">금천구</option>
+                        <option key="관악구">관악구</option>
+                        <option key="동작구">동작구</option>
+                        <option key="강남구">강남구</option>
+                        <option key="서초구">서초구</option>
+                        <option key="강동구">강동구</option>
+                        <option key="송파구">송파구</option>
+                    </select>
+                    </span> 
                     <button onClick={postTeamPosting} className="createTeam__postBtn">글작성</button>
                 </section>
             </article>
