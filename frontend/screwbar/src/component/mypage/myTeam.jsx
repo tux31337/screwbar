@@ -8,7 +8,6 @@ let detailTeam;
 let isParticipant;
 let myData;
 
-
 const MyTeam = (props) => {
   const [myInfo, setMyInfo] = useState({}); //내 정보
   const [teams, setTeams] = useState();
@@ -24,9 +23,9 @@ const MyTeam = (props) => {
           isParticipant = result.data;
           detailTeam = teams.filter((team) => team.postNum === postNumId);
           detailTeam = detailTeam[0];
-          myData =  userInfo;
+          myData = userInfo;
           setModalOpen(true);
-        })
+        });
       });
   };
 
@@ -52,6 +51,9 @@ const MyTeam = (props) => {
         <section className="home__cards">
           {teams &&
             teams.map((team) => {
+              /*               {
+                console.log(team.closed);
+              } */
               return (
                 <>
                   {team.closed === 0 ? (
@@ -75,24 +77,25 @@ const MyTeam = (props) => {
                       <div className="home__cards__hr"></div>
                     </div>
                   ) : (
-                      <div
-                        key={team.postNum}
-                        onClick={() => {
-                          openModal(team.postNum);
-                        }}
-                      >
-                        <div className="closedTeam">
-                        <img
-                          src={team.postImg}
-                          alt=""
-                          className="home__cards__img"
-                        />
-                        <span>{team.title}</span>
-                        <div className="home__cards__count">
-                          {team.headCount} / {team.participants}
-                        </div>
-                        </div>
-                        <div className="home__cards__hr"></div>
+                    <div
+                      key={team.postNum}
+                      onClick={() => {
+                        openModal(team.postNum);
+                      }}
+                    >
+                      <div className="closedTeam">
+                        <p className="closedText">마감</p>
+                      </div>
+                      <img
+                        src={team.postImg}
+                        alt=""
+                        className="home__cards__img"
+                      />
+                      <span>{team.title}</span>
+                      <div className="home__cards__count">
+                        {team.headCount} / {team.participants}
+                      </div>
+                      <div className="home__cards__hr"></div>
                     </div>
                   )}
                 </>
@@ -106,9 +109,8 @@ const MyTeam = (props) => {
         header="Modal heading"
         detail={detailTeam}
         isParticipant={isParticipant}
-        myData = {myData}
-      >
-      </TeamModal>
+        myData={myData}
+      ></TeamModal>
     </>
   );
 };

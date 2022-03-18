@@ -15,8 +15,8 @@ async function isParticipant(req, res) {
 }
 
 async function joinTeam(req, res) {
-  const { postNum} = req.body;
-  const user_id = req.userId
+  const { postNum } = req.body;
+  const user_id = req.userId;
   const findJoin = await participantsRepository.findJoin(postNum, user_id);
   const headCount = await participantsRepository.getHeadCount(postNum);
   const isWriter = await participantsRepository.isWriter(postNum, user_id);
@@ -26,8 +26,7 @@ async function joinTeam(req, res) {
     if (isClosed) {
       return res.status(200).json({ message: '마감완료' });
     }
-  }
-  else if (findJoin) {
+  } else if (findJoin) {
     await participantsRepository.updateHeadCount(postNum, headCount - 1);
     return db
       .execute('DELETE FROM participants WHERE postNum = ? and user_id = ?', [
@@ -36,7 +35,7 @@ async function joinTeam(req, res) {
       ])
       .then((result) => {
         return res.status(200).json({ message: '취소완료' });
-      })
+      });
   } else {
     await participantsRepository.updateHeadCount(postNum, headCount + 1);
     return db
@@ -46,7 +45,7 @@ async function joinTeam(req, res) {
       )
       .then((result) => {
         return res.status(200).json({ message: '신청완료' });
-      })
+      });
   }
 }
 

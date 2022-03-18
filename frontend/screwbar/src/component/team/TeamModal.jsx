@@ -35,6 +35,13 @@ const Modal = (props) => {
 
   // 팀 참여
   const joinTeam = (postNum, user_id) => {
+    if (
+      user_id !== myData.data.userId &&
+      (detail.headCount = detail.participants)
+    ) {
+      alert('참여할 수 없습니다😿');
+      return;
+    }
     isParticipant.message = !isParticipant.message;
     if (isParticipant.message) {
       detail.headCount = detail.headCount + 1;
@@ -61,7 +68,30 @@ const Modal = (props) => {
       .catch((error) => {
         alert(error.response.data.message);
       });
-  };  
+  };
+
+  // 평가하기
+  const evaluation = (postNum, user_id) => {
+    const data = {
+      postNum: postNum,
+      user_id: user_id,
+    };
+    axios.post('team/evaluated', data).then((result) => {
+      console.log(result.data.result);
+      if (result.data.result === 1) {
+        alert('이미 열정을 주셨습니다.👍');
+        navigate('/myTeam');
+      } else {
+        navigate('/evaluation', {
+          state: {
+            postNum: postNum,
+            user_id: user_id,
+          },
+        });
+      }
+    });
+  };
+
   return (
     
     // 모달이 열릴때 openModal 클래스가 생성된다.
@@ -78,11 +108,18 @@ const Modal = (props) => {
             <section className="teamModal__main__top">
               {detail.closed === 0 ? (
                 <div className="closed not_closed">
-                  <button className="">평가하기</button>
+                  <button className="evaluation_button">평가하기</button>
                 </div>
               ) : (
                 <div className="closed">
-                  <button onClick={() => goTest()}>평가하기</button>
+                  <button
+                    className="evaluation_button"
+                    onClick={() =>
+                      evaluation(detail.postNum, myData.data.userId)
+                    }
+                  >
+                    🔥팀에게 열정주기🔥
+                  </button>
                 </div>
               )}
 
@@ -135,8 +172,8 @@ const Modal = (props) => {
                     className="teamModal__main__top__right__btn__join"
                     onClick={() => joinTeam(detail.postNum, detail.user_id)}
                   >
-                    {console.log(myData)}
-                    {(detail.closed === 0 && (myData.data.userId === detail.user_id))
+                    {detail.closed === 0 &&
+                    myData.data.userId === detail.user_id
                       ? '마감하기'
                       : isParticipant.message === true
                       ? '취소하기'

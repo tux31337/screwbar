@@ -19,9 +19,10 @@ function Home() {
           isParticipant = result.data;
           detailTeam = teams.filter((team) => team.postNum === postNumId);
           detailTeam = detailTeam[0];
-          myData =  userInfo;
+
+          myData = userInfo;
           setModalOpen(true);
-        })
+        });
       });
   };
 
@@ -49,7 +50,7 @@ function Home() {
         <section className="home__cards">
           {teams &&
             teams.map((team) => {
-              if(team.closed === 0) {
+              if (team.closed === 0) {
                 return (
                   <div
                     key={team.postNum}
