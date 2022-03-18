@@ -36,7 +36,7 @@ a {
 }
 
 .navbar__logo__img {
-  width: 170px;
+  width: 300px;
 }
 
 .navbar__bottom {
@@ -52,7 +52,7 @@ a {
 
 .navbar__bottom__menu1 {
   list-style: none;
-  padding-left: 0;
+  padding-left: 900px;
   display: flex;
 }
 
@@ -94,7 +94,6 @@ a {
 .naver_bottom_nav {
   display: flex;
   align-items: center;
-  padding-left: 15px;
 }
 
 /**
@@ -115,7 +114,7 @@ input[id='menuicon'] + label span {
   display: block;
   position: absolute;
   width: 100%;
-  height: 3px;
+  height: 4px;
   border-radius: 30px;
   background: #5f0080;
   transition: all 0.35s;
@@ -126,7 +125,7 @@ input[id='menuicon'] + label span:nth-child(1) {
 }
 
 input[id='menuicon'] + label span:nth-child(2) {
-  top: 50%;
+  top: 60%;
   transform: translateY(-50%);
 }
 
@@ -164,6 +163,7 @@ div[class='sidebar'] {
   z-index: 1;
   transition: all 0.35s;
   border: 1px solid snow;
+  padding-bottom: 10px;
 }
 
 input[id='menuicon']:checked + label + h4 + div {
@@ -192,8 +192,10 @@ input[id='menuicon'] + label + h4 + div {
 .navbar__bottom__menu2__board {
   width: 33px;
   height: 33px;
-  padding-left: 350%;
+  padding-left: 15px;
   cursor: pointer;
+  align-items: flex-end;
+  padding-bottom: 10px;
 }
 
 .navbar__bottom__menu2__chat {
@@ -201,4 +203,10 @@ input[id='menuicon'] + label + h4 + div {
   height: 33px;
   padding-left: 15px;
   cursor: pointer;
+  align-items: flex-end;
+  padding-bottom: 10px;
 }
+
+.naver_bottom_nav > h4 {
+  font-size: 1.3rem;
+ }

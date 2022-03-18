@@ -47,7 +47,7 @@ function Login() {
         <>
     <section className="login">
         <div>
-            <img src="img/screwbar.png"></img>
+            <img src="img/logo.png"></img>
         </div>
         <label className="login__label">이메일</label>
         <input
@@ -61,8 +61,8 @@ function Login() {
       <button className="login__loginBtn" onClick={userLogin}>로그인</button>
       <button className="login__signupBtn" onClick={() => navigate('/signup')}>회원가입</button>
       <ul className="login__finddiv">
-        <li className="login__finddiv__list"><a>아이디 찾기</a></li>|
-        <li className="login__finddiv__list"><a>비밀번호 찾기</a></li>
+        <li className="login__finddiv__list"><a href="/FindId">아이디 찾기</a></li>|
+        <li className="login__finddiv__list"><a href="/FindPw">비밀번호 찾기</a></li>
       </ul>
       
     </section>

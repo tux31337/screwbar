@@ -13,6 +13,10 @@ import CreateTeam from './component/team/CreateTeam';
 import MyTeam from './component/mypage/myTeam';
 import Chatting from './component/chat/Chatting';
 import Test from './component/Test';
+import NewPw from './component/user/NewPw';
+import FindPw from './component/user/FindPw';
+import FindId from './component/user/FindId';
+import Navbar2 from './component/Navbar2';
 
 const App = () => {
   return (
@@ -31,7 +35,7 @@ const App = () => {
           path="/signup"
           element={AuthHoc(
             <>
-              <Navbar />
+              <Navbar2 />
               <Signup />
             </>,
             false
@@ -80,7 +84,7 @@ const App = () => {
           path="/myTeam"
           element={AuthHoc(
             <>
-              <Navbar />
+              <Navbar2 />
               <MypageNavbar />
               <MyTeam />
             </>
@@ -90,7 +94,7 @@ const App = () => {
           path="/modifyProfile"
           element={AuthHoc(
             <>
-              <Navbar />
+              <Navbar2 />
               <MypageNavbar />
             </>
           )}
@@ -99,7 +103,7 @@ const App = () => {
           path="/modifyPw"
           element={AuthHoc(
             <>
-              <Navbar />
+              <Navbar2 />
               <MypageNavbar />
             </>
           )}
@@ -124,6 +128,35 @@ const App = () => {
               <Closed />
             </>,
             true
+          )}
+        ></Route>
+
+
+        <Route
+          path="/FindId"
+          element={AuthHoc(
+            <>
+              <FindId />
+            </>,
+            false
+          )}
+        ></Route>
+        <Route
+          path="/FindPw"
+          element={AuthHoc(
+            <>
+              <FindPw />
+            </>,
+            false
+          )}
+        ></Route>
+        <Route
+          path="/NewPw"
+          element={AuthHoc(
+            <>
+              <NewPw />
+            </>,
+            false
           )}
         ></Route>
       </Routes>
