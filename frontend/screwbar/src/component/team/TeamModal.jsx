@@ -60,11 +60,23 @@ const Modal = (props) => {
 
   // 평가하기
   const evaluation = (postNum, user_id) => {
-    navigate('/evaluation', {
-      state: {
-        postNum: postNum,
-        user_id: user_id,
-      },
+    const data = {
+      postNum: postNum,
+      user_id: user_id,
+    };
+    axios.post('team/evaluated', data).then((result) => {
+      console.log(result.data.result);
+      if (result.data.result === 1) {
+        alert('이미 평가하셨습니다.');
+        navigate('/myTeam');
+      } else {
+        navigate('/evaluation', {
+          state: {
+            postNum: postNum,
+            user_id: user_id,
+          },
+        });
+      }
     });
   };
 

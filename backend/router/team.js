@@ -46,4 +46,8 @@ router.post('/joinTeam', isAuth, participantsService.joinTeam);
 router.get('/getMyTeam', isAuth, myTeamService.getMyTeam);
 router.get('/getDetailMyTeam', isAuth, myTeamService.getDetailMyTeam);
 
+// 팀 평가
+router.post('/evaluated', isAuth, myTeamService.evaluated);
+router.post('/getParticipants', isAuth, myTeamService.getParticipants);
+router.post('/evaluation', isAuth, myTeamService.doEvaluation);
 module.exports = router;

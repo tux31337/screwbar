@@ -29,19 +29,27 @@ const ModalComponent = ({
   const [selectedEvaluations, setEvaluations] = useState([]);
   //아이디 추가된
   let finalPersonalData = useRef({
-    id: participant.id,
-    goodkind: false,
-    goodtime: false,
-    goodmean: false,
-    bandkind: false,
-    badtime: false,
-    badmean: false,
+    user_id: participant.user_id,
+    goodkind: 0,
+    goodtime: 0,
+    goodmean: 0,
+    badkind: 0,
+    badtime: 0,
+    badmean: 0,
   });
 
   //최종 개인데이터 만들기
   const onMakeData = (selectedEvaluations) => {
-    for (var sel of selectedEvaluations) {
-      finalPersonalData.current[sel] = true;
+    // 초기화
+    finalPersonalData.current['goodkind'] = 0;
+    finalPersonalData.current['goodtime'] = 0;
+    finalPersonalData.current['goodmean'] = 0;
+    finalPersonalData.current['badkind'] = 0;
+    finalPersonalData.current['badtime'] = 0;
+    finalPersonalData.current['badmean'] = 0;
+
+    for (let sel of selectedEvaluations) {
+      finalPersonalData.current[sel] = 1;
     }
     return finalPersonalData;
   };
@@ -63,15 +71,14 @@ const ModalComponent = ({
     setEvaluations([...selectedEvaluations, selectedItem.id]);
   };
 
-  // 제출을 누르면 closed로 데이터 보내기 + 페이지 닫기
+  // 제출을 누르면 evaluation으로 데이터 보내기 + 페이지 닫기
   const onSubmitPersonalData = () => {
-    console.log('확인 버튼 클릭! 선택된 데이터 👇');
-    console.log(selectedEvaluations);
-    console.log();
+    /*     console.log('확인 버튼 클릭! 선택된 데이터 👇');
+    console.log(selectedEvaluations); */
 
     finalPersonalData = onMakeData(selectedEvaluations);
-    console.log('확인 버튼 클릭! finalPersonalData 데이터 👇');
-    console.log(finalPersonalData);
+    /*     console.log('확인 버튼 클릭! finalPersonalData 데이터 👇');
+    console.log(finalPersonalData); */
     onAdd(finalPersonalData);
     onCloseHandler();
   };
@@ -79,12 +86,13 @@ const ModalComponent = ({
   return (
     <div
       className={
-        modalVisibleId === participant.id ? 'openModal modal' : 'modal'
+        modalVisibleId === participant.user_id ? 'openModal modal' : 'modal'
       }
     >
+      {/* {console.log(participant)} */}
       <section>
         <header>
-          <h2>🔥 {participant.name}님에게 열정주기 🔥</h2>
+          <h2>🔥 {participant.username}님에게 열정주기 🔥</h2>
           <button className="close" onClick={onCloseHandler}>
             &times;
           </button>

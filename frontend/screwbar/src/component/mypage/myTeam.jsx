@@ -51,9 +51,9 @@ const MyTeam = (props) => {
         <section className="home__cards">
           {teams &&
             teams.map((team) => {
-              {
+              /*               {
                 console.log(team.closed);
-              }
+              } */
               return (
                 <>
                   {team.closed === 0 ? (
