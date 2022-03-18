@@ -31,6 +31,13 @@ const Modal = (props) => {
 
   // 팀 참여
   const joinTeam = (postNum, user_id) => {
+    if (
+      user_id !== myData.data.userId &&
+      (detail.headCount = detail.participants)
+    ) {
+      alert('참여할 수 없습니다😿');
+      return;
+    }
     isParticipant.message = !isParticipant.message;
     if (isParticipant.message) {
       detail.headCount = detail.headCount + 1;
@@ -67,7 +74,7 @@ const Modal = (props) => {
     axios.post('team/evaluated', data).then((result) => {
       console.log(result.data.result);
       if (result.data.result === 1) {
-        alert('이미 평가하셨습니다.');
+        alert('이미 열정을 주셨습니다.👍');
         navigate('/myTeam');
       } else {
         navigate('/evaluation', {

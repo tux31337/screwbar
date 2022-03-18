@@ -49,7 +49,7 @@ const ModalComponent = ({
     finalPersonalData.current['badmean'] = 0;
 
     for (let sel of selectedEvaluations) {
-      finalPersonalData.current[sel] = 1;
+      finalPersonalData.current[sel] = 0.1;
     }
     return finalPersonalData;
   };
@@ -93,9 +93,9 @@ const ModalComponent = ({
       <section>
         <header>
           <h2>🔥 {participant.username}님에게 열정주기 🔥</h2>
-          <button className="close" onClick={onCloseHandler}>
+          {/* <button className="close" onClick={onCloseHandler}>
             &times;
-          </button>
+          </button> */}
         </header>
         <main>
           <div className="content">
