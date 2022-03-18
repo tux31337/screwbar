@@ -33,7 +33,7 @@ const Modal = (props) => {
   const joinTeam = (postNum, user_id) => {
     if (
       user_id !== myData.data.userId &&
-      (detail.headCount = detail.participants)
+      detail.headCount === detail.participants
     ) {
       alert('참여할 수 없습니다😿');
       return;
