@@ -8,7 +8,7 @@ import { useNavigate } from 'react-router-dom';
 
 const Modal = (props) => {
   // 열기, 닫기, 모달 헤더 텍스트를 부모로부터 받아옴
-  const { open, close, header, detail, isParticipant } = props;
+  const { open, close, header, detail, isParticipant, myData} = props;
   const [detailUser, setDetailUser] = useState(false);
   const today = new Date();
   const year = today.getFullYear();
@@ -17,13 +17,11 @@ const Modal = (props) => {
   const convertTime = useCallback((time) => {
     return moment(time).format('YYYY/MM/DD');
   }, []);
-
   const showUserDetail = () => {
     setDetailUser(!detailUser);
   };
-
   const goToChat = (userId) => {
-    navigate('/chat', {
+    navigate('/chatting', {
       state: {
         userId: userId,
         username: detail.username,
@@ -31,11 +29,17 @@ const Modal = (props) => {
     });
   };
 
+  const goTest = () => {
+    navigate("/chatting")
+  }
+
   // 팀 참여
   const joinTeam = (postNum, user_id) => {
     isParticipant.message = !isParticipant.message;
     if (isParticipant.message) {
       detail.headCount = detail.headCount + 1;
+    } else if(detail.closed === 0 && (myData.data.userId === detail.user_id)) {
+
     } else {
       detail.headCount = detail.headCount - 1;
     }
@@ -44,20 +48,22 @@ const Modal = (props) => {
       user_id: user_id,
     };
     axios
-      .post('/team/joinTeam', data)
+      .post('/team/joinTeam', data)  // 취소완료 참가완료 마감완료
       .then((result) => {
         alert(result.data.message);
+        if(result.data.message === "마감완료") {
+          detail.closed = !detail.closed;
+          close();
+          return;
+        }
         close();
-        detail.closed = !detail.closed;
       })
       .catch((error) => {
         alert(error.response.data.message);
       });
-  };
-
-  console.log(detail);
-
+  };  
   return (
+    
     // 모달이 열릴때 openModal 클래스가 생성된다.
     <div className={open ? 'openModal teamModal' : 'teamModal'}>
       {open ? (
@@ -76,7 +82,7 @@ const Modal = (props) => {
                 </div>
               ) : (
                 <div className="closed">
-                  <button>평가하기</button>
+                  <button onClick={() => goTest()}>평가하기</button>
                 </div>
               )}
 
@@ -121,12 +127,16 @@ const Modal = (props) => {
                 <span className="teamModal__main__top__right__temparature">
                   열정온도 : {detail.temperature}
                 </span>
+                <span className="teamModal__main__top__right__finishTime">
+                  마감시간 : 
+                </span>
                 <span className="teamModal__main__top__right__btn">
                   <button
                     className="teamModal__main__top__right__btn__join"
                     onClick={() => joinTeam(detail.postNum, detail.user_id)}
                   >
-                    {detail.closed === 0
+                    {console.log(myData)}
+                    {(detail.closed === 0 && (myData.data.userId === detail.user_id))
                       ? '마감하기'
                       : isParticipant.message === true
                       ? '취소하기'

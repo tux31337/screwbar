@@ -11,6 +11,8 @@ import QuillEditor from './component/team/QuillEditor';
 import Closed from './component/evaluation/closed';
 import CreateTeam from './component/team/CreateTeam';
 import MyTeam from './component/mypage/myTeam';
+import Chatting from './component/chat/Chatting';
+import Test from './component/Test';
 
 const App = () => {
   return (
@@ -36,13 +38,22 @@ const App = () => {
           )}
         ></Route>
         <Route
+          path="/"
+          element={AuthHoc(
+            <>
+              <Test />
+            </>,
+            false
+          )}
+        ></Route>
+        <Route
           path="/home"
           element={AuthHoc(
             <>
               <Navbar />
               <Home />
             </>,
-            true
+            false
           )}
         ></Route>
         <Route
@@ -94,11 +105,11 @@ const App = () => {
           )}
         ></Route>
         <Route
-          path="/chat"
+          path="/chatting"
           element={AuthHoc(
             <>
               <Navbar />
-              <Chat />
+              <Chatting />
             </>,
 
             true

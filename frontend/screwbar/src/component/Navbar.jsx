@@ -39,7 +39,7 @@ function Navbar() {
   };
 
   const chatBtn = () => {
-    navigate('/chat');
+    navigate('/chatting');
   };
 
   const goMypage = () => {

@@ -43,6 +43,8 @@ const ModalComponent = ({
     for (var sel of selectedEvaluations) {
       finalPersonalData.current[sel] = true;
     }
+    
+
     return finalPersonalData;
   };
   // 항목을 클릭했을 때 이벤트

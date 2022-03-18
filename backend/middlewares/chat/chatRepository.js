@@ -30,7 +30,7 @@ async function createChat(req, res) {
 
 async function getChatList(req, res) {
     const userId = req.userId;
-    const result = mongodb.getChat().find({$or:[{peerUserId: {$eq: req.userId}}, {user: {$eq: req.userId}}]}).toArray((err, data) => {
+    const result = mongodb.getChat().find({$or:[{peerUserId: {$eq: req.userId}}, {user: {$eq: req.userId}}]}, {username : 1}).toArray((err, data) => {
         res.status(200).json({data : data});
     });
 }

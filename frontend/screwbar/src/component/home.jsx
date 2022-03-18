@@ -5,21 +5,23 @@ import TeamModal from './team/TeamModal';
 
 let detailTeam;
 let isParticipant;
+let myData;
 function Home() {
   const [myInfo, setMyInfo] = useState({}); //내 정보
   const [teams, setTeams] = useState();
   const [modalOpen, setModalOpen] = useState(false);
 
   const openModal = (postNumId) => {
-    console.log('open modal' + postNumId);
-
     axios
       .post('/team/isParticipant', { postNumId: postNumId })
       .then((result) => {
-        isParticipant = result.data;
-        detailTeam = teams.filter((team) => team.postNum === postNumId);
-        detailTeam = detailTeam[0];
-        setModalOpen(true);
+        axios.get('/auth/myInfo').then((userInfo) => {
+          isParticipant = result.data;
+          detailTeam = teams.filter((team) => team.postNum === postNumId);
+          detailTeam = detailTeam[0];
+          myData =  userInfo;
+          setModalOpen(true);
+        })
       });
   };
 
@@ -39,43 +41,43 @@ function Home() {
     });
   }, []);
 
+
+
   return (
     <>
       <article className="home">
         <section className="home__cards">
           {teams &&
             teams.map((team) => {
-              {
-                console.log(team.postNum);
-              }
-              return (
-                <div
-                  key={team.postNum}
-                  onClick={() => {
-                    openModal(team.postNum);
-                  }}
-                >
-                  <img src={team.postImg} alt="" className="home__cards__img" />
-                  <span>{team.title}</span>
-                  <div className="home__cards__count">
-                    {team.headCount} / {team.participants}
-                    {/* {console.log(team.headCount)} */}
+              if(team.closed === 0) {
+                return (
+                  <div
+                    key={team.postNum}
+                    onClick={() => {
+                      openModal(team.postNum);
+                    }}
+                  >
+                    <img src={team.postImg} alt="" className="home__cards__img" />
+                    <span>{team.title}</span>
+                    <div className="home__cards__count">
+                      {team.headCount} / {team.participants}
+                    </div>
+                    <div className="home__cards__hr"></div>
                   </div>
-                  <div className="home__cards__hr"></div>
-                </div>
-              );
+                );
+              }
             })}
         </section>
       </article>
 
       <TeamModal
         open={modalOpen}
-        close={closeModal}
+        close={() => closeModal()}
         header="Modal heading"
         detail={detailTeam}
         isParticipant={isParticipant}
+        myData = {myData}
       >
-        <div>{console.log(detailTeam)}</div>
       </TeamModal>
     </>
   );

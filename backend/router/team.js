@@ -18,7 +18,7 @@ router.post(
   upload.postsUpload.single('img'),
   teamService.postImg
 );
-router.get('/getTeam', isAuth, teamService.getTeam);
+router.get('/getTeam', teamService.getTeam);
 router.get('/getDetailTeam', isAuth, teamService.getDetailTeam);
 
 router.post(
@@ -33,8 +33,6 @@ router.post(
   upload.postsUpload.single('img'),
   teamService.postImg
 );
-router.get('/getTeam', isAuth, teamService.getTeam);
-router.get('/getDetailTeam', isAuth, teamService.getDetailTeam);
 
 // 참가자인지 확인하기
 router.post('/isParticipant', isAuth, participantsService.isParticipant);

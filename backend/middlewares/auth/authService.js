@@ -105,11 +105,37 @@ async function emailDuplicateCheck(req, res) {
   }
 }
 
+async function findEmail(req, res) {
+  const username = req.body.username;
+  const phonenumber = req.body.phoneNumber;
+  const email = await userRepository.findEmail(username, phonenumber);
+  if(email) {
+    return res.status(200).json({message: email.email});
+  } else {
+    return res.status(401).json({message : "이메일을 찾을 수 없습니다"});
+  }
+}
+
+async function changePassword(req, res) {
+  const username = req.body.email;
+  const password = req.body.password;
+  const hashed = await bcrypt.hash(password, config.bcrypt.saltRounds);
+  const email = await userRepository.changePassword(username, hashed);
+  if(email.affectedRows === 1) {
+    return res.status(200).json({message : "성공"});
+  } else {
+    return res.status(401).json({message : "실패"});
+  }
+}
+
 module.exports.signup = signup;
 module.exports.signIn = signIn;
 module.exports.me = me;
 module.exports.logout = logout;
 module.exports.myInfo = myInfo;
 module.exports.emailDuplicateCheck = emailDuplicateCheck;
+module.exports.findEmail = findEmail;
+module.exports.changePassword = changePassword;
+
 
 

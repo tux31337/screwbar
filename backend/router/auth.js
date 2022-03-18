@@ -60,4 +60,12 @@ router.post('/getVerificationCode', sens.sendVerificationSMS);
 
 //문자 인증번호 확인
 router.post('/checkVerificationCode', sens.confirmSms);
+
+//이메일 찾기
+router.post('/findEmail', authService.findEmail);
+
+//비밀번호 찾기
+router.post('/changePassword', authService.changePassword);
+
+
 module.exports = router;

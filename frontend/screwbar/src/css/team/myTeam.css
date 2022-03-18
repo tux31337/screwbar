@@ -1,0 +1,48 @@
+.home {
+    width: 1100px;
+    margin: auto;
+  }
+  
+  .home__cards {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    grid-gap: 20px;
+  }
+  
+  .home__cards > div {
+    cursor: pointer;
+  }
+  
+  .home__cards__img {
+    width: 255px;
+    height: 200px;
+    border-radius: 10px;
+  }
+  
+  .home__cards__hr {
+    width: 255px;
+    height: 1px;
+    margin-top: 5px;
+    border-bottom: 1px solid;
+    border-color: rgb(233, 238, 243);
+  }
+  
+  .navbar__logo__img {
+    cursor: pointer;
+  }
+  
+  .closedTeam {
+    display: flex;
+    flex-direction: column;
+    width: 255px;
+    height: auto;
+    background-color: #6c757d;
+    opacity: 0.7;
+    border-radius: 10px;
+    text-align: left;
+  }
+
+  .closedTeam > img {
+    margin: auto;
+  }
+  
