@@ -34,6 +34,9 @@ router.post(
   teamService.postImg
 );
 
+// 팀 삭제하기
+router.delete('/:postNum', isAuth, myTeamService.deleteTeam);
+
 // 참가자인지 확인하기
 router.post('/isParticipant', isAuth, participantsService.isParticipant);
 
@@ -48,4 +51,8 @@ router.get('/getDetailMyTeam', isAuth, myTeamService.getDetailMyTeam);
 router.post('/evaluated', isAuth, myTeamService.evaluated);
 router.post('/getParticipants', isAuth, myTeamService.getParticipants);
 router.post('/evaluation', isAuth, myTeamService.doEvaluation);
+
+// 마이페이지 열정온도
+router.get('/getTemperature', isAuth, myTeamService.getTemperature);
+
 module.exports = router;
