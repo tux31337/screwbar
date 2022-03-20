@@ -34,6 +34,9 @@ router.post(
   teamService.postImg
 );
 
+router.get('/teamCount', teamService.teamCount);
+
+
 // 참가자인지 확인하기
 router.post('/isParticipant', isAuth, participantsService.isParticipant);
 

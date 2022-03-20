@@ -154,17 +154,7 @@
     transform: translateY(-50%) rotate(-45deg);
   }
   
-  div[class='sidebar'] {
-    width: 150px;
-    height: 520px;
-    background: white;
-    position: absolute;
-    top: 180px;
-    z-index: 1;
-    transition: all 0.35s;
-    border: 1px solid snow;
-    padding-bottom: 10px;
-  }
+
   
   input[id='menuicon']:checked + label + h4 + div {
     display: flex;
@@ -174,20 +164,7 @@
   input[id='menuicon'] + label + h4 + div {
     display: none;
   }
-  
-  .sidebar {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    line-height: 50px;
-  }
-  
-  .sidebar > div {
-    height: 30px;
-    width: 300px;
-    text-align: center;
-    align-self: center;
-  }
+
   
   .navbar__bottom__menu2__board {
     width: 33px;

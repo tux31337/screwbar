@@ -7,7 +7,7 @@ async function createUser(user) {
     )
     .then((result) => {
     });
-  return db.execute("INSERT INTO temperature(user_id, userTemp) VALUES(?,?)", [userID, "36.5", 0, 0, 0, 0, 0, 0]);
+  return db.execute("INSERT INTO temperature(user_id, userTemp, goodkind, badkind, goodtime, badtime, goodmean, badmean) VALUES(?,?, ?, ?, ?, ?, ?, ?)", [userID, "36.5", 0, 0, 0, 0, 0, 0]);
 }
 
 async function findByNumbmer(phoneNumber) {

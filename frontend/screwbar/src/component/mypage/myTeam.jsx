@@ -40,20 +40,24 @@ const MyTeam = (props) => {
   }, []);
 
   useEffect(() => {
-    axios.get('/auth/myInfo').then((result) => {
-      setMyInfo(result.data.message);
-    });
-  }, []);
+    getMyInfo();
+  }, [])
+
+  const getMyInfo = async () => {
+    await axios.get("/auth/myInfo").then((result) => {
+      setMyInfo(result.data);
+    })
+  }
+  
 
   return (
     <>
-      <article className="home">
+    {console.log(myInfo)}
+      {myInfo && <article className="home">
         <section className="home__cards">
           {teams &&
             teams.map((team) => {
-              /*               {
-                console.log(team.closed);
-              } */
+
               return (
                 <>
                   {team.closed === 0 ? (
@@ -102,7 +106,7 @@ const MyTeam = (props) => {
               );
             })}
         </section>
-      </article>
+      </article>}
       <TeamModal
         open={modalOpen}
         close={closeModal}

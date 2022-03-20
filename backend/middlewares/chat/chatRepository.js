@@ -8,12 +8,15 @@ const chatRepository = require('./chatRepository.js');
 
 
 async function createChat(req, res) {
-    mongodb.getChat().find({$or:[{peerUserId: {$eq: req.body.user}}, {peerUserId: {$eq: req.body.peerUserId}}],$or:[{user: {$eq: req.body.user}}, {user: {$eq: req.body.peerUserId}}]}).toArray((err, data) => {
+    mongodb.getChat().find({$and : [{$or:[{peerUserId: {$eq: req.body.user}}, {peerUserId: {$eq: req.body.peerUserId}}],$or:[{user: {$eq: req.body.user}}, {user: {$eq: req.body.peerUserId}}]}]}).toArray((err, data) => {
+        console.log(data);
         if(data != "") {
+            console.log("여기");
             let id = data[0]._id;
             data[0].chatMessage.push(req.body.chatMessage[0]);
             mongodb.getChat().updateOne({_id:id}, {$set:{chatMessage: data[0].chatMessage}}) 
         } else {
+            console.log("여기");
             mongodb.getChat().insertOne(req.body);
         }
     })

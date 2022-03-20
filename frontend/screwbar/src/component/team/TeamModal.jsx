@@ -133,8 +133,8 @@ const Modal = (props) => {
                     나이 : {year - detail.birthday.substring(0, 4) + 1}
                   </span>
                   <span>성별 : {detail.gender}</span>
-                  {detail.discloseInfo && (
-                    <div className="teamModal__main__top__right__leader__imgSpan">
+                  {console.log(detail)}
+                  {detail.discloseInfo === 1 ?  <div className="teamModal__main__top__right__leader__imgSpan">
                       <img
                         src="/img/userDetail.svg"
                         alt=""
@@ -146,8 +146,8 @@ const Modal = (props) => {
                         <br />
                         <small>휴대폰 : {detail.phoneNumber}</small>
                       </span>
-                    </div>
-                  )}
+                    </div> : "" }
+
                 </div>
                 <span className="teamModal__main__top__right__date">
                   모임 기간 : {convertTime(detail.meetingDate)}

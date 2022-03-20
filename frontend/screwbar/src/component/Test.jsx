@@ -1,5 +1,7 @@
 
+import { Navigate, useNavigate } from 'react-router-dom';
 import '../css/Test.css';
+
 
 
 
@@ -8,6 +10,13 @@ import '../css/Test.css';
 
 
 const Test = () => {
+    const navigate = useNavigate();
+
+    
+    setTimeout(() => {
+        console.log("test")
+        navigate("/home");
+    }, 14000)
     
     return(
         <div className='iframe'>

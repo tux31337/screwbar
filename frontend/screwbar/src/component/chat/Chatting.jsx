@@ -24,6 +24,8 @@ function Chatting() {
     /*채팅 한개 데이터 뽑기 */
     const [oneChat, setOneChat] = useState([]);
 
+    /* user이름바꾸기 */
+    const [username, setUsername] = useState();
 
 
 
@@ -42,17 +44,26 @@ function Chatting() {
         axios.get("/auth/myInfo").then((result) => {
           socket.emit('login', {userId: result.data.userId})
           setMyInfo(result.data);
+          setUsername(opponentUsername.current);
+          axios.get("/chat/chatList").then((chat) => {
+            if(chat.data.data.length > 0) {
+              setMyChat(chat.data.data);
+              if(location.state) {
+                  chat.data.data.filter((data) => {
+                      if((data.user === result.data.userId || data.user === opponentUserId.current) && (data.peerUserId === result.data.userId || data.peerUserId === opponentUserId.current)) {
+                          setOneChat(data.chatMessage);
+                      }
+                  })
+              }
+            }
+          });
         });
     }, []);
 
     
     /* 이전 채팅 리스트 가져오기 */
     useEffect(() => {
-        axios.get("/chat/chatList").then((result) => {
-          if(result.data.data.length > 0) {
-            setMyChat(result.data.data);
-          }
-        });
+
     }, []);
 
     /* input 변경값 */
@@ -92,6 +103,8 @@ function Chatting() {
         socket.emit("chatting", {message: sendMessage});
     }
 
+
+
     useEffect(() => {
         socket.on("message", (data) => {
         console.log(data);
@@ -101,17 +114,17 @@ function Chatting() {
     }, [oneChat]);
 
 
+
       /* 이름 클릭시 */
       const onChangeChatting = (userId, opponentUserInfoId, username1, username2) => {
         if(myInfo.userId === userId) {
-            console.log("이거실행")
             opponentUserId.current = opponentUserInfoId;
             opponentUsername.current = username2;
+            setUsername(username2);
         } else {
-            console.log("저거실행")
             opponentUserId.current = userId;
-            console.log(opponentUserId);
             opponentUsername.current = username1;
+            setUsername(username1);
         }
         const result = 
         myChat.filter((chat) => {
@@ -144,7 +157,8 @@ function Chatting() {
 
                 <div className = "wrapper">
                     <div className = "user-container">
-                        {opponentUsername.current === undefined ? "없음" : opponentUsername.current}
+                        {console.log(opponentUsername)}
+                        {username === undefined ? "없음" : username}
                     </div>
                         <div className="display-container">
                             <ul className="chatting-list">
@@ -153,7 +167,6 @@ function Chatting() {
                                 }
                                 {
                                     oneChat && oneChat.map((chat, i) => {
-                                        console.log(oneChat);
                                         return(
                                          <>
                                             {
