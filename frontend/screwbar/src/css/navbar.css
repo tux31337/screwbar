@@ -78,10 +78,7 @@ a {
 .navbar__bottom {
   display: flex;
   border-bottom: 2px solid #5f0080;
-<<<<<<< HEAD
-=======
   /* margin-bottom: 3%; */
->>>>>>> 199c3cd2ed0c067b80be175eba65a011a8647c17
 }
 
 .navbar__bottom > span {
