@@ -3,6 +3,12 @@
   margin: auto;
 }
 
+.classification {
+  font-weight: 500;
+  font-size: 20px;
+  margin-bottom: 30px;
+}
+
 .homecards {
   display: grid;
   grid-template-columns: 1fr 1fr 1fr 1fr;
@@ -46,4 +52,10 @@
   font-size: 40px;
   font-weight: 500;
   margin-left: 10px;
+}
+.partition {
+  width: 1000px;
+  height: 2px;
+  margin: 50px 0px;
+  background-color: #dee2e6;
 }

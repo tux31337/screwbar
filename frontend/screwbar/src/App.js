@@ -18,6 +18,7 @@ import FindId from './component/user/FindId';
 import Navbar2 from './component/Navbar2';
 import ModifyPw from './component/mypage/ModifyPw';
 import SimpleSlider from './component/banner';
+import StyledBanner from './component/styledBanner';
 
 const App = () => {
   return (
@@ -56,7 +57,8 @@ const App = () => {
           element={AuthHoc(
             <>
               <Navbar />
-              <SimpleSlider />
+              <StyledBanner />
+              {/* <SimpleSlider /> */}
               <Home />
             </>,
             false
@@ -105,7 +107,8 @@ const App = () => {
           path="/chatting"
           element={AuthHoc(
             <>
-              <Navbar />
+              <Navbar2 />
+              <MypageNavbar />
               <Chatting />
             </>,
 
@@ -123,7 +126,6 @@ const App = () => {
             true
           )}
         ></Route>
-
 
         <Route
           path="/FindId"

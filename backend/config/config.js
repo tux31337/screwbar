@@ -24,11 +24,10 @@ const config = {
   },
   host: {
     port: required('HOST_PORT', 8080),
-
   },
   //mongodb
   mongodb: {
-    host: required('MONGODB_HOST')
+    host: required('MONGODB_HOST'),
   },
   //암호화
   bcrypt: {

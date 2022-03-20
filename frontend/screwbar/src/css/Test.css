@@ -1,8 +1,8 @@
 .iframe {
-    height: 100vh;
-    overflow: hidden;
+  height: 100vh;
+  overflow: hidden;
 }
 
 .iframe__video {
-    width: 100%;
+  width: 100%;
 }

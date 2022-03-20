@@ -3,6 +3,7 @@ import axios from 'axios';
 import { useEffect, useState } from 'react';
 import '../../css/team/myTeam.css';
 import TeamModal from '../team/TeamModal';
+import Temperature from '../mypage/temperature';
 
 let detailTeam;
 let isParticipant;
@@ -14,7 +15,7 @@ const MyTeam = (props) => {
   const [modalOpen, setModalOpen] = useState(false);
 
   const openModal = (postNumId) => {
-    console.log('open modal' + postNumId);
+    // console.log('open modal' + postNumId);
 
     axios
       .post('/team/isParticipant', { postNumId: postNumId })
@@ -40,69 +41,94 @@ const MyTeam = (props) => {
   }, []);
 
   useEffect(() => {
-    axios.get('/auth/myInfo').then((result) => {
-      setMyInfo(result.data.message);
-    });
+    getMyInfo();
   }, []);
+
+  const getMyInfo = async () => {
+    await axios.get('/auth/myInfo').then((result) => {
+      setMyInfo(result.data);
+    });
+  };
 
   return (
     <>
-      <article className="home">
-        <section className="home__cards">
-          {teams &&
-            teams.map((team) => {
-              /*               {
+      {/* {console.log(myInfo)} */}
+      <Temperature myInfo={myInfo}></Temperature>
+
+      {myInfo && (
+        <article className="home">
+          <h4 className="classification">대기 중인 나의 팀</h4>
+          <section className="home__cards">
+            {teams &&
+              teams.map((team) => {
+                /*               {
                 console.log(team.closed);
               } */
-              return (
-                <>
-                  {team.closed === 0 ? (
-                    <div
-                      key={team.postNum}
-                      onClick={() => {
-                        openModal(team.postNum);
-                      }}
-                    >
-                      <div>
-                      <img
-                        src={team.postImg}
-                        alt=""
-                        className="home__cards__img"
-                      />
-                      <span>{team.title}</span>
-                      <div className="home__cards__count">
-                        {team.headCount} / {team.participants}
+                return (
+                  <>
+                    {team.closed === 0 && (
+                      <div
+                        key={team.postNum}
+                        onClick={() => {
+                          openModal(team.postNum);
+                        }}
+                      >
+                        <div>
+                          <img
+                            src={team.postImg}
+                            alt=""
+                            className="home__cards__img"
+                          />
+                          <span>{team.title}</span>
+                          <div className="home__cards__count">
+                            {team.headCount} / {team.participants}
+                          </div>
+                        </div>
+                        <div className="home__cards__hr"></div>
                       </div>
+                    )}
+                  </>
+                );
+              })}
+          </section>
+          <div className="partition"></div>
+          <h4 className="classification">마감된 나의 팀</h4>
+          <section className="home__cards">
+            {teams &&
+              teams.map((team) => {
+                /*               {
+                console.log(team.closed);
+              } */
+                return (
+                  <>
+                    {team.closed !== 0 && (
+                      <div
+                        key={team.postNum}
+                        onClick={() => {
+                          openModal(team.postNum);
+                        }}
+                      >
+                        <div className="closedTeam">
+                          <p className="closedText">마감</p>
+                        </div>
+                        <img
+                          src={team.postImg}
+                          alt=""
+                          className="home__cards__img"
+                        />
+                        <span>{team.title}</span>
+                        <div className="home__cards__count">
+                          {team.headCount} / {team.participants}
+                        </div>
+                        <div className="home__cards__hr"></div>
                       </div>
-                      <div className="home__cards__hr"></div>
-                    </div>
-                  ) : (
-                    <div
-                      key={team.postNum}
-                      onClick={() => {
-                        openModal(team.postNum);
-                      }}
-                    >
-                      <div className="closedTeam">
-                        <p className="closedText">마감</p>
-                      </div>
-                      <img
-                        src={team.postImg}
-                        alt=""
-                        className="home__cards__img"
-                      />
-                      <span>{team.title}</span>
-                      <div className="home__cards__count">
-                        {team.headCount} / {team.participants}
-                      </div>
-                      <div className="home__cards__hr"></div>
-                    </div>
-                  )}
-                </>
-              );
-            })}
-        </section>
-      </article>
+                    )}
+                  </>
+                );
+              })}
+          </section>
+        </article>
+      )}
       <TeamModal
         open={modalOpen}
         close={closeModal}

@@ -29,6 +29,22 @@ const Modal = (props) => {
     });
   };
 
+  // 포스팅 삭제
+  const deletePosting = (postNum) => {
+    if (window.confirm('정말 삭제하시겠습니까?')) {
+      axios.delete(`/team/${postNum}`).then((res) => {
+        /*         console.log(res.data);
+        console.log(res.data.message); */
+        if (res.data.message === 'deleted') {
+          alert('삭제되었습니다');
+          detail.closed = !detail.closed;
+          close();
+        }
+      });
+    } else {
+    }
+  };
+
   const goTest = () => {
     navigate('/chatting');
   };
@@ -76,7 +92,7 @@ const Modal = (props) => {
       user_id: user_id,
     };
     axios.post('team/evaluated', data).then((result) => {
-      console.log(result.data.result);
+      // console.log(result.data.result);
       if (result.data.result === 1) {
         alert('이미 열정을 주셨습니다.👍');
         navigate('/myTeam');
@@ -131,8 +147,8 @@ const Modal = (props) => {
                     나이 : {year - detail.birthday.substring(0, 4) + 1}
                   </span>
                   <span>성별 : {detail.gender}</span>
-                  {detail.discloseInfo && (
-                    <div className="teamModal__main__top__right__leader__imgSpan">
+                  {console.log(detail)}
+                  {detail.discloseInfo === 1 ?  <div className="teamModal__main__top__right__leader__imgSpan">
                       <img
                         src="/img/userDetail.svg"
                         alt=""
@@ -144,8 +160,8 @@ const Modal = (props) => {
                         <br />
                         <small>휴대폰 : {detail.phoneNumber}</small>
                       </span>
-                    </div>
-                  )}
+                    </div> : "" }
+
                 </div>
                 <span className="teamModal__main__top__right__date">
                   모임 기간 : {convertTime(detail.meetingDate)}
@@ -177,12 +193,21 @@ const Modal = (props) => {
                       ? '취소하기'
                       : '참가하기'}
                   </button>
-                  <button
-                    className="teamModal__main__top__right__btn__chatting"
-                    onClick={() => goToChat(detail.user_id)}
-                  >
-                    문의하기
-                  </button>
+                  {myData.data.userId === detail.user_id ? (
+                    <button
+                      className="teamModal__main__top__right__btn__chatting"
+                      onClick={() => deletePosting(detail.postNum)}
+                    >
+                      삭제하기
+                    </button>
+                  ) : (
+                    <button
+                      className="teamModal__main__top__right__btn__chatting"
+                      onClick={() => goToChat(detail.user_id)}
+                    >
+                      문의하기
+                    </button>
+                  )}
                 </span>
               </div>
             </section>

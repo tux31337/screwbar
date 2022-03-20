@@ -1,8 +1,8 @@
-import React from "react";
-import Slider from "react-slick";
-import "slick-carousel/slick/slick.css";
-import "slick-carousel/slick/slick-theme.css";
-import styled from 'styled-components';
+import React from 'react';
+import Slider from 'react-slick';
+import 'slick-carousel/slick/slick.css';
+import 'slick-carousel/slick/slick-theme.css';
+
 class SimpleSlider extends React.Component {
   render() {
     var settings = {
@@ -13,8 +13,10 @@ class SimpleSlider extends React.Component {
       slidesToScroll: 1,
       pauseOnHover: true,
       autoplay: true,
-      autoplaySpeed: 3000
+      autoplaySpeed: 2000,
+      centerMode: true, // 중앙정렬
     };
+
     return (
       <Slider {...settings}>
         <div>
@@ -34,4 +36,4 @@ class SimpleSlider extends React.Component {
   }
 }
 
-export default  SimpleSlider;
+export default SimpleSlider;
