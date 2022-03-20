@@ -77,8 +77,6 @@
   
   .navbar__bottom {
     display: flex;
-    border-bottom: 2px solid #5f0080;
-    margin-bottom: 3%;
   }
   
   .navbar__bottom > span {

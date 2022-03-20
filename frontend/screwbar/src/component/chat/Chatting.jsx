@@ -122,7 +122,12 @@ function Chatting() {
         setOneChat(result[0].chatMessage);
       }
 
-
+      const onKeyPress = (e) => {
+        if (e.key == 'Enter') {
+            console.log("전송");
+        sendMessage();
+        }
+      }
 
     
     /**HTML 부분 */
@@ -183,7 +188,7 @@ function Chatting() {
                         </div>
                         <div className="input-container">
                             <span>
-                                <input type="text" className="chatting-input" onChange={onMessage} />
+                                <input type="text" className="chatting-input" onChange={onMessage} onKeyPress={onKeyPress}/>
                                 <button className="send-button" onClick={(event) => {sendMessage(event)}}>전송</button>
                             </span>
                         </div>

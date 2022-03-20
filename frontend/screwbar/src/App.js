@@ -5,7 +5,6 @@ import Navbar from './component/Navbar';
 import Signup from './component/user/Signup';
 import AuthHoc from './hoc/auth';
 import Home from './component/home';
-import Chat from './component/chat/chat';
 import MypageNavbar from './component/mypage/mypageNavbar';
 import QuillEditor from './component/team/QuillEditor';
 import Evaluation from './component/evaluation/evaluation';
