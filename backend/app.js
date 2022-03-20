@@ -11,7 +11,7 @@ const teamRouter = require('./router/team.js');
 const chatRouter = require('./router/chat.js');
 
 const db = require('./config/db/database.js');
-// const { connectDB } = require('./config/db/mongodb.js');
+const { connectDB } = require('./config/db/mongodb.js');
 
 const app = express();
 app.use(express.static(path.join(__dirname + '/public')));
@@ -29,13 +29,15 @@ app.use(cors(corsOption));
 app.use('/auth', authRouter);
 app.use('/api', teamRouter);
 app.use('/team', teamRouter);
-// app.use("/chat", chatRouter);
+app.use('/chat', chatRouter);
 
-/* connectDB().then((data) => {
-  console.log(data);
-}).catch((error) => {
-  console.log(error);
-}) */
+connectDB()
+  .then((data) => {
+    console.log(data);
+  })
+  .catch((error) => {
+    console.log(error);
+  });
 
 db.getConnection().then((connection) => {});
 app.use((req, res, next) => {

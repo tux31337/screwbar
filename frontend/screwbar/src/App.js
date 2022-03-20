@@ -5,7 +5,6 @@ import Navbar from './component/Navbar';
 import Signup from './component/user/Signup';
 import AuthHoc from './hoc/auth';
 import Home from './component/home';
-import Chat from './component/chat/chat';
 import MypageNavbar from './component/mypage/mypageNavbar';
 import QuillEditor from './component/team/QuillEditor';
 import Evaluation from './component/evaluation/evaluation';
@@ -19,6 +18,7 @@ import FindId from './component/user/FindId';
 import Navbar2 from './component/Navbar2';
 import ModifyPw from './component/mypage/ModifyPw';
 import SimpleSlider from './component/banner';
+import StyledBanner from './component/styledBanner';
 
 const App = () => {
   return (
@@ -57,7 +57,8 @@ const App = () => {
           element={AuthHoc(
             <>
               <Navbar />
-              <SimpleSlider />
+              <StyledBanner />
+              {/* <SimpleSlider /> */}
               <Home />
             </>,
             false
@@ -125,7 +126,6 @@ const App = () => {
             true
           )}
         ></Route>
-
 
         <Route
           path="/FindId"

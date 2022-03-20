@@ -26,9 +26,9 @@ const config = {
     port: required('HOST_PORT', 8080),
   },
   //mongodb
-  /*  mongodb: {
-    host: required('MONGODB_HOST')
-  }, */
+  mongodb: {
+    host: required('MONGODB_HOST'),
+  },
   //암호화
   bcrypt: {
     saltRounds: parseInt(required('BCRYPT_SALT_ROUNDS', 12)),

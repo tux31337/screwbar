@@ -78,7 +78,7 @@ a {
 .navbar__bottom {
   display: flex;
   border-bottom: 2px solid #5f0080;
-  margin-bottom: 3%;
+  /* margin-bottom: 3%; */
 }
 
 .navbar__bottom > span {
@@ -181,16 +181,16 @@ div[class='sidebar'] > div:hover {
   border-radius: 5px;
 }
 div[class='sidebar'] > div:hover > a {
-  color: #F9CA03  ;
+  color: #f9ca03;
 }
 
 .active {
   background-color: #5f0080;
-  color: #F9CA03  ;
+  color: #f9ca03;
 }
 
 .active > a {
-  color: #F9CA03;
+  color: #f9ca03;
 }
 
 input[id='menuicon']:checked + label + h4 + div {
@@ -236,4 +236,4 @@ input[id='menuicon'] + label + h4 + div {
 
 .naver_bottom_nav > h4 {
   font-size: 1.3rem;
- }
+}
