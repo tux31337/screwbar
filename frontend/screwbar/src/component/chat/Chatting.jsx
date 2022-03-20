@@ -59,7 +59,13 @@ function Chatting() {
     const onMessage = (event) => {
         setMessage(event.target.value);
     }
-
+    const onKeyPress = (event) => {
+        if (event.key == 'Enter') {
+            console.log("전송");
+        sendMessage();
+        setMessage('');
+        }
+      }
     /* 전송 클릭 시 */
     const sendMessage = () => {
         console.log(opponentUserId.current)
@@ -79,7 +85,7 @@ function Chatting() {
 
         axios.post("/chat/insertChat", postData).then((result) => {
         })
-
+        
         /* 소켓용 데이터 */
         const sendMessage = {
             senderId: myInfo.userId,
@@ -122,14 +128,6 @@ function Chatting() {
         setOneChat(result[0].chatMessage);
       }
 
-      const onKeyPress = (e) => {
-        if (e.key == 'Enter') {
-            console.log("전송");
-        sendMessage();
-        }
-      }
-
-    
     /**HTML 부분 */
     return(
         <>
@@ -188,7 +186,7 @@ function Chatting() {
                         </div>
                         <div className="input-container">
                             <span>
-                                <input type="text" className="chatting-input" onChange={onMessage} onKeyPress={onKeyPress}/>
+                                <input type="text" value={message} className="chatting-input" onChange={onMessage} onKeyPress={onKeyPress}/>
                                 <button className="send-button" onClick={(event) => {sendMessage(event)}}>전송</button>
                             </span>
                         </div>
