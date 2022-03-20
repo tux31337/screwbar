@@ -1,0 +1,71 @@
+.temperature {
+  position: relative;
+  margin: auto;
+  padding-left: 800px;
+  width: 250px;
+  margin-bottom: 30px;
+  cursor: pointer;
+}
+
+.temperature-text {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  margin-bottom: 5px;
+}
+
+.passion-text {
+  color: #727272;
+}
+.degreebox {
+  display: flex;
+}
+.degree {
+  color: #ff9797;
+}
+.passion-img {
+  width: 23px;
+  height: 23px;
+}
+
+.temperature-bar {
+  position: relative;
+  background-color: #f0f0f0;
+  border: none;
+  width: 250px;
+  height: 15px;
+  border-radius: 100px;
+  overflow: hidden; /* 초록색이 터저나가지 않게 가려라 */
+}
+
+.temperature-bar-guage {
+  position: absolute;
+  top: 0;
+  left: 0;
+  background-color: #ff9797;
+  height: 15px;
+  width: 70%;
+  border-radius: 100px;
+  overflow: hidden;
+  animation: bar;
+  animation-duration: 1600ms;
+  animation-iteration-count: initial;
+  animation-timing-function: ease-out;
+}
+.temperature:hover .detail {
+  display: block;
+}
+.detail {
+  width: 180px;
+  position: absolute;
+  padding: 7px;
+  /* bottom: 0; */
+  top: 0;
+  left: 82%;
+  border: 2px solid #5f0080;
+  border-radius: 10px;
+  margin-left: -10px;
+  margin-top: 50px;
+  /* margin-bottom: -70px; */
+  display: none;
+}

@@ -16,6 +16,15 @@ async function getMyTeam(req, res) {
 async function getDetailMyTeam(req, res) {
   return res.status(200);
 }
+// 내가 만든 팀 삭제하기
+async function deleteTeam(req, res) {
+  // console.log(req.params.postNum);
+  return db
+    .execute('DELETE FROM posting WHERE postNum = ?', [req.params.postNum])
+    .then((result) => {
+      return res.json({ message: 'deleted' });
+    });
+}
 
 /* 팀 평가 관련 */
 
@@ -72,8 +81,26 @@ async function doEvaluation(req, res) {
       return res.json({ message: '열정주기 완료' });
     });
 }
+
+// 열정온도 가져오기
+async function getTemperature(req, res) {
+  console.log('열정온도');
+  console.log(req);
+  const user_id = req.userId;
+  console.log(user_id);
+  return db
+    .execute('SELECT * FROM temperature WHERE temperature.user_id = ?', [
+      user_id,
+    ])
+    .then((result) => {
+      console.log(result[0]);
+      return res.status(200).json({ result: result[0] });
+    });
+}
 module.exports.getMyTeam = getMyTeam;
 module.exports.getDetailMyTeam = getDetailMyTeam;
 module.exports.getParticipants = getParticipants;
 module.exports.doEvaluation = doEvaluation;
 module.exports.evaluated = evaluated;
+module.exports.getTemperature = getTemperature;
+module.exports.deleteTeam = deleteTeam;
