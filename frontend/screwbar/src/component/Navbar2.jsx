@@ -64,14 +64,14 @@ function Navbar2() {
               <li>
                 <img
                   className="logoutBtn"
-                  src="img/user.svg"
+                  src="img/user.png"
                   onClick={goMypage}
                 />
               </li>
               <li>
                 <img
                   className="logoutBtn"
-                  src="img/logout.svg"
+                  src="img/logout2.png"
                   onClick={logout}
                 />
               </li>

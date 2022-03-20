@@ -6,9 +6,8 @@ function MypageNavbar() {
   const pathName = useLocation().pathname;
   const menus = [
     { name: '내 팀 현황', path: '/myTeam' },
-    { name: '프로필 수정', path: '/modifyProfile' },
-    { name: '비밀번호 수정', path: '/modifyPw' },
-    { name: '채팅 목록', path: '/chat' },
+    { name: '프로필 수정', path: '/modifyPw' },
+    { name: '채팅 목록', path: '/chatting' },
   ];
 
   return (

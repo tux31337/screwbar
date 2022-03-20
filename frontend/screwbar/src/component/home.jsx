@@ -42,8 +42,6 @@ function Home() {
     });
   }, []);
 
-
-
   return (
     <>
       <article className="home">

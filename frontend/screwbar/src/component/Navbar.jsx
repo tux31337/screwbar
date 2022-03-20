@@ -39,7 +39,7 @@ function Navbar() {
   };
 
   const chatBtn = () => {
-    navigate('/chat');
+    navigate('/chatting');
   };
 
   const goMypage = () => {
@@ -64,14 +64,14 @@ function Navbar() {
               <li>
                 <img
                   className="logoutBtn"
-                  src="img/user.svg"
+                  src="img/user.png"
                   onClick={goMypage}
                 />
               </li>
               <li>
                 <img
                   className="logoutBtn"
-                  src="img/logout.svg"
+                  src="img/logout2.png"
                   onClick={logout}
                 />
               </li>
@@ -118,12 +118,12 @@ function Navbar() {
           <ul className="navbar__bottom__menu1"></ul>
           <div className="navbar__bottom__menu2">
             <img
-              src="img/board.svg"
+              src="img/write.png"
               className="navbar__bottom__menu2__board"
               onClick={postBtn}
             />
             <img
-              src="img/chat.svg"
+              src="img/email.png"
               className="navbar__bottom__menu2__chat"
               onClick={chatBtn}
             />
