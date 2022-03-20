@@ -67,5 +67,4 @@ router.post('/findEmail', authService.findEmail);
 //비밀번호 찾기
 router.post('/changePassword', authService.changePassword);
 
-
 module.exports = router;

@@ -1,4 +1,4 @@
-const {v4} = require('uuid');
+/* const {v4} = require('uuid');
 const db = require('../../config/db/database.js')
 const mongodb = require('../../config/db/mongodb.js')
 const userRepository = require('../auth/authRepository.js');
@@ -36,4 +36,4 @@ async function getChatList(req, res) {
 }
 
 module.exports.createChat = createChat; 
-module.exports.getChatList = getChatList; 
+module.exports.getChatList = getChatList;  */
