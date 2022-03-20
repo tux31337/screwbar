@@ -67,4 +67,10 @@ router.post('/findEmail', authService.findEmail);
 //비밀번호 찾기
 router.post('/changePassword', authService.changePassword);
 
+//비밀번호 찾기
+router.post('/newPassword', isAuth, authService.newPassowrd);
+
+//주소 변경
+router.post('/newAddress', isAuth, authService.newAddress);
+
 module.exports = router;

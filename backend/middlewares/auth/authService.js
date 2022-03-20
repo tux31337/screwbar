@@ -128,6 +128,29 @@ async function changePassword(req, res) {
   }
 }
 
+async function newPassword(req, res) {
+  const userId = req.userId;
+  const password = req.body.password;
+  const hashed = await bcrypt.hash(password, config.bcrypt.saltRounds);
+  const result = await userRepository.newPassword(userId , hashed);
+  if(result.affectedRows === 1) {
+    return res.status(200).json({message : "성공"});
+  } else {
+    return res.status(401).json({message : "실패"});
+  }
+}
+
+async function newAddress(req, res) {
+  const userId = req.userId;
+  const address = req.body.address;
+  const result = await userRepository.newAddress(userId, address);
+  if(result.affectedRows === 1) {
+    return res.status(200).json({message : "성공"});
+  } else {
+    return res.status(401).json({message : "실패"});
+  }
+}
+
 module.exports.signup = signup;
 module.exports.signIn = signIn;
 module.exports.me = me;
@@ -136,6 +159,7 @@ module.exports.myInfo = myInfo;
 module.exports.emailDuplicateCheck = emailDuplicateCheck;
 module.exports.findEmail = findEmail;
 module.exports.changePassword = changePassword;
-
+module.exports.newPassowrd = newPassword;
+module.exports.newAddress = newAddress;
 
 

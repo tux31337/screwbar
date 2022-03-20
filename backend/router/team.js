@@ -55,4 +55,8 @@ router.post('/evaluation', isAuth, myTeamService.doEvaluation);
 // 마이페이지 열정온도
 router.get('/getTemperature', isAuth, myTeamService.getTemperature);
 
+//팀 개수ㅡ
+router.get('/teamCount', teamService.teamCount);
+
+
 module.exports = router;

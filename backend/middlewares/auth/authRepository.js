@@ -59,6 +59,24 @@ async function changePassword(email, password) {
     .then((result) => result[0]);
 }
 
+async function newPassword(userId, password) {
+  return db
+    .execute('UPDATE users SET password = ? WHERE user_id = ?', [
+      password,
+      userId,
+    ])
+    .then((result) => result[0]);
+}
+
+async function newAddress(userId, address) {
+  return db
+    .execute('UPDATE users SET address = ? WHERE user_id = ?', [
+      address,
+      userId,
+    ])
+    .then((result) => result[0]);
+}
+
 module.exports.createUser = createUser;
 module.exports.findByNumbmer = findByNumbmer;
 module.exports.findByEmail = findByEmail;
@@ -66,3 +84,5 @@ module.exports.findById = findById;
 module.exports.getHeadCount = getHeadCount;
 module.exports.findEmail = findEmail;
 module.exports.changePassword = changePassword;
+module.exports.newPassword = newPassword;
+module.exports.newAddress = newAddress;

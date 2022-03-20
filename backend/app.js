@@ -29,9 +29,13 @@ app.use(cors(corsOption));
 app.use('/auth', authRouter);
 app.use('/api', teamRouter);
 app.use('/team', teamRouter);
-// app.use('/chat', chatRouter);
+// app.use("/chat", chatRouter);
 
-// connectDB().then((data) => {});
+/* connectDB().then((data) => {
+  console.log(data);
+}).catch((error) => {
+  console.log(error);
+}) */
 
 db.getConnection().then((connection) => {});
 app.use((req, res, next) => {

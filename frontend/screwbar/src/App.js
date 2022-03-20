@@ -17,6 +17,8 @@ import NewPw from './component/user/NewPw';
 import FindPw from './component/user/FindPw';
 import FindId from './component/user/FindId';
 import Navbar2 from './component/Navbar2';
+import ModifyPw from './component/mypage/ModifyPw';
+import SimpleSlider from './component/banner';
 
 const App = () => {
   return (
@@ -55,6 +57,7 @@ const App = () => {
           element={AuthHoc(
             <>
               <Navbar />
+              <SimpleSlider />
               <Home />
             </>,
             false
@@ -95,6 +98,7 @@ const App = () => {
             <>
               <Navbar2 />
               <MypageNavbar />
+              <ModifyPw />
             </>
           )}
         ></Route>
@@ -102,7 +106,8 @@ const App = () => {
           path="/chatting"
           element={AuthHoc(
             <>
-              <Navbar />
+              <Navbar2 />
+              <MypageNavbar />
               <Chatting />
             </>,
 

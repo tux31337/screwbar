@@ -1,5 +1,5 @@
 .myPageNav {
-  position: fixed;
+  position: fixed; 
   margin-left: 45px;
   width: 200px;
 }
@@ -12,9 +12,12 @@
   font-size: 20px;
   margin-bottom: 10px;
   color: gray;
+  text-align: center;
 }
 
 .sidebar-item.active {
-  color: black;
+  color: #F9CA03;
   font-weight: 700;
+  border-radius: 5px;
 }
+
