@@ -3,7 +3,7 @@ import { useEffect } from "react";
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { useState } from "react";
 import "../../css/mypage/modify.css"
-import DaumPost from "../../component/user/Daumpost";
+import DaumPost from "../user/Daumpost";
 
 const ModifyPw = () => {
     const [email, setEmail] = useState("");

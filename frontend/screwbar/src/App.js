@@ -106,7 +106,8 @@ const App = () => {
           path="/chatting"
           element={AuthHoc(
             <>
-              <Navbar />
+              <Navbar2 />
+              <MypageNavbar />
               <Chatting />
             </>,
 

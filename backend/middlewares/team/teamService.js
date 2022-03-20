@@ -18,7 +18,7 @@ async function createTeam(req, res) {
     .then((data) => {
       // 작성자 참여자에 넣어주기
       participantsRepository.insertParticipant(teamId, userId);
-      return res.status(200).json({ message: '생산 성공' });
+      return res.status(200).json({ message: '생성 성공' });
     });
 }
 
@@ -26,8 +26,8 @@ async function getTeam(req, res) {
   let page = parseInt(req.query.page);
   let sport = req.query.sport;
   let area = req.query.area;
-  let start =  page * 9;
-  let end =  (1 + page) * 9; 
+  let start =  page * 8;
+  let end =  (1 + page) * 8; 
   if(sport && !area) {
     return db
       .execute(
