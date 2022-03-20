@@ -154,8 +154,6 @@
     transform: translateY(-50%) rotate(-45deg);
   }
   
-
-  
   input[id='menuicon']:checked + label + h4 + div {
     display: flex;
     position: absolute;
@@ -164,7 +162,6 @@
   input[id='menuicon'] + label + h4 + div {
     display: none;
   }
-
   
   .navbar__bottom__menu2__board {
     width: 33px;
