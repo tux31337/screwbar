@@ -4,7 +4,7 @@ import { useLocation } from 'react-router-dom';
 import { useEffect, useRef, useState } from 'react';
 import axios from 'axios';
 
-const socket = io.connect('http://localhost:8080', {
+const socket = io.connect('http://3.36.99.28:8080', {
   forceNew: true,
 });
 
@@ -89,37 +89,37 @@ function Chatting() {
 
   /* 전송 클릭 시 */
   const sendMessage = () => {
-    console.log(opponentUserId.current);
+    console.log(opponentUserId.current)
     /* DB 저장용 데이터 */
     const postData = {
-      user: myInfo.userId,
-      username: myInfo.userName,
-      peerUserId: opponentUserId.current,
-      peerUsername: opponentUsername.current,
-      chatMessage: [
-        {
-          senderId: myInfo.userId,
-          senderName: myInfo.userName,
-          recepient: opponentUserId.current,
-          data: message,
-        },
-      ],
-    };
-
-    axios.post('/chat/insertChat', postData).then((result) => {});
+        "user":  myInfo.userId,
+        "username" : myInfo.userName,
+        "peerUserId" : opponentUserId.current,
+        "peerUsername": opponentUsername.current,
+        "chatMessage" : [{
+          "senderId": myInfo.userId,
+          "senderName": myInfo.userName,
+          "recepient" : opponentUserId.current,
+          "data": message,
+        }]
+    }
+    axios.post("/chat/insertChat", postData).then((result) => {
+    })
 
     /* 소켓용 데이터 */
     const sendMessage = {
-      senderId: myInfo.userId,
-      senderName: myInfo.userName,
-      recepient: opponentUserId.current,
-      data: message,
-    };
+        senderId: myInfo.userId,
+        senderName: myInfo.userName,
+        recepient: opponentUserId.current,
+        data: message,
+    }
+    if(oneChat === null || (oneChat[0].senderId === myInfo.userId || oneChat[0].recepient === myInfo.userId) && (oneChat[0].recepient === opponentUserId.current || oneChat[0].senderId === opponentUserId.current)) {
     setOneChat([...oneChat, sendMessage]);
+    }
     setChatList([...chatList, sendMessage]);
-    setMessage('');
-    socket.emit('chatting', { message: sendMessage });
-  };
+    setMessage("");
+    socket.emit("chatting", {message: sendMessage});
+};
 
   useEffect(() => {
     socket.on('message', (data) => {

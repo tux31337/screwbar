@@ -5,7 +5,7 @@ import moment from 'moment';
 import axios from 'axios';
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-
+import default_Img from "../../css/img/logo.png";
 const Modal = (props) => {
   // 열기, 닫기, 모달 헤더 텍스트를 부모로부터 받아옴
   const { open, close, header, detail, isParticipant, myData } = props;
@@ -15,7 +15,11 @@ const Modal = (props) => {
   const navigate = useNavigate();
 
   const convertTime = useCallback((time) => {
-    return moment(time).format('YYYY/MM/DD');
+    return moment(time).format('YYYY-MM-DD');
+  }, []);
+
+  const convertTime2 = useCallback((time) => {
+    return moment(time).format('YYYY-MM-DD, HH:mm');
   }, []);
   const showUserDetail = () => {
     setDetailUser(!detailUser);
@@ -28,6 +32,11 @@ const Modal = (props) => {
       },
     });
   };
+
+  //default img
+  const onErrorImg = (e) =>{
+    e.target.src = default_Img;
+  }
 
   // 포스팅 삭제
   const deletePosting = (postNum) => {
@@ -138,7 +147,7 @@ const Modal = (props) => {
               )}
 
               <div className="teamModal__main__top__left">
-                <img src={detail.postImg} alt="" />
+                <img src={detail.postImg}  onError={onErrorImg}/>
               </div>
               <div className="teamModal__main__top__right">
                 <div className="teamModal__main__top__right__leader">
@@ -150,7 +159,7 @@ const Modal = (props) => {
                   {console.log(detail)}
                   {detail.discloseInfo === 1 ?  <div className="teamModal__main__top__right__leader__imgSpan">
                       <img
-                        src="/img/userDetail.svg"
+                        src="/img/profile.png"
                         alt=""
                         className="userDetail"
                         onMouseOver={showUserDetail}
@@ -179,7 +188,7 @@ const Modal = (props) => {
                   열정온도 : {detail.temperature}
                 </span>
                 <span className="teamModal__main__top__right__finishTime">
-                  마감시간 :
+                  마감시간 : {convertTime2(detail.deadline)}
                 </span>
                 <span className="teamModal__main__top__right__btn">
                   <button

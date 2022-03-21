@@ -131,7 +131,11 @@ function CreateTeam(props) {
         formData.append('title', title);
         formData.append('discloseInfo', discloseInfo);
         formData.append('deadline', date);
-        formData.append('area', area);
+        if(area === undefined){
+            formData.append('area', "성북구");
+        }else{
+            formData.append('area', area);
+        }
         props.quill.getContents().ops.map((result) => {
             if(result.insert.image) {
                 const copyArray = useUrl;
@@ -220,7 +224,6 @@ function CreateTeam(props) {
                         <option value="25">25</option>
                         <option value="상관 없음">상관 없음</option>
                     </select>
-                    <span className="createTeam__information__temperature">열정온도 조건</span>
                     <span className="createTeam__information__deadline">마감 기간 :</span> <input type="date" className="createTeam__information__date__deadline1__input" onChange={deadline1} /><input type="time" className="createTeam__information__date__deadline2__input" onChange={deadline2} />
                     <span className="createTeam__information__area">지역설정 :&nbsp;
                     <select className="createTeam__information__area__value" onChange={areaValueChange}>
