@@ -8,7 +8,7 @@ class SimpleSlider extends React.Component {
     var settings = {
       dots: true,
       infinite: true,
-      speed: 500,
+      speed: 0,
       slidesToShow: 1,
       slidesToScroll: 1,
       pauseOnHover: true,
@@ -20,22 +20,16 @@ class SimpleSlider extends React.Component {
     return (
       <Slider {...settings}>
         <div>
-          <img src="img/logo.png"></img>
+        <img src="img/banner2.jpg"></img>
         </div>
         <div>
-          <h3>2</h3>
+        <img src="img/banner4.jpg"></img>
         </div>
         <div>
-          <h3>3</h3>
+        <img src="img/banner5.jpg"></img>
         </div>
         <div>
-          <h3>4</h3>
-        </div>
-        <div>
-          <h3>5</h3>
-        </div>
-        <div>
-          <h3>6</h3>
+        <img src="img/banner3.jpg"></img>
         </div>
       </Slider>
     );
