@@ -4,7 +4,7 @@ import { useLocation } from 'react-router-dom';
 import { useEffect, useRef, useState } from 'react';
 import axios from 'axios';
 
-const socket = io.connect('http://localhost:8080', {
+const socket = io.connect('http://3.36.99.28:8080', {
   forceNew: true,
 });
 
