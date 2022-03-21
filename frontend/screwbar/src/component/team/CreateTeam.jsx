@@ -5,8 +5,6 @@ import { useEffect } from "react";
 import axios from "axios";
 import { useNavigate } from 'react-router-dom';
 import moment from 'moment';
-import React from 'react';
-
 
 
 
@@ -119,7 +117,6 @@ function CreateTeam(props) {
     const postTeamPosting = () => {
         const date = convertTime(deadlineDate + " " + deadlineTime);
         console.log(date);
-
         const formData = new FormData();
         if(imgFile) {
             formData.append('imgFile', imgFile[0]);
@@ -134,9 +131,9 @@ function CreateTeam(props) {
         formData.append('title', title);
         formData.append('discloseInfo', discloseInfo);
         formData.append('deadline', date);
-        if(area === undefined) {
+        if(area === undefined){
             formData.append('area', "성북구");
-        } else {
+        }else{
             formData.append('area', area);
         }
         props.quill.getContents().ops.map((result) => {
@@ -227,10 +224,9 @@ function CreateTeam(props) {
                         <option value="25">25</option>
                         <option value="상관 없음">상관 없음</option>
                     </select>
-                    <span className="createTeam__information__temperature">열정온도 조건</span>
                     <span className="createTeam__information__deadline">마감 기간 :</span> <input type="date" className="createTeam__information__date__deadline1__input" onChange={deadline1} /><input type="time" className="createTeam__information__date__deadline2__input" onChange={deadline2} />
                     <span className="createTeam__information__area">지역설정 :&nbsp;
-                    <select className="createTeam__information__area__value" onChange={areaValueChange} defaultValue={"성북구"}>
+                    <select className="createTeam__information__area__value" onChange={areaValueChange}>
                         <option key="성북구">성북구</option>
                         <option key="은평구">은평구</option>
                         <option key="서대문구">서대문구</option>

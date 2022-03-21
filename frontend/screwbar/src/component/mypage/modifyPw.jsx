@@ -14,15 +14,6 @@ const ModifyPw = () => {
     const [password2, setPassword2] = useState("");
     const [address, setAddress] = useState("");
     const [addressDetail, setAddressDetail] = useState("");
-    const [phonenumber, setPhoneNumber] = useState("");
-    const [birthday, setBirthday] = useState("");
-    const [labelCheck, setLabelCheck] = useState(false);
-    const [emailCheck, setEmailCheck] = useState(false);
-    const [emailDuplicateCheck, setEmailDuplicateCheck] = useState("");
-    const [radioValue, setRadioValue] = useState("남");
-    const [birthdayYear, setBirthdayYear] = useState("");
-    const [birthdayMonth, setBirthdayMonth] = useState("");
-    const [birthdayDate, setBirthdayDate] = useState("");
 
     const [passwordCheck, setPasswordCheck] = useState(true);
     const navigate = useNavigate();

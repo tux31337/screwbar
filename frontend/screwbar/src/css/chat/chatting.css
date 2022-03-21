@@ -6,7 +6,8 @@
 }
 
 .chatting__list {
-  background-color: #5f0080;
+  background-color: #ffffff !important;
+  border: 2px solid #5f0080;
   width: 300px;
   border-radius: 10px 0px 0px 10px;
 }
@@ -21,7 +22,7 @@
   /* height: 50px; */
   padding: 15px 0px;
   text-align: center;
-  color: #f0f0f0;
+  color: #710097;
   font-weight: 500;
   cursor: pointer;
   transition-property: background-color;
@@ -29,7 +30,7 @@
 }
 
 .chatting__list > ul > li:hover {
-  background-color: #710097;
+  font-weight: 900;
 }
 
 .wrapper {
@@ -39,6 +40,9 @@
   flex-direction: column;
   overflow: hidden;
   margin: auto;
+  border: 2px solid #5f0080;
+  border-left: none;
+  border-radius: 0px 10px 10px 0px;
 }
 
 .user {

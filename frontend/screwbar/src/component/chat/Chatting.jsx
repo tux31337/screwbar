@@ -1,31 +1,42 @@
-import "../../css/chat/chatting.css"
+import '../../css/chat/chatting.css';
 import io from 'socket.io-client';
-import { useLocation } from "react-router-dom";
-import { useEffect, useRef, useState } from "react";
-import axios from "axios";
+import { useLocation } from 'react-router-dom';
+import { useEffect, useRef, useState } from 'react';
+import axios from 'axios';
 
-const socket =  io.connect('http://localhost:8080', {
-  forceNew:true,
+const socket = io.connect('http://3.36.99.28:8080', {
+  forceNew: true,
 });
 
 function Chatting() {
-    /** 문의하기 버튼으로 넘어왔을 경우 */
-    const location = useLocation();
-    /* 내정보  */
-    const [myInfo, setMyInfo] = useState("");
-    /* 채팅 정보 가져오기 */
-    const [myChat, setMyChat] = useState([]);
+  /** 문의하기 버튼으로 넘어왔을 경우 */
+  const location = useLocation();
+  /* 내정보  */
+  const [myInfo, setMyInfo] = useState('');
+  /* 채팅 정보 가져오기 */
+  const [myChat, setMyChat] = useState([]);
+  /* input 메시지 하나하나 */
+  const [message, setMessage] = useState('');
 
-    /* input 메시지 하나하나 */
-    const [message, setMessage] = useState("");
+  /*소켓 실시간 데이터 */
+  const [chatList, setChatList] = useState([]);
 
-    /*채팅 한개 데이터 뽑기 */
-    const [oneChat, setOneChat] = useState([]);
+  /*채팅 한개 데이터 뽑기 */
+  const [oneChat, setOneChat] = useState([]);
 
-    /* user이름바꾸기 */
-    const [username, setUsername] = useState();
+  /* user이름바꾸기 */
+  const [username, setUsername] = useState();
 
+  const messageBoxRef = useRef();
 
+    const scrollToBottom = () => {
+      if (messageBoxRef.current) {
+        messageBoxRef.current.scrollTop = messageBoxRef.current.scrollHeight;
+      }
+    };
+    useEffect(() => {
+      scrollToBottom();
+    }, [oneChat]);
 
     let opponentUserId = useRef();
     let opponentUsername = useRef();
@@ -67,6 +78,13 @@ function Chatting() {
     const onMessage = (event) => {
         setMessage(event.target.value);
     }
+
+    const onCheckEnter = (e) => {
+      console.log(message);
+      if (e.key === 'Enter' && message !== '') {
+        sendMessage();
+      }
+    };
 
     /* 전송 클릭 시 */
     const sendMessage = () => {
@@ -171,7 +189,7 @@ function Chatting() {
                         {console.log(opponentUsername.current)}
                         {opponentUsername.current === undefined ? "없음" : opponentUsername.current}
                     </div>
-                        <div className="display-container">
+                      <div className="display-container" ref={messageBoxRef}>
                             <ul className="chatting-list">
                                 {
 
@@ -207,14 +225,16 @@ function Chatting() {
                         </div>
                         <div className="input-container">
                             <span>
-                                <input type="text" className="chatting-input" value={message} onChange={onMessage} />
+                                <input type="text" className="chatting-input" value={message} onChange={onMessage} onKeyPress={onCheckEnter}/>
                                 <button className="send-button" onClick={(event) => {sendMessage(event)}}>전송</button>
                             </span>
+                            <span className="message">{chat.data}</span>
+                            <span className="time">오후 2:10</span>
                         </div>
                 </div>
-            </div>
-        </>
-    )
+              </div>
+          </>
+  );
 }
 
 export default Chatting;

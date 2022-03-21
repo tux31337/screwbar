@@ -6,7 +6,6 @@ const participantsRepository = require('./participantsRepository.js');
 async function createTeam(req, res) {
   const teamId = v4();
   const {personnel,price,excercise,date,temperature,content,title,deleteUrl,discloseInfo, deadline, area} = req.body;
-  console.log(area);
   const IMG_URL = req.file? `http://localhost:8080/uploads/present/${req.userId}/${req.file.filename}`: null;
   const userId = req.userId;
   if (deleteUrl) {
@@ -32,28 +31,28 @@ async function getTeam(req, res) {
   if(sport && !area) {
     return db
       .execute(
-        `SELECT posting.postNum, posting.user_id, posting.headCount, posting.meetingDate, posting.deadline, posting.cost, posting.title, posting.contents, posting.postImg, posting.participants, posting.sportName, posting.areaName, posting.discloseInfo, posting.temperature, posting.deadline, posting.closed, users.email, users.username, users.birthday, users.phoneNumber, users.gender from posting inner join users on posting.user_id = users.user_id   WHERE posting.closed = 0 AND posting.sportName= '${sport}' ORDER BY posting.regDate desc LIMIT ${start}, ${end}`
+        `SELECT posting.postNum, posing.deadline, posting.user_id, posting.headCount, posting.meetingDate, posting.cost, posting.title, posting.contents, posting.postImg, posting.participants, posting.sportName, posting.areaName, posting.discloseInfo, posting.temperature, posting.deadline, posting.closed, users.email, users.username, users.birthday, users.phoneNumber, users.gender from posting inner join users on posting.user_id = users.user_id   WHERE posting.closed = 0 AND posting.sportName= '${sport}' ORDER BY posting.regDate desc LIMIT ${start}, ${end}`
       ).then((result) => {
         return res.status(200).json({ message: result[0], paging : page + 1});
       }); 
   } else if(!sport && area) {
     return db
     .execute(
-      `SELECT posting.postNum, posting.user_id, posting.headCount, posting.meetingDate, posting.deadline, posting.cost, posting.title, posting.contents, posting.postImg, posting.participants, posting.sportName, posting.areaName, posting.discloseInfo, posting.temperature, posting.deadline, posting.closed, users.email, users.username, users.birthday, users.phoneNumber, users.gender from posting inner join users on posting.user_id = users.user_id   WHERE posting.closed = 0 AND posting.areaName= '${area}' ORDER BY posting.regDate desc LIMIT ${start}, ${end}`
+      `SELECT posting.postNum, posing.deadline, posting.user_id, posting.headCount, posting.meetingDate, posting.cost, posting.title, posting.contents, posting.postImg, posting.participants, posting.sportName, posting.areaName, posting.discloseInfo, posting.temperature, posting.deadline, posting.closed, users.email, users.username, users.birthday, users.phoneNumber, users.gender from posting inner join users on posting.user_id = users.user_id   WHERE posting.closed = 0 AND posting.areaName= '${area}' ORDER BY posting.regDate desc LIMIT ${start}, ${end}`
     ).then((result) => {
       return res.status(200).json({ message: result[0], paging : page + 1});
     }); 
   } else if(sport && area) {
     return db
     .execute(
-      `SELECT posting.postNum, posting.user_id, posting.headCount, posting.meetingDate, posting.deadline, posting.cost, posting.title, posting.contents, posting.postImg, posting.participants, posting.sportName, posting.areaName, posting.discloseInfo, posting.temperature, posting.deadline, posting.closed, users.email, users.username, users.birthday, users.phoneNumber, users.gender from posting inner join users on posting.user_id = users.user_id   WHERE posting.closed = 0 AND posting.areaName= '${area}' AND posting.sportName= '${sport}' ORDER BY posting.regDate desc LIMIT ${start}, ${end}`
+      `SELECT posting.postNum, posing.deadline, posting.user_id, posting.headCount, posting.meetingDate, posting.cost, posting.title, posting.contents, posting.postImg, posting.participants, posting.sportName, posting.areaName, posting.discloseInfo, posting.temperature, posting.deadline, posting.closed, users.email, users.username, users.birthday, users.phoneNumber, users.gender from posting inner join users on posting.user_id = users.user_id   WHERE posting.closed = 0 AND posting.areaName= '${area}' AND posting.sportName= '${sport}' ORDER BY posting.regDate desc LIMIT ${start}, ${end}`
     ).then((result) => {
       return res.status(200).json({ message: result[0], paging : page + 1});
     }); 
   }
   return db
     .execute(
-      `SELECT posting.postNum, posting.user_id, posting.headCount, posting.meetingDate, posting.deadline, posting.cost, posting.title, posting.contents, posting.postImg, posting.participants, posting.sportName, posting.areaName, posting.discloseInfo, posting.temperature, posting.deadline, posting.closed, users.email, users.username, users.birthday, users.phoneNumber, users.gender from posting inner join users on posting.user_id = users.user_id   WHERE posting.closed = 0 ORDER BY posting.regDate desc LIMIT ${start}, ${end}`
+      `SELECT posting.postNum, posing.deadline, posting.user_id, posting.headCount, posting.meetingDate, posting.cost, posting.title, posting.contents, posting.postImg, posting.participants, posting.sportName, posting.areaName, posting.discloseInfo, posting.temperature, posting.deadline, posting.closed, users.email, users.username, users.birthday, users.phoneNumber, users.gender from posting inner join users on posting.user_id = users.user_id   WHERE posting.closed = 0 ORDER BY posting.regDate desc LIMIT ${start}, ${end}`
     )
     .then((result) => {
       return res.status(200).json({ message: result[0], paging : page + 1});

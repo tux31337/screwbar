@@ -111,6 +111,7 @@ function Navbar() {
               <span></span>
               <span></span>
             </label>
+            
             <h4 onClick={openCategory}>&nbsp;&nbsp;랭킹</h4>
             <div className="sidebar">
             <div className={tab === '전체' ? 'active' : ''} onClick={() => changeTab("전체")}><Link to= "/home" state={{data: "전체"}}>전체</Link></div>

@@ -3,8 +3,7 @@ import { useEffect, useState } from 'react';
 import { useLocation } from 'react-router-dom';
 import '../css/home.css';
 import TeamModal from './team/TeamModal';
-import React from 'react';
-
+import Banner from './banner';
 
 let detailTeam;
 let isParticipant;
@@ -24,33 +23,31 @@ function Home() {
   const [sports, setSprots] = useState();
   const [areas, setAreas] = useState();
 
-  if(location.state){
-    if(location.state.data === "전체") {
-      sport = "";
-    }
-    else if(location.state.data) {
+  if (location.state) {
+    if (location.state.data === '전체') {
+      sport = '';
+    } else if (location.state.data) {
       sport = location.state.data;
-      console.log(sport)
+      console.log(sport);
     }
-    if(location.state.area === "지역선택(전체)") {
-      area = "";
-    }
-    else if(location.state.area) {
+    if (location.state.area === '지역선택(전체)') {
+      area = '';
+    } else if (location.state.area) {
       area = location.state.area;
     }
   }
   const openModal = (postNumId) => {
-  axios
-    .post('/team/isParticipant', { postNumId: postNumId })
-    .then((result) => {
-      axios.get('/auth/myInfo').then((userInfo) => {
-        isParticipant = result.data;
-        detailTeam = teams.filter((team) => team.postNum === postNumId);
-        detailTeam = detailTeam[0];
-        myData = userInfo;
-        setModalOpen(true);
+    axios
+      .post('/team/isParticipant', { postNumId: postNumId })
+      .then((result) => {
+        axios.get('/auth/myInfo').then((userInfo) => {
+          isParticipant = result.data;
+          detailTeam = teams.filter((team) => team.postNum === postNumId);
+          detailTeam = detailTeam[0];
+          myData = userInfo;
+          setModalOpen(true);
+        });
       });
-    });
   };
 
   const closeModal = () => {
@@ -69,8 +66,8 @@ function Home() {
   useEffect(() => {
     axios.get('/team/teamCount').then((result) => {
       setPage(result.data.page);
-    })
-  }, [])
+    });
+  }, []);
 
   useEffect(() => {
     axios.get('/auth/myInfo').then((result) => {
@@ -78,45 +75,52 @@ function Home() {
     });
   }, []);
 
-
-  //scroll loading 
+  //scroll loading
   const fetchTeams = async () => {
     console.log(sports);
     console.log(area);
 
     setLoading(true);
-    if(page >= teamPaing) {
-      if(sports && !area) {
-        console.log("1실행")
-        await axios.get(`/team/getTeam?page=${teamPaing}&&sport=${sport}`).then((result) => {
-          setTeams(result.data.message);
-          setTeamPaging(result.data.paging); // 다음페이지 불러오기
-        })
-      } else if(!sports && area) {
-        console.log("2실행")
-        await axios.get(`/team/getTeam?page=${teamPaing}&&area=${area}`).then((result) => {
-          setTeams(result.data.message);
-          setTeamPaging(result.data.paging);
-        })
-      } else if(area && sports) { 
-        console.log("3실행")
-          await axios.get(`/team/getTeam?page=${teamPaing}&&area=${area}&&sport=${sport}`).then((result) => {
+    if (page >= teamPaing) {
+      if (sports && !area) {
+        console.log('1실행');
+        await axios
+          .get(`/team/getTeam?page=${teamPaing}&&sport=${sport}`)
+          .then((result) => {
+            setTeams(result.data.message);
+            setTeamPaging(result.data.paging); // 다음페이지 불러오기
+          });
+      } else if (!sports && area) {
+        console.log('2실행');
+        await axios
+          .get(`/team/getTeam?page=${teamPaing}&&area=${area}`)
+          .then((result) => {
             setTeams(result.data.message);
             setTeamPaging(result.data.paging);
-          })
+          });
+      } else if (area && sports) {
+        console.log('3실행');
+        await axios
+          .get(`/team/getTeam?page=${teamPaing}&&area=${area}&&sport=${sport}`)
+          .then((result) => {
+            setTeams(result.data.message);
+            setTeamPaging(result.data.paging);
+          });
       } else {
-        console.log("4실행")
-        await axios.get('/team/getTeam?page='+teamPaing).then((result) => {
-          setTeams(result.data.message);
-          setTeamPaging(result.data.paging) // 다음페이지 불러오기
-        })
-        .catch((error) => {
-          console.log(error);
-        })
+        console.log('4실행');
+        await axios
+          .get('/team/getTeam?page=' + teamPaing)
+          .then((result) => {
+            setTeams(result.data.message);
+            setTeamPaging(result.data.paging); // 다음페이지 불러오기
+          })
+          .catch((error) => {
+            console.log(error);
+          });
         setLoading(false);
       }
-  }
-  }
+    }
+  };
 
   useEffect(() => {
     fetchTeams();
@@ -124,44 +128,50 @@ function Home() {
 
   const fetchMoreFetchTeams = async () => {
     setFetching(true);
-    
-    if(page >= teamPaing) {
-      if(sports && !area) {
-        console.log("-1실행-")
-        await axios.get(`/team/getTeam?page=${teamPaing}&&sport=${sport}`).then((result) => {
+
+    if (page >= teamPaing) {
+      if (sports && !area) {
+        console.log('-1실행-');
+        await axios
+          .get(`/team/getTeam?page=${teamPaing}&&sport=${sport}`)
+          .then((result) => {
+            const fetchedData = result.data.message;
+            const mergedData = teams.concat(...fetchedData);
+            setTeams(mergedData);
+            setTeamPaging(result.data.paging);
+          });
+      } else if (!sports && area) {
+        console.log('-2실행-');
+        await axios
+          .get(`/team/getTeam?page=${teamPaing}&&area=${area}`)
+          .then((result) => {
+            const fetchedData = result.data.message;
+            const mergedData = teams.concat(...fetchedData);
+            setTeams(result.data.message);
+            setTeamPaging(result.data.paging);
+          });
+      } else if (area && sports) {
+        console.log('-3실행-');
+        await axios
+          .get(`/team/getTeam?page=${teamPaing}&&area=${area}&&sport=${sport}`)
+          .then((result) => {
+            const fetchedData = result.data.message;
+            const mergedData = teams.concat(...fetchedData);
+            setTeams(result.data.message);
+            setTeamPaging(result.data.paging);
+          });
+      } else {
+        console.log('-4실행-');
+        await axios.get('/team/getTeam?page=' + teamPaing).then((result) => {
           const fetchedData = result.data.message;
           const mergedData = teams.concat(...fetchedData);
           setTeams(mergedData);
           setTeamPaging(result.data.paging);
         });
-      } else if(!sports && area) {
-        console.log("-2실행-")
-        await axios.get(`/team/getTeam?page=${teamPaing}&&area=${area}`).then((result) => {
-          const fetchedData = result.data.message;
-          const mergedData = teams.concat(...fetchedData);
-          setTeams(result.data.message);
-          setTeamPaging(result.data.paging);
-        })
-      } else if(area && sports) {
-        console.log("-3실행-")
-        await axios.get(`/team/getTeam?page=${teamPaing}&&area=${area}&&sport=${sport}`).then((result) => {
-          const fetchedData = result.data.message;
-          const mergedData = teams.concat(...fetchedData);
-          setTeams(result.data.message);
-          setTeamPaging(result.data.paging);
-        })
-      }else {
-        console.log("-4실행-")
-        await axios.get('/team/getTeam?page='+teamPaing).then((result) => {
-        const fetchedData = result.data.message;
-        const mergedData = teams.concat(...fetchedData);
-        setTeams(mergedData);
-        setTeamPaging(result.data.paging);
-      })
+      }
     }
-  }
     setFetching(false);
-  }
+  };
 
   //스크롤 이벤트 핸들러
   const handleScroll = () => {
@@ -172,13 +182,13 @@ function Home() {
     if (scrollTop + scrollHeight >= scrollHeight && fetching === false) {
       fetchMoreFetchTeams();
     }
-  }
+  };
   useEffect(() => {
-    window.addEventListener("scroll", handleScroll);
+    window.addEventListener('scroll', handleScroll);
     return () => {
-      window.removeEventListener("scroll", handleScroll);
-    }
-  })
+      window.removeEventListener('scroll', handleScroll);
+    };
+  });
 
   return (
     <>
@@ -194,7 +204,11 @@ function Home() {
                       openModal(team.postNum);
                     }}
                   >
-                    <img src={team.postImg} alt="" className="home__cards__img" />
+                    <img
+                      src={team.postImg}
+                      alt=""
+                      className="home__cards__img"
+                    />
                     <span>{team.title}</span>
                     <div className="home__cards__count">
                       {team.headCount} / {team.participants}
@@ -213,11 +227,10 @@ function Home() {
         header="Modal heading"
         detail={detailTeam}
         isParticipant={isParticipant}
-        myData = {myData}
-      >
-      </TeamModal>
+        myData={myData}
+      ></TeamModal>
     </>
-  ) 
+  );
 }
 
 export default Home;
