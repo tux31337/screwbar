@@ -1,6 +1,8 @@
 import '../../css/mypage/mypageNavbar.css';
 import SidebarItem from './sidebarItem';
 import { Link, useLocation } from 'react-router-dom';
+import React from 'react';
+
 
 function MypageNavbar() {
   const pathName = useLocation().pathname;

@@ -4,6 +4,8 @@ import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { useState } from "react";
 import "../../css/mypage/modify.css"
 import DaumPost from "../user/Daumpost";
+import React from 'react';
+
 
 const ModifyPw = () => {
     const [email, setEmail] = useState("");

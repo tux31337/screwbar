@@ -19,6 +19,7 @@ import FindId from './component/user/FindId';
 import Navbar2 from './component/Navbar2';
 import ModifyPw from './component/mypage/ModifyPw';
 import SimpleSlider from './component/banner';
+import ChattingTest from './component/chat/ChattingTest';
 
 const App = () => {
   return (
@@ -109,6 +110,18 @@ const App = () => {
               <Navbar2 />
               <MypageNavbar />
               <Chatting />
+            </>,
+
+            true
+          )}
+        ></Route>
+
+<Route
+          path="/chattingtest"
+          element={AuthHoc(
+            <>
+              <Navbar2 />
+              <ChattingTest />
             </>,
 
             true

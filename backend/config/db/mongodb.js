@@ -16,5 +16,3 @@ function getChat() {
 
 module.exports.connectDB = connectDB;
 module.exports.getChat = getChat;
-
-//module.exports.getChat = getChat;

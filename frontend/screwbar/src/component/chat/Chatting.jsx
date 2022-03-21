@@ -15,11 +15,9 @@ function Chatting() {
     const [myInfo, setMyInfo] = useState("");
     /* 채팅 정보 가져오기 */
     const [myChat, setMyChat] = useState([]);
+
     /* input 메시지 하나하나 */
     const [message, setMessage] = useState("");
-
-    /*소켓 실시간 데이터 */
-    const [chatList, setChatList] = useState([]);
 
     /*채팅 한개 데이터 뽑기 */
     const [oneChat, setOneChat] = useState([]);
@@ -31,7 +29,7 @@ function Chatting() {
 
     let opponentUserId = useRef();
     let opponentUsername = useRef();
-    if(location.state) {
+    if(location.state && !opponentUsername) {
         opponentUserId.current = location.state.userId;
         opponentUsername.current = location.state.username;
     }
@@ -51,7 +49,7 @@ function Chatting() {
               if(location.state) {
                   chat.data.data.filter((data) => {
                       if((data.user === result.data.userId || data.user === opponentUserId.current) && (data.peerUserId === result.data.userId || data.peerUserId === opponentUserId.current)) {
-                          setOneChat(data.chatMessage);
+                        setOneChat(data.chatMessage);
                       }
                   })
               }
@@ -61,10 +59,9 @@ function Chatting() {
     }, []);
 
     
-    /* 이전 채팅 리스트 가져오기 */
     useEffect(() => {
 
-    }, []);
+    }, [username]);
 
     /* input 변경값 */
     const onMessage = (event) => {
@@ -89,6 +86,7 @@ function Chatting() {
         }
 
         axios.post("/chat/insertChat", postData).then((result) => {
+
         })
 
         /* 소켓용 데이터 */
@@ -98,46 +96,60 @@ function Chatting() {
             recepient: opponentUserId.current,
             data: message,
         }
+        
         setOneChat([...oneChat, sendMessage]);
-        setChatList([...chatList, sendMessage]);
+        setMessage("");
         socket.emit("chatting", {message: sendMessage});
     }
 
+    useEffect(() => {
 
+    }, [oneChat]);
 
     useEffect(() => {
         socket.on("message", (data) => {
+        console.log(opponentUserId.current);
         console.log(data);
-          setChatList([...chatList, data]);
-          setOneChat([...oneChat, data]);
+        if(!oneChat || (data.recepient === myInfo.userId && data.senderId === opponentUserId.current)) {
+            setOneChat([...oneChat, data]);
+        }
         })
     }, [oneChat]);
-
-
-
+    
       /* 이름 클릭시 */
-      const onChangeChatting = (userId, opponentUserInfoId, username1, username2) => {
-        if(myInfo.userId === userId) {
-            opponentUserId.current = opponentUserInfoId;
-            opponentUsername.current = username2;
-            setUsername(username2);
-        } else {
-            opponentUserId.current = userId;
-            opponentUsername.current = username1;
-            setUsername(username1);
-        }
-        const result = 
-        myChat.filter((chat) => {
-            if(chat.user === userId && chat.peerUserId === opponentUserInfoId) {
-                return true
+      const onChangeChatting = (userId, opponentUserInfoId, username1, username2, chatList) => {
+        axios.get("/chat/chatList").then((chat) => {
+            if(chat.data.data.length > 0) {
+              setMyChat(chat.data.data);
+              if(location.state || chat.data.data.length > 0) {
+                chat.data.data.filter((data) => {
+                    if((data.user === chatList.peerUserId || data.user === chatList.user) && (data.peerUserId === chatList.user || data.peerUserId === chatList.peerUserId)) {
+                        let copyArray = [...oneChat];
+                        setOneChat(data.chatMessage);
+                    }
+                })
             }
-        });
-        setOneChat(result[0].chatMessage);
+              myInfo.userName === username1 ? setUsername(username2) : setUsername(username1);
+              if(myInfo.userId === userId) {
+                  opponentUserId.current = chatList.peerUserId;
+                  opponentUsername.current = chatList.peerUsername;
+              } else {
+                  opponentUserId.current = chatList.user;
+                  opponentUsername.current = chatList.username; 
+              }
+              const result = 
+              myChat.filter((chat) => {
+                  if(chat.user === userId && chat.peerUserId === opponentUserInfoId) {
+                      return true
+                  }
+              });
+              setOneChat(result[0].chatMessage);
+            }
+          });
+
       }
 
 
-
-    
     /**HTML 부분 */
     return(
         <>
@@ -146,7 +158,7 @@ function Chatting() {
                     <ul>
                         {myChat && myChat.map((chatList, i) => {
                             return(
-                                <li key={i} onClick={() => {onChangeChatting(chatList.user, chatList.peerUserId, chatList.userName, chatList.peerUsername)}}>
+                                <li key={i} onClick={() => {onChangeChatting(chatList.user, chatList.peerUserId, chatList.userName, chatList.peerUsername, chatList)}}>
                                     {myInfo.userId === chatList.user ? chatList.peerUsername : chatList.username}
                                 </li>
                             )
@@ -154,11 +166,10 @@ function Chatting() {
 
                     </ul>
                 </div>
-
                 <div className = "wrapper">
                     <div className = "user-container">
-                        {console.log(opponentUsername)}
-                        {username === undefined ? "없음" : username}
+                        {console.log(opponentUsername.current)}
+                        {opponentUsername.current === undefined ? "없음" : opponentUsername.current}
                     </div>
                         <div className="display-container">
                             <ul className="chatting-list">
@@ -196,7 +207,7 @@ function Chatting() {
                         </div>
                         <div className="input-container">
                             <span>
-                                <input type="text" className="chatting-input" onChange={onMessage} />
+                                <input type="text" className="chatting-input" value={message} onChange={onMessage} />
                                 <button className="send-button" onClick={(event) => {sendMessage(event)}}>전송</button>
                             </span>
                         </div>

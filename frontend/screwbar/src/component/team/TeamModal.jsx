@@ -6,6 +6,7 @@ import axios from 'axios';
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
+
 const Modal = (props) => {
   // 열기, 닫기, 모달 헤더 텍스트를 부모로부터 받아옴
   const { open, close, header, detail, isParticipant, myData } = props;
@@ -15,7 +16,11 @@ const Modal = (props) => {
   const navigate = useNavigate();
 
   const convertTime = useCallback((time) => {
-    return moment(time).format('YYYY/MM/DD');
+    return moment(time).format('YYYY-MM-DD');
+  }, []);
+
+  const convertTime2 = useCallback((time) => {
+    return moment(time).format('YYYY-MM-DD HH:mm:ss');
   }, []);
   const showUserDetail = () => {
     setDetailUser(!detailUser);
@@ -163,6 +168,7 @@ const Modal = (props) => {
                     </div> : "" }
 
                 </div>
+                {console.log(detail)}
                 <span className="teamModal__main__top__right__date">
                   모임 기간 : {convertTime(detail.meetingDate)}
                 </span>
@@ -179,7 +185,7 @@ const Modal = (props) => {
                   열정온도 : {detail.temperature}
                 </span>
                 <span className="teamModal__main__top__right__finishTime">
-                  마감시간 :
+                  마감시간 : {convertTime2(detail.deadline)}
                 </span>
                 <span className="teamModal__main__top__right__btn">
                   <button

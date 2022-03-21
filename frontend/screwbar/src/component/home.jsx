@@ -3,6 +3,8 @@ import { useEffect, useState } from 'react';
 import { useLocation } from 'react-router-dom';
 import '../css/home.css';
 import TeamModal from './team/TeamModal';
+import React from 'react';
+
 
 let detailTeam;
 let isParticipant;

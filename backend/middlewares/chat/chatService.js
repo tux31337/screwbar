@@ -21,14 +21,6 @@ async function createChat(req, res) {
         }
     })
 
-     //const result = mongodb.getChat().insertOne(req.body);
-    // const user = await userRepository.findById(req.userId)
-    // const id = user.peerUserId;
-    // const name = user.peerUsername;
-    // // let socket = test.login_user[id];
-    // console.log(id);c
-    // console.log(name); 
-    //const result = getChat.getChat().insertOne(user);
 }
 
 async function getChatList(req, res) {

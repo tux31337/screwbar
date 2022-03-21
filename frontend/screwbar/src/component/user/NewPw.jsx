@@ -6,6 +6,8 @@ import { useState } from "react";
 import { signupAction } from "../../action/auth";
 import "../../css/user/signup.css"
 import DaumPost from "./Daumpost";
+import React from 'react';
+
 
 function NewPw() {
     const [username, setUserName] = useState("");

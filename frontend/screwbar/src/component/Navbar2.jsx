@@ -4,6 +4,8 @@ import axios from 'axios';
 import '../css/navbar2.css';
 import { useNavigate } from 'react-router-dom';
 import { useEffect, useState } from 'react';
+import React from 'react';
+
 
 function Navbar2() {
   const navigate = useNavigate();

@@ -4,6 +4,7 @@ import { useEffect } from 'react';
 import { useState } from 'react';
 import '../../css/mypage/temperature.css';
 
+
 const Temperature = (props) => {
   const { myInfo } = props;
   const [goodkind, setGoodkind] = useState();

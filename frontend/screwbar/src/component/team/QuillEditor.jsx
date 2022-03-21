@@ -8,6 +8,7 @@ import "../../css/team/quilleditor.css"
 import CreateTeam from './CreateTeam';
 
 
+
 export default (props) => {
     const { quill, quillRef } = useQuill();
     const [title, setTitle] = useState("");
