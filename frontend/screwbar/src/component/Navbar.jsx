@@ -4,7 +4,7 @@ import axios from "axios";
 import "../css/navbar.css"
 import { useNavigate } from 'react-router-dom';
 import { useEffect, useState } from "react";
-
+import '../css/font.css';
 
 function Navbar() {
     const navigate = useNavigate();
